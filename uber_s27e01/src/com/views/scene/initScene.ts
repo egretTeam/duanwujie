@@ -137,7 +137,7 @@ module com.views.scene {
             this.close1Btn.y = this.infoPage.height / 6 - 40;
 
             this.close2Btn.x = this.infoPage.width / 3 - 40;
-            this.close2Btn.y = this.infoPage.height * 2 / 3;
+            this.close2Btn.y = this.infoPage.height * 2 / 3+50;
 
 
             this.close1Btn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.hidePage,this);
