@@ -1,0 +1,39 @@
+{
+	"native": {
+		"path_ignore": []
+	},
+	"publish": {
+		"web": 0,
+		"native": 1,
+		"path": "bin-release"
+	},
+	"egret_version": "3.1.0",
+	"modules": [
+		{
+			"name": "egret"
+		},
+		{
+			"name": "game"
+		},
+		{
+			"name": "tween"
+		},
+		{
+			"name": "res"
+		},
+		{
+    		"name": "socket"
+		},
+		{
+			"name": "particle",
+			"path": "../particle/libsrc"
+		},
+		{
+			"name": "weixinapi",
+			"path": "../weixinapi/libsrc"
+		},
+		{
+			"name": "dragonbones"
+		}
+	]
+}
