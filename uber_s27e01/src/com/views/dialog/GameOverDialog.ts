@@ -34,7 +34,6 @@ module com.views.dialog {
         }
         
         public showShareArea():void{
-            
         }
         
         public close(): void {
