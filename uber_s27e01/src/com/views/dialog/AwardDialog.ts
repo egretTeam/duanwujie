@@ -1,0 +1,58 @@
+module com.views.dialog {
+	/**
+	 *
+	 * @author 
+	 *
+	 */
+	export class AwardDialog extends Dialog{
+    	  public static balance:number = 6;
+    	  
+    	  text:egret.TextField;
+    	
+        constructor() {
+            super();
+        }   
+        
+        
+        protected  getImage():egret.Bitmap{
+            return new egret.Bitmap(RES.getRes("rise"));
+        }
+     
+        protected  createContent(): void{
+            this.text=new egret.TextField();
+            this.text.x=370;
+            this.text.y = 710;
+            this.text.size=30;
+            
+            this.addChild(this.text);
+            this.text.height=50;
+            this.update();
+        }
+        
+        protected onRemoveStage(e: egret.Event) {//移除
+            super.onRemoveStage(e);
+        }
+        
+        protected customTouchHandler(evt: egret.TouchEvent) {
+            if(AwardDialog.balance<=0){
+                return;
+            }
+            if(new egret.Rectangle(240,460,160,160).contains(evt.stageX,evt.stageY)){
+                AwardDialog.balance--;
+                this.update();
+            }
+        }
+        
+        public update():void{
+            this.text.text = '' + AwardDialog.balance;
+        }
+        
+        public showShareArea():void{
+            
+        }
+        
+        public close(): void {
+            
+        }
+	}
+}

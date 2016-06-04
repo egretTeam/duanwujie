@@ -11,7 +11,10 @@ var com;
                     this.score = 0;
                     this.spScore = 0;
                     this.age = 0;
-                    this.spDuration = 3;
+                    /**
+                     * logo盾牌出现频率
+                     */
+                    this.spDuration = 20;
                     this.spCount = 0;
                     this.timeGap = 35;
                     this.lOrRMovrGap = 9;
@@ -150,7 +153,7 @@ var com;
                         if (items[i] == null)
                             continue;
                         items[i].update();
-                        if (this.age % 2 == 0) {
+                        if (this.age % 3 == 0) {
                             if (items[i].y >= com.model.DataCenter.instance.configVO.appHeight - 10) {
                                 this.removeChild(items[i]);
                                 items.splice(i, 1);
@@ -209,7 +212,12 @@ var com;
                     if (parseInt(egret.localStorage.getItem("highestScore")) < this.score || egret.localStorage.getItem("highestScore") == null) {
                         egret.localStorage.setItem("highestScore", this.score + "");
                     }
-                    com.MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
+                    this.showGameOverPanel();
+                    //MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
+                };
+                p.showGameOverPanel = function () {
+                    this.gameOverdialog = new com.views.dialog.GameOverDialog();
+                    this.addChild(this.gameOverdialog);
                 };
                 p.luzhangFactory = function (num) {
                     //            var luzhang = new com.views.ui.scene.gameScene.luzhang();
