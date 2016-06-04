@@ -24,6 +24,9 @@ var com;
                 case com.constants.SceneConstants.TEACH:
                     this.scene = (new com.views.scene.TeachScene());
                     break;
+                case com.constants.SceneConstants.LUCK:
+                    this.scene = (new com.views.scene.luckScene());
+                    break;
                 default:
                     break;
             }

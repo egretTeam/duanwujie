@@ -245,6 +245,8 @@ module com.views.scene {
             if(parseInt(egret.localStorage.getItem("highestScore"))<this.score||egret.localStorage.getItem("highestScore")==null){
                 egret.localStorage.setItem("highestScore",this.score+"");
             }
+            
+            MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
         }
 
         

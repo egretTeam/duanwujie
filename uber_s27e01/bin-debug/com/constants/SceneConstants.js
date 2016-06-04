@@ -14,6 +14,7 @@ var com;
             SceneConstants.INIT = 0;
             SceneConstants.GAME = 1;
             SceneConstants.TEACH = 2;
+            SceneConstants.LUCK = 3;
             return SceneConstants;
         }());
         constants.SceneConstants = SceneConstants;

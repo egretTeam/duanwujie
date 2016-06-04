@@ -209,6 +209,7 @@ var com;
                     if (parseInt(egret.localStorage.getItem("highestScore")) < this.score || egret.localStorage.getItem("highestScore") == null) {
                         egret.localStorage.setItem("highestScore", this.score + "");
                     }
+                    com.MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
                 };
                 p.luzhangFactory = function (num) {
                     //            var luzhang = new com.views.ui.scene.gameScene.luzhang();

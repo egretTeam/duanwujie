@@ -51,6 +51,7 @@ var game_file_list = [
 	"bin-debug/com/views/scene/GameScene.js",
 	"bin-debug/com/views/scene/initScene/hand.js",
 	"bin-debug/com/views/scene/initScene.js",
+	"bin-debug/com/views/scene/luckScene.js",
 	"bin-debug/com/views/scene/teachScene.js",
 	"bin-debug/com/views/ui/button/Button.js",
 	"bin-debug/com/views/ui/button/ArtButton.js",

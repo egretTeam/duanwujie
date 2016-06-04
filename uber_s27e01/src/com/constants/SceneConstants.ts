@@ -8,5 +8,6 @@ module com.constants {
         public static INIT: number = 0;
         public static GAME: number = 1;
         public static TEACH: number = 2;
+        public static LUCK: number = 3;
 	}
 }

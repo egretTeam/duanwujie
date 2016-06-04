@@ -30,6 +30,9 @@ module com {
                 case com.constants.SceneConstants.TEACH://教学场景
                     this.scene = <com.views.ui.BasicView>(new com.views.scene.TeachScene());
                     break;
+                case com.constants.SceneConstants.LUCK://教学场景
+                    this.scene = <com.views.ui.BasicView>(new com.views.scene.luckScene());
+                    break;
                 default:
                     break;
             }
