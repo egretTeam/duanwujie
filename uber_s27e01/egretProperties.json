@@ -28,9 +28,6 @@
     		"name": "eui"
 		},
 		{
-    		"name": "gui"
-		},
-		{
 			"name": "particle",
 			"path": "../particle/libsrc"
 		},
