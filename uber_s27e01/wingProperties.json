@@ -125,6 +125,11 @@
 					"isFolder":false,
 					"key":"close2",
 					"name":"close2"
+				},
+				{
+					"isFolder":false,
+					"key":"rule",
+					"name":"rule"
 				}
 			]
 		}

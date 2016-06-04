@@ -9,8 +9,9 @@ module com.views.scene {
         private rankingBtn: egret.Shape;
         private close1Btn: egret.Bitmap;
         private close2Btn: egret.Bitmap;
-        private rankingList: egret.Bitmap;
+        private infoPage: egret.Bitmap;
         private startBtn: egret.Shape;
+        private ruleBtn: egret.Shape;
 
         constructor() {
             super();
@@ -27,6 +28,7 @@ module com.views.scene {
             egret.Ticker.getInstance().unregister(this.dragonbones,this);
             this.drum.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.swapDrumStatus,this);
             this.rankingBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.showRankingList,this);
+            this.ruleBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.showRuleList,this);
             
             
         }
@@ -73,6 +75,22 @@ module com.views.scene {
             this.rankingBtn.touchEnabled=true;
             this.rankingBtn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.showRankingList,this);
             
+            //规则说明
+            this.ruleBtn = new egret.Shape();
+            this.ruleBtn.width = 200;
+            this.ruleBtn.height = 500;
+            this.ruleBtn.x = 40;
+            this.ruleBtn.y = 0;
+
+            this.ruleBtn.graphics.beginFill(0x00FF00,0);
+            this.ruleBtn.graphics.drawRect(0,0,this.ruleBtn.width,this.ruleBtn.height);
+            this.ruleBtn.graphics.endFill();
+
+            this.addChild(this.ruleBtn);
+
+            this.ruleBtn.touchEnabled = true;
+            this.ruleBtn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.showRuleList,this);
+            
             //开始游戏
             this.startBtn = new egret.Shape();
             this.startBtn.width = 280;
@@ -103,51 +121,59 @@ module com.views.scene {
         private startGame(evt: egret.TouchEvent): void {
             MainView.instance.changeScene(com.constants.SceneConstants.TEACH);
         }
+
+        private showPage(evt: egret.TouchEvent,pageName:string): void {
+            this.infoPage = new egret.Bitmap(RES.getRes(pageName));
+            this.infoPage.x = 0;
+            this.infoPage.y = -100;
+
+            this.close1Btn = new egret.Bitmap(RES.getRes("close1"));
+            this.close2Btn = new egret.Bitmap(RES.getRes("close2"));
+
+            this.close1Btn.touchEnabled = true;
+            this.close2Btn.touchEnabled = true;
+
+            this.close1Btn.x = this.infoPage.width * 4 / 5 + 20;
+            this.close1Btn.y = this.infoPage.height / 6 - 40;
+
+            this.close2Btn.x = this.infoPage.width / 3 - 40;
+            this.close2Btn.y = this.infoPage.height * 2 / 3;
+
+
+            this.close1Btn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.hidePage,this);
+            this.close2Btn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.hidePage,this);
+
+            this.addChild(this.infoPage);
+            this.addChild(this.close1Btn);
+            this.addChild(this.close2Btn);
+
+        }
+
+        /**
+         * 弹出规则页
+         */
+        private showRuleList(evt: egret.TouchEvent): void {
+            this.showPage(evt,"rule");
+        }
         /**
          * 弹出排名
          */ 
         private showRankingList(evt: egret.TouchEvent): void {
-            this.rankingList = new egret.Bitmap(RES.getRes("page1Bg"));
-            this.rankingList.x=0;
-            this.rankingList.y=-100;
-            
-            this.close1Btn = new egret.Bitmap(RES.getRes("close1"));
-            this.close2Btn = new egret.Bitmap(RES.getRes("close2"));
-            
-            this.close1Btn.touchEnabled = true;
-            this.close2Btn.touchEnabled = true;
-            
-            this.close1Btn.x = this.rankingList.width * 4 / 5+20;
-            this.close1Btn.y = this.rankingList.height /6-40;
-
-            this.close2Btn.x = this.rankingList.width / 3-40;
-            this.close2Btn.y = this.rankingList.height *2/ 3 ;
-            
-            
-            this.close1Btn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.hideRankingList,this);
-            this.close2Btn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.hideRankingList,this);
-            
-            this.addChild(this.rankingList);
-            this.addChild(this.close1Btn);
-            this.addChild(this.close2Btn);
-            
+            this.showPage(evt,"page1Bg");
         }
-        
-        private hideRankingList(evt: egret.TouchEvent): void {
+        private hidePage(evt: egret.TouchEvent): void {
 
-            this.removeChild(this.rankingList);
+            this.removeChild(this.infoPage);
             this.removeChild(this.close1Btn);
             this.removeChild(this.close2Btn);
-            
-            this.close1Btn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.hideRankingList,this);
-            this.close2Btn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.hideRankingList,this);
 
-
+            this.close1Btn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.hidePage,this);
+            this.close2Btn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.hidePage,this);
         }
+        
         
         
         private swapDrumStatus(evt: egret.TouchEvent ):void{
-            console.log("状态： "+this.playing);
             this.playing=!this.playing;
             if(this.playing)
                 this.drum.animation.gotoAndPlay("kai",-1,-1,0);
