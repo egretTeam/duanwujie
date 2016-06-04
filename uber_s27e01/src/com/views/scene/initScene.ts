@@ -119,7 +119,7 @@ module com.views.scene {
          * 开始游戏
          */ 
         private startGame(evt: egret.TouchEvent): void {
-            MainView.instance.changeScene(com.constants.SceneConstants.TEACH);
+            MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
         }
 
         private showPage(evt: egret.TouchEvent,pageName:string): void {

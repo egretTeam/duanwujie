@@ -5,7 +5,7 @@
 			"name":"preload"
 		},
 		{
-			"keys":"green,luzhangkuang,luzhang,luzhangjson,finger,icon,hand,share_p0,bgmusic,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2,rule",
+			"keys":"green,luzhangkuang,luzhang,luzhangjson,finger,icon,hand,share_p0,bgmusic,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2,rule,JD,weipinhui,Diamonds,Diamonds2,Diamonds3,bell1,bell2,backgroud,bell2_2,bell2_1,bell2_1_1,money1,money2",
 			"name":"gameScene"
 		}
 	],
@@ -155,6 +155,71 @@
 			"name":"rule",
 			"type":"image",
 			"url":"assets/page1/rule.png"
+		},
+		{
+			"name":"JD",
+			"type":"image",
+			"url":"assets/LUCK/JD.png"
+		},
+		{
+			"name":"weipinhui",
+			"type":"image",
+			"url":"assets/LUCK/weipinhui.png"
+		},
+		{
+			"name":"Diamonds",
+			"type":"image",
+			"url":"assets/Diamonds.png"
+		},
+		{
+			"name":"Diamonds2",
+			"type":"image",
+			"url":"assets/LUCK/Dimonds2.png"
+		},
+		{
+			"name":"Diamonds3",
+			"type":"image",
+			"url":"assets/LUCK/Diamonds3.png"
+		},
+		{
+			"name":"bell1",
+			"type":"image",
+			"url":"assets/LUCK/bell1.png"
+		},
+		{
+			"name":"bell2",
+			"type":"image",
+			"url":"assets/LUCK/bell2.png"
+		},
+		{
+			"name":"backgroud",
+			"type":"image",
+			"url":"assets/LUCK/backgroud.png"
+		},
+		{
+			"name":"bell2_2",
+			"type":"image",
+			"url":"assets/LUCK/bell2_2.png"
+		},
+		{
+			"name":"bell2_1",
+			"type":"image",
+			"url":"assets/LUCK/bell2_1.png"
+		},
+		{
+			"name":"bell2_1_1",
+			"type":"image",
+			"url":"assets/LUCK/bell2_1_1.png"
+		},
+		{
+			"name":"money1",
+			"type":"image",
+			"url":"assets/LUCK/money1.png"
+		},
+		{
+			"name":"money2",
+			"type":"image",
+			"url":"assets/LUCK/money2.png"
 		}
 	]
 }
