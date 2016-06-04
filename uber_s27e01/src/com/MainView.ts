@@ -1,4 +1,4 @@
-﻿module com {
+module com {
     export class MainView extends com.views.ui.BasicView{
         scene: com.views.ui.BasicView;//场景
         loading:com.views.ui.loading.LoaderLoading;
@@ -21,14 +21,13 @@
             if (this.scene != null)
                 this.removeChild(this.scene);
             switch (index) {
-                case 0://初始场景
+                case com.constants.SceneConstants.INIT://初始场景
                     this.scene = <com.views.ui.BasicView>(new com.views.scene.InitScene());
                     break;
-                case 1://初始场景
+                case com.constants.SceneConstants.GAME://游戏场景
                     this.scene = <com.views.ui.BasicView>(new com.views.scene.GameScene());
                     break;
-
-                case 2://初始场景
+                case com.constants.SceneConstants.TEACH://教学场景
                     this.scene = <com.views.ui.BasicView>(new com.views.scene.TeachScene());
                     break;
                 default:

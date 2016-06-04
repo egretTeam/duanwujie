@@ -50,6 +50,16 @@ var com;
             AppUtils.posDistance = function (p1, p2) {
                 return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
             };
+            AppUtils.loadArmature = function (json, texture, png, armatureName) {
+                console.log("json: " + json);
+                var dragonbonesData = RES.getRes(json);
+                var textureData = RES.getRes(texture);
+                var t = RES.getRes(png);
+                var dragonbonesFactory = new dragonBones.EgretFactory();
+                dragonbonesFactory.addDragonBonesData(dragonBones.DataParser.parseDragonBonesData(dragonbonesData));
+                dragonbonesFactory.addTextureAtlas(new dragonBones.EgretTextureAtlas(t, textureData));
+                return dragonbonesFactory.buildArmature(armatureName);
+            };
             return AppUtils;
         }());
         utils.AppUtils = AppUtils;

@@ -1,6 +1,5 @@
 module com.views.scene {
-    export class GameScene extends com.views.ui.BasicView {
-        bg: egret.Shape;//背景
+    export class GameScene extends AbstractScene{
         carLeft:com.views.ui.scene.gameScene.car;//车子左边
         carRight:com.views.ui.scene.gameScene.car;//车子右边
         loading:com.views.ui.loading.LoaderLoading;
@@ -30,9 +29,6 @@ module com.views.scene {
 
         constructor() {
             super();
-
-            //this.loading = new com.views.ui.loading.LoaderLoading("resource/resource.json?v=0","gameScene",this.onConfigComplete.bind(this));
-            //this.addChild(this.loading);
             this.initGameLayout();
         }
 
@@ -60,20 +56,16 @@ module com.views.scene {
             this.addChild(this.bg);
 
             //绘制赛道
-            this.bg.graphics.beginFill(0x696969);
-            this.bg.graphics.drawRect(com.model.DataCenter.instance.configVO.appWidth/4-3, 0, 6, com.model.DataCenter.instance.configVO.appHeight);
+            this.bg.graphics.beginFill(0x80A6FC);
+            this.bg.graphics.drawRect(com.model.DataCenter.instance.configVO.appWidth / 4 - 3,0,6,com.model.DataCenter.instance.configVO.appHeight);
             this.bg.graphics.endFill();
 
-            this.bg.graphics.beginFill(0x989898);
-            this.bg.graphics.drawRect(com.model.DataCenter.instance.configVO.appWidth/2-3, 0, 6, com.model.DataCenter.instance.configVO.appHeight);
+            this.bg.graphics.beginFill(0xFFA680);
+            this.bg.graphics.drawRect(com.model.DataCenter.instance.configVO.appWidth / 2 - 3,0,6,com.model.DataCenter.instance.configVO.appHeight);
             this.bg.graphics.endFill();
 
-            this.bg.graphics.beginFill(0x696969);
-            this.bg.graphics.drawRect(com.model.DataCenter.instance.configVO.appWidth*3/4-3, 0,6, com.model.DataCenter.instance.configVO.appHeight);
-            this.bg.graphics.endFill();
-
-            this.bg.graphics.beginFill(0x323232);
-            this.bg.graphics.drawRoundRect(com.model.DataCenter.instance.configVO.appWidth/2-40, 46,80, 57,25,25);
+            this.bg.graphics.beginFill(0x80A6FF);
+            this.bg.graphics.drawRect(com.model.DataCenter.instance.configVO.appWidth * 3 / 4 - 3,0,6,com.model.DataCenter.instance.configVO.appHeight);
             this.bg.graphics.endFill();
 
             var carnum:number = com.utils.AppUtils.GetRandomNum(0,7);
@@ -121,46 +113,11 @@ module com.views.scene {
             this.addChildAt(this.scoreLabel,13);
 
             this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchBegin,this);
-            this.addEventListener(egret.Event.ENTER_FRAME,this.onEnterFrame,this);
-
-            com.controller.EventManager.instance.addEventListener(this,com.model.localData.event.TimerEvent.TIMER, this.onTimeEvent.bind(this));
-
-
-        }
-        onTimeEvent():void{
-
-            if(this.gameOver)return;
-
-            for(var i = 0;i<=this.leftArr.length-1;i++){
-                if(this.leftArr[i]!=null){
-                    if(this.leftArr[i].isHit||this.leftArr[i].isEnd){
-                        this.leftArr[i] = null;
-                    }
-                }
-            }
-
-            for(var i = 0;i<=this.rightArr.length-1;i++){
-                if(this.rightArr[i]!=null){
-                    if(this.rightArr[i].isHit||this.rightArr[i].isEnd){
-                        this.rightArr[i] = null;
-
-                    }
-                }
-
-            }
-
-            for(var i =0;i<=this.leftArr.length-1;i++){
-                if(this.leftArr[i]==null){
-                    this.leftArr.splice(i,1)
-                }
-            }
-
-            for(var i = 0;i<=this.rightArr.length-1;i++){
-                if(this.rightArr[i]==null){
-                    this.rightArr.splice(i,1);
-                }
-            }
-
+           this.addEventListener(egret.Event.ENTER_FRAME,this.onEnterFrame,this);
+            
+//            var timer:egret.Timer = new egret.Timer(100,0);
+//            timer.addEventListener(egret.TimerEvent.TIMER,this.onEnterFrame, this);
+//            timer.start();
 
         }
         onEnterFrame(e:egret.Event):void{
@@ -188,13 +145,13 @@ module com.views.scene {
                 this.create(this.rightArr,2,3);
 
             }
+
             //检查左侧赛道
             this.check(this.leftArr,this.carLeft,-350,-180);
            
             //检查右侧赛道
             this.check(this.rightArr,this.carRight,0,140);
 
-            
 
         }
         
@@ -203,7 +160,7 @@ module com.views.scene {
                 case 0: {
                     var luzhangs = this.luzhangFactory(com.utils.AppUtils.GetRandomNum(s,e));
                     items.push(luzhangs);
-                    this.addChildAt(luzhangs,13);
+                    this.addChildAt(luzhangs,5);
                     break
                 }
                 case 1: {
@@ -211,11 +168,11 @@ module com.views.scene {
                     if(this.spCount % this.spDuration == 0) {
                         var sp = this.shieldFactory(com.utils.AppUtils.GetRandomNum(s,e));
                         items.push(sp);
-                        this.addChildAt(sp,13);
+                        this.addChildAt(sp,5);
                     } else {
                         var rounds = this.roundFactory(com.utils.AppUtils.GetRandomNum(s,e));
                         items.push(rounds);
-                        this.addChildAt(rounds,13);
+                        this.addChildAt(rounds,5);
                     }
                     break;
                 }
@@ -229,7 +186,9 @@ module com.views.scene {
             for(var i = 0;i < items.length ;i++) {
                 if(items[i] == null) continue;
                 items[i].update();
-                if(items[i].y >= com.model.DataCenter.instance.configVO.appHeight - 20) {
+
+                if(this.age % 2 == 0) {
+                if(items[i].y >= com.model.DataCenter.instance.configVO.appHeight - 10) {
                     this.removeChild(items[i]);
                     items.splice(i,1);
                     continue;}
@@ -242,7 +201,7 @@ module com.views.scene {
                 var cly = car.y;
                 var lax = items[i].x;
                 var lay = items[i].y;
-                if(com.utils.AppUtils.posDistance({ x: clx,y: cly },{ x: lax,y: lay }) < 10) {
+                if(com.utils.AppUtils.posDistance({ x: clx,y: cly },{ x: lax,y: lay }) < 40) {
                     switch(items[i].getType()){
                         case com.constants.ItemConstant.BLOCK:{
                             this.luZhangBomb = new com.views.ui.scene.gameScene.luzhangBomb();
@@ -270,6 +229,7 @@ module com.views.scene {
                     }
                     this.removeChild(items[i]);
                     items.splice(i,1);
+                }
                 }
             }
         } 
@@ -317,6 +277,8 @@ module com.views.scene {
 
         onTouchBegin(e: egret.TouchEvent):void{
             if(this.gameOver)return;
+            this.setChildIndex(this.cloud,7);
+            this.setChildIndex(this.scoreLabel,7);
             if(e.stageX<com.model.DataCenter.instance.configVO.appWidth/2){
 
                 if(this.carLeft.isLeftRight==0){

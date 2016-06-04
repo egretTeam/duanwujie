@@ -1,4 +1,4 @@
-﻿module com.utils {
+module com.utils {
     export class AppUtils {
         static getFontSize(size:number, rate?:number):number {//获取字体大小
             var result = 0;
@@ -45,6 +45,18 @@
         }
         static posDistance(p1,p2):number{
             return Math.sqrt(Math.pow(p1.x-p2.x,2)+Math.pow(p1.y-p2.y,2));
+        }
+        
+        static loadArmature(json:string,texture:string,png:string,armatureName:string):dragonBones.Armature{
+            console.log("json: " + json);
+            var dragonbonesData = RES.getRes(json);
+            var textureData = RES.getRes(texture);
+            var t = RES.getRes(png);
+            var dragonbonesFactory: dragonBones.EgretFactory = new dragonBones.EgretFactory();
+            dragonbonesFactory.addDragonBonesData(dragonBones.DataParser.parseDragonBonesData(dragonbonesData));
+            dragonbonesFactory.addTextureAtlas(new dragonBones.EgretTextureAtlas(t,textureData));
+            
+            return dragonbonesFactory.buildArmature(armatureName);
         }
     }
 } 

@@ -5,7 +5,7 @@
 			"name":"preload"
 		},
 		{
-			"keys":"green,luzhangkuang,luzhang,luzhangjson,finger,icon,hand,initscene,share_p0,bgmusic,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud",
+			"keys":"green,luzhangkuang,luzhang,luzhangjson,finger,icon,hand,share_p0,bgmusic,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2",
 			"name":"gameScene"
 		}
 	],
@@ -105,6 +105,51 @@
 			"name":"cloud",
 			"type":"image",
 			"url":"assets/game/cloud.png"
+		},
+		{
+			"name":"page1/png",
+			"type":"image",
+			"url":"assets/page1/texture.png"
+		},
+		{
+			"name":"page1/texture",
+			"type":"json",
+			"url":"assets/page1/texture.json"
+		},
+		{
+			"name":"page1/json",
+			"type":"json",
+			"url":"assets/page1/page1.json"
+		},
+		{
+			"name":"drum/png",
+			"type":"image",
+			"url":"assets/drum/texture.png"
+		},
+		{
+			"name":"drum/texture",
+			"type":"json",
+			"url":"assets/drum/texture.json"
+		},
+		{
+			"name":"drum/json",
+			"type":"json",
+			"url":"assets/drum/drum.json"
+		},
+		{
+			"name":"page1Bg",
+			"type":"image",
+			"url":"assets/page1/pageBG.png"
+		},
+		{
+			"name":"close1",
+			"type":"image",
+			"url":"assets/page1/close1.png"
+		},
+		{
+			"name":"close2",
+			"type":"image",
+			"url":"assets/page1/close2.png"
 		}
 	]
 }

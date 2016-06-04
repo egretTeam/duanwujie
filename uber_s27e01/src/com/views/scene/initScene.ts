@@ -1,18 +1,17 @@
 module com.views.scene {
-    export class InitScene extends com.views.ui.BasicView {
-        bg: egret.Shape;//背景
-        car:com.views.ui.scene.initScene.car;
+    export class InitScene extends AbstractScene {
         loading:com.views.ui.loading.LoaderLoading;
+        //骨架
+        private armature: dragonBones.Armature;
+        private drum: dragonBones.Armature;
+        private display;
+        private playing:Boolean=true;
+        private rankingBtn: egret.Shape;
+        private close1Btn: egret.Bitmap;
+        private close2Btn: egret.Bitmap;
+        private rankingList: egret.Bitmap;
+        private startBtn: egret.Shape;
 
-        title:egret.TextField;
-
-        minititle:egret.TextField;
-
-        beginBtn:egret.Shape;//开始按钮
-
-        beginBtnText:egret.TextField;
-
-        bottomText:egret.TextField;
         constructor() {
             super();
 
@@ -22,125 +21,138 @@ module com.views.scene {
         }
 
         protected onRemoveStage(e: egret.Event) {//移除
-
-
             super.onRemoveStage(e);
-
-            this.bg = null;
-            this.car = null;
-            this.loading = null;
-            this.title = null;
-            this.minititle = null;
-            this.beginBtn = null;
-            this.beginBtnText = null;
-            this.bottomText = null;
-
+            dragonBones.WorldClock.clock.remove(this.armature);
+            dragonBones.WorldClock.clock.remove(this.drum);
+            egret.Ticker.getInstance().unregister(this.dragonbones,this);
+            this.drum.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.swapDrumStatus,this);
+            this.rankingBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.showRankingList,this);
+            
+            
         }
         onConfigComplete(e: com.model.localData.event.LoaderEvent) {//配置加载完成
             this.initInitLayout();
             this.removeChild(this.loading);
         }
-        private initInitLayout():void{
-            this.bg = new egret.Shape();
-            this.bg.graphics.beginFill(0x5096C8);
-            this.bg.graphics.drawRect(0, 0, com.model.DataCenter.instance.configVO.appWidth, com.model.DataCenter.instance.configVO.appHeight);
-            this.bg.graphics.endFill();
-            this.addChild(this.bg);
+        private initInitLayout(): void {
+            //背景
+            this.armature = com.utils.AppUtils.loadArmature("page1/json","page1/texture","page1/png","armatureName");
+            
+            this.armature.animation.gotoAndPlay("newAnimation",-1,-1,1);
+            this.display = this.armature.display;
+            this.addChild(this.display);
+            
+//            console.log(this.display.x+" "+this.display.y+" "+this.display.anchor)
+            this.display.x=this.display.width/2;
+            this.display.y = this.display.height / 4+56;
 
-            var sound:egret.Sound = RES.getRes("bgmusic")
-            var channel:egret.SoundChannel = sound.play(0);
+            //鼓
+            this.drum = com.utils.AppUtils.loadArmature("drum/json","drum/texture","drum/png","Armature");
+            this.drum.display.x = this.display.width / 5*4;
+            this.drum.display.y = 100;
+            this.drum.animation.gotoAndPlay("kai",-1,-1,0);
 
-
-            this.car = new com.views.ui.scene.initScene.car();
-            this.car.setPos(0,200);
-            this.addChild(this.car);
-
-            this.title = new egret.TextField();
-            this.title.fontFamily = "Microsoft YaHei";
-            this.title.textColor = 0x88dbc1;
-            this.title.size = 90;
-            this.title.width = com.model.DataCenter.instance.configVO.appWidth;
-            this.title.textAlign = egret.HorizontalAlign.CENTER;
-            this.title.text = "测试";
-            this.title.x = 0;
-            this.title.y = 30;
-            this.addChild(this.title);
-
-            this.minititle = new egret.TextField();
-            this.minititle.fontFamily = "Microsoft YaHei"
-            this.minititle.textColor = 0xffffff;
-            this.minititle.size = 30;
-            this.minititle.text = "轻触屏幕换线，两辆车必须避开所有的路";
-            this.minititle.textHeight = 40
-            this.minititle.x = 45;
-            this.minititle.width = com.model.DataCenter.instance.configVO.appWidth*7/8
-            this.minititle.y = 150;
-            this.minititle.textAlign = egret.HorizontalAlign.CENTER;
-            this.addChild(this.minititle);
-
-            this.minititle = new egret.TextField();
-            this.minititle.fontFamily = "Microsoft YaHei"
-            this.minititle.textColor = 0xffffff;
-            this.minititle.size = 30;
-            this.minititle.text = "障，不能错过任何绿圈。";
-            this.minititle.textHeight = 40
-            this.minititle.x = 45;
-            this.minititle.width = com.model.DataCenter.instance.configVO.appWidth*7/8
-            this.minititle.y = 190;
-            this.minititle.textAlign = egret.HorizontalAlign.CENTER;
-            this.addChild(this.minititle);
-
-            this.beginBtn = new egret.Shape();
-            this.beginBtn.graphics.beginFill(0x88dbc1);
-            this.beginBtn.graphics.drawRoundRect(0, 0, 300, 100,30,30);
-            this.beginBtn.x = com.model.DataCenter.instance.configVO.appWidth/2-150;
-            this.beginBtn.y = com.model.DataCenter.instance.configVO.appHeight*8/10+60;
-            this.beginBtn.graphics.endFill();
-            this.addChild(this.beginBtn);
+            this.drum.display.touchEnabled=true;
+            this.drum.display.addEventListener(egret.TouchEvent.TOUCH_TAP,this.swapDrumStatus,this);
+            this.addChild(this.drum.display);
 
 
-            this.beginBtnText = new egret.TextField();
-            this.beginBtnText.fontFamily = "Microsoft YaHei"
-            this.beginBtnText.textColor = 0x5096C8;
-            this.beginBtnText.size = 50;
-            this.beginBtnText.text = "游戏教程";
-            this.beginBtnText.bold = true;
-            this.beginBtnText.x = com.model.DataCenter.instance.configVO.appWidth/2-100;
-            this.beginBtnText.y = com.model.DataCenter.instance.configVO.appHeight*8/10+85
-            this.addChild(this.beginBtnText);
+            //排行榜
+            this.rankingBtn=new egret.Shape();
+            this.rankingBtn.width = 180;
+            this.rankingBtn.height = 130;
+            this.rankingBtn.x = this.stage.width * 2 / 3 - 20;
+            this.rankingBtn.y = this.stage.height * 2 / 5;
+            
+            this.rankingBtn.graphics.beginFill(0x00FF00,0);
+            this.rankingBtn.graphics.drawRect(0,0,this.rankingBtn.width,this.rankingBtn.height);
+            this.rankingBtn.graphics.endFill();
+            
+            this.addChild(this.rankingBtn);
+            
+            this.rankingBtn.touchEnabled=true;
+            this.rankingBtn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.showRankingList,this);
+            
+            //开始游戏
+            this.startBtn = new egret.Shape();
+            this.startBtn.width = 280;
+            this.startBtn.height = 150;
+            this.startBtn.x = this.stage.width * 1 / 3 -20;
+            this.startBtn.y = this.stage.height * 5 / 9 - 40;
 
+            this.startBtn.graphics.beginFill(0x00FF00,0);
+            this.startBtn.graphics.drawRect(0,0,this.startBtn.width,this.startBtn.height);
+            this.startBtn.graphics.endFill();
+            
+            this.startBtn.touchEnabled = true;
+            this.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.startGame,this);
+            this.addChild(this.startBtn);
+            
+            
+            dragonBones.WorldClock.clock.add(this.drum);
+            dragonBones.WorldClock.clock.add(this.armature);
+            egret.Ticker.getInstance().register(this.dragonbones,this);
+            
+        }
+        dragonbones(advancedTime: number): void {
+            dragonBones.WorldClock.clock.advanceTime(advancedTime / 1000);
+        }
+        /**
+         * 开始游戏
+         */ 
+        private startGame(evt: egret.TouchEvent): void {
+            MainView.instance.changeScene(com.constants.SceneConstants.TEACH);
+        }
+        /**
+         * 弹出排名
+         */ 
+        private showRankingList(evt: egret.TouchEvent): void {
+            this.rankingList = new egret.Bitmap(RES.getRes("page1Bg"));
+            this.rankingList.x=0;
+            this.rankingList.y=-100;
+            
+            this.close1Btn = new egret.Bitmap(RES.getRes("close1"));
+            this.close2Btn = new egret.Bitmap(RES.getRes("close2"));
+            
+            this.close1Btn.touchEnabled = true;
+            this.close2Btn.touchEnabled = true;
+            
+            this.close1Btn.x = this.rankingList.width * 4 / 5+20;
+            this.close1Btn.y = this.rankingList.height /6-40;
 
+            this.close2Btn.x = this.rankingList.width / 3-40;
+            this.close2Btn.y = this.rankingList.height *2/ 3 ;
+            
+            
+            this.close1Btn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.hideRankingList,this);
+            this.close2Btn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.hideRankingList,this);
+            
+            this.addChild(this.rankingList);
+            this.addChild(this.close1Btn);
+            this.addChild(this.close2Btn);
+            
+        }
+        
+        private hideRankingList(evt: egret.TouchEvent): void {
 
-            egret.Tween.get(this.beginBtnText,{loop:true}).to({x:com.model.DataCenter.instance.configVO.appWidth/2-90},100).to({x:com.model.DataCenter.instance.configVO.appWidth/2-110},100).to({x:com.model.DataCenter.instance.configVO.appWidth/2-90},100).to({x:com.model.DataCenter.instance.configVO.appWidth/2-110},100).to({x:com.model.DataCenter.instance.configVO.appWidth/2-90},100).to({x:com.model.DataCenter.instance.configVO.appWidth/2-110},100).to({x:com.model.DataCenter.instance.configVO.appWidth/2-100},100).wait(1200);
-            egret.Tween.get(this.beginBtn,{loop:true}).to({x:com.model.DataCenter.instance.configVO.appWidth/2-140},100).to({x:com.model.DataCenter.instance.configVO.appWidth/2-160},100).to({x:com.model.DataCenter.instance.configVO.appWidth/2-140},100).to({x:com.model.DataCenter.instance.configVO.appWidth/2-160},100).to({x:com.model.DataCenter.instance.configVO.appWidth/2-140},100).to({x:com.model.DataCenter.instance.configVO.appWidth/2-160},100).to({x:com.model.DataCenter.instance.configVO.appWidth/2-150},100).wait(1200);
+            this.removeChild(this.rankingList);
+            this.removeChild(this.close1Btn);
+            this.removeChild(this.close2Btn);
+            
+            this.close1Btn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.hideRankingList,this);
+            this.close2Btn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.hideRankingList,this);
 
-
-            egret.setTimeout(function(){
-
-                this.beginBtn.touchEnabled = true;
-                this.beginBtn.addEventListener(egret.TouchEvent.TOUCH_BEGIN,function(){
-                    MainView.instance.changeScene(2);
-                },this);
-
-                this.beginBtnText.touchEnabled = true;
-
-                this.beginBtnText.addEventListener(egret.TouchEvent.TOUCH_BEGIN,function(){
-                    MainView.instance.changeScene(2);
-                },this);
-            },this,850);
-
-
-            this.bottomText = new egret.TextField();
-            this.bottomText.fontFamily = "Microsoft YaHei"
-            this.bottomText.textColor = 0xffffff;
-            this.bottomText.width = com.model.DataCenter.instance.configVO.appWidth;
-            this.bottomText.size = 25;
-            this.bottomText.text = "技术支持：拇指部落";
-            this.bottomText.y = com.model.DataCenter.instance.configVO.appHeight*27/28;
-            this.bottomText.textAlign = egret.HorizontalAlign.CENTER;
-            this.addChild(this.bottomText);
 
         }
-
+        
+        
+        private swapDrumStatus(evt: egret.TouchEvent ):void{
+            console.log("状态： "+this.playing);
+            this.playing=!this.playing;
+            if(this.playing)
+                this.drum.animation.gotoAndPlay("kai",-1,-1,0);
+            else
+                this.drum.animation.gotoAndPlay("guan",-1,-1,1);
+        }
     }
 }

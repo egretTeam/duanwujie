@@ -15,13 +15,13 @@ var com;
             if (this.scene != null)
                 this.removeChild(this.scene);
             switch (index) {
-                case 0:
+                case com.constants.SceneConstants.INIT:
                     this.scene = (new com.views.scene.InitScene());
                     break;
-                case 1:
+                case com.constants.SceneConstants.GAME:
                     this.scene = (new com.views.scene.GameScene());
                     break;
-                case 2:
+                case com.constants.SceneConstants.TEACH:
                     this.scene = (new com.views.scene.TeachScene());
                     break;
                 default:

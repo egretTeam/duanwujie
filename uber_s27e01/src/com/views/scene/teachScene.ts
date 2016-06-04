@@ -1,7 +1,5 @@
 module com.views.scene {
-    export class TeachScene extends com.views.ui.BasicView {
-        bg: egret.Shape;//背景
-
+    export class TeachScene extends AbstractScene{
         title:egret.TextField;
 
         minititle:egret.TextField;
@@ -10,9 +8,9 @@ module com.views.scene {
 
         beginBtnText:egret.TextField;
 
-        line1:egret.Bitmap;
-        line2:egret.Bitmap;
-        line3:egret.Bitmap;
+//        line1:egret.Bitmap;
+//        line2:egret.Bitmap;
+//        line3:egret.Bitmap;
 
         carLeft:com.views.ui.scene.gameScene.car;//车子左边
         carRight:com.views.ui.scene.gameScene.car;//车子右边
@@ -42,9 +40,6 @@ module com.views.scene {
             this.beginBtnText = null;
             this.bottomText = null;
 
-            this.line1 = null;
-            this.line2 = null;
-            this.line3 = null;
 
             this.carLeft = null;
             this.carRight = null;
@@ -60,23 +55,38 @@ module com.views.scene {
             this.bg.graphics.endFill();
             this.addChild(this.bg);
 
-            this.line1 = new egret.Bitmap();
-            this.line1.texture = RES.getRes("initscene.line2");
-            this.line1.x = com.model.DataCenter.instance.configVO.appWidth/4 - this.line1.width/2;
-            this.line1.y = com.model.DataCenter.instance.configVO.appHeight - this.line1.height;
-            this.addChild(this.line1);
+            
+            //绘制赛道
+            this.bg.graphics.beginFill(0x80A6FC);
+            this.bg.graphics.drawRect(com.model.DataCenter.instance.configVO.appWidth / 4 - 3,0,6,com.model.DataCenter.instance.configVO.appHeight);
+            this.bg.graphics.endFill();
 
-            this.line2 = new egret.Bitmap();
-            this.line2.texture = RES.getRes("initscene.line1");
-            this.line2.x = com.model.DataCenter.instance.configVO.appWidth/2 - this.line1.width/2;
-            this.line2.y = com.model.DataCenter.instance.configVO.appHeight - this.line1.height;
-            this.addChild(this.line2);
+            this.bg.graphics.beginFill(0xFFA680);
+            this.bg.graphics.drawRect(com.model.DataCenter.instance.configVO.appWidth / 2 - 3,0,6,com.model.DataCenter.instance.configVO.appHeight);
+            this.bg.graphics.endFill();
 
-            this.line3 = new egret.Bitmap();
-            this.line3.texture = RES.getRes("initscene.line2");
-            this.line3.x = com.model.DataCenter.instance.configVO.appWidth*3/4 - this.line1.width/2;
-            this.line3.y = com.model.DataCenter.instance.configVO.appHeight - this.line1.height;
-            this.addChild(this.line3);
+            this.bg.graphics.beginFill(0x80A6FF);
+            this.bg.graphics.drawRect(com.model.DataCenter.instance.configVO.appWidth * 3 / 4 - 3,0,6,com.model.DataCenter.instance.configVO.appHeight);
+            this.bg.graphics.endFill();
+
+            
+//            this.line1 = new egret.Rectangle();
+//            this.line1.texture = RES.getRes("initscene.line2");
+//            this.line1.x = com.model.DataCenter.instance.configVO.appWidth/4 - this.line1.width/2;
+//            this.line1.y = com.model.DataCenter.instance.configVO.appHeight - this.line1.height;
+//            this.addChild(this.line1);
+//
+//            this.line2 = new egret.Bitmap();
+//            this.line2.texture = RES.getRes("initscene.line1");
+//            this.line2.x = com.model.DataCenter.instance.configVO.appWidth/2 - this.line1.width/2;
+//            this.line2.y = com.model.DataCenter.instance.configVO.appHeight - this.line1.height;
+//            this.addChild(this.line2);
+//
+//            this.line3 = new egret.Bitmap();
+//            this.line3.texture = RES.getRes("initscene.line2");
+//            this.line3.x = com.model.DataCenter.instance.configVO.appWidth*3/4 - this.line1.width/2;
+//            this.line3.y = com.model.DataCenter.instance.configVO.appHeight - this.line1.height;
+//            this.addChild(this.line3);
 
             this.teachAni();
 
