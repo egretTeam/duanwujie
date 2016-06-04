@@ -11,8 +11,10 @@ module com.views.scene {
         spScore:number = 0;
 
         age:number = 0;
-        
-        spDuration:number=3;
+        /**
+         * logo盾牌出现频率
+         */ 
+        spDuration:number=20;
         spCount:number=0;
 
         timeGap:number = 35;
@@ -24,6 +26,7 @@ module com.views.scene {
 
         leftArr:any = new Array();
         rightArr:any = new Array();
+        gameOverdialog: com.views.dialog.GameOverDialog;
 
         gameOver:boolean = false;
 
@@ -33,8 +36,6 @@ module com.views.scene {
         }
 
         protected onRemoveStage(e: egret.Event) {//移除
-
-
             super.onRemoveStage(e);
 
             this.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchBegin, this);
@@ -187,7 +188,7 @@ module com.views.scene {
                 if(items[i] == null) continue;
                 items[i].update();
 
-                if(this.age % 2 == 0) {
+                if(this.age % 3 == 0) {
                 if(items[i].y >= com.model.DataCenter.instance.configVO.appHeight - 10) {
                     this.removeChild(items[i]);
                     items.splice(i,1);
@@ -245,11 +246,14 @@ module com.views.scene {
             if(parseInt(egret.localStorage.getItem("highestScore"))<this.score||egret.localStorage.getItem("highestScore")==null){
                 egret.localStorage.setItem("highestScore",this.score+"");
             }
-            
-            MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
+            this.showGameOverPanel();
+            //MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
         }
 
-        
+        showGameOverPanel():void{
+            this.gameOverdialog=new com.views.dialog.GameOverDialog();
+            this.addChild(this.gameOverdialog);
+        }
         
         luzhangFactory(num:number):com.views.ui.scene.gameScene.luzhang{
 //            var luzhang = new com.views.ui.scene.gameScene.luzhang();

@@ -1,18 +1,9 @@
 module com.views.scene{
     export class luckScene extends AbstractScene {
        private backgroud:egret.Bitmap;
-       private weipinhui:egret.Bitmap;
-       private JD: egret.Bitmap;
-       private Diamonds:egret.Bitmap;
-       private Diamonds2:egret.Bitmap;
-       private Diamonds3: egret.Bitmap;
-       private bell1: egret.Bitmap;
-       private bell2: egret.Bitmap;
-       private bell2_1: egret.Bitmap;
-       private bell2_1_1: egret.Bitmap;
-       private bell2_2: egret.Bitmap;
-       private money1: egret.Bitmap;
-       private money2: egret.Bitmap;
+       private getnextpage():number{
+           return 3;
+       }
         constructor() {
             super();
             this.init();
@@ -23,66 +14,30 @@ module com.views.scene{
             this.backgroud.x = 0;
             this.backgroud.y = -150;
             this.addChild(this.backgroud);
-//            
-//            //唯品会口令
-//            this.weipinhui = new egret.Bitmap(RES.getRes("weipinhui"))
-//            this.weipinhui.x = 0;
-//            this.weipinhui.y = -100;
-//            this.addChild(this.weipinhui);
-//            
-//            //JD口令
-//            this.JD = new egret.Bitmap(RES.getRes("JD"))
-//            this.JD.x = 0;
-//            this.JD.y = -100;
-//            this.addChild(this.JD);
-//            
-//            //钻石会员第1页
-//            this.Diamonds = new egret.Bitmap(RES.getRes("Diamonds"))
-//            this.Diamonds.x = 0;
-//            this.Diamonds.y = -100;
-//            this.addChild(this.Diamonds);
+        switch(this.getnextpage()){
+            case 0:
+            this.addChild(new com.views.dialog.WeipinhuiDialog());
+            break;
+            case 1:
+            this.addChild(new com.views.dialog.JdDialog());
+            break;
+            case 2:           
+            this.addChild(new com.views.dialog.DiamondsDailog());
+            break;
+            case 3:               
+            this.addChild(new com.views.dialog.Bell1Dialog());
+            break;
+            case 4:  
+            this.addChild(new com.views.dialog.Money1Dialog());
+            break;
+            case 5:
+            this.addChild(new com.views.dialog.Money1Dialog());
+            break;
+            }
+
             
-            //钻石会员第2页
-//            this.Diamonds2 = new egret.Bitmap(RES.getRes("Diamonds2"))
-//            this.Diamonds2.x = 0;
-//            this.Diamonds2.y = -100;
-//            this.addChild(this.Diamonds2);
-           
-            //钻石会员第3页
-//            this.Diamonds3 = new egret.Bitmap(RES.getRes("Diamonds3"))
-//            this.Diamonds3.x = 0;
-//            this.Diamonds3.y = -100;
-//            this.addChild(this.Diamonds3);
-            
-            //彩铃第1页
-//            this.bell1 = new egret.Bitmap(RES.getRes("bell1"))
-//            this.bell1.x = 0;
-//            this.bell1.y = -100;
-//            this.addChild(this.bell1);
-            
-            //彩铃第2页
-//            this.bell2 = new egret.Bitmap(RES.getRes("bell2"))
-//            this.bell2.x = 0;
-//            this.bell2.y = -100;
-//            this.addChild(this.bell2);
-            
-            //彩铃第2-1页
-//            this.bell2_1 = new egret.Bitmap(RES.getRes("bell2_1"))
-//            this.bell2_1.x = 0;
-//            this.bell2_1.y = -100;
-//            this.addChild(this.bell2_1);
-            
-            //彩铃第2-1-1页
-//            this.bell2_1_1 = new egret.Bitmap(RES.getRes("bell2_1_1"))
-//            this.bell2_1_1.x = 0;
-//            this.bell2_1_1.y = -100;
-//            this.addChild(this.bell2_1_1);
-            
-            //彩铃第2-2页
-//            this.bell2_2 = new egret.Bitmap(RES.getRes("bell2_2"))
-//            this.bell2_2.x = 0;
-//            this.bell2_2.y = -100;
-//            this.addChild(this.bell2_2);
+
+
             
             //话费流量1页
 //            this.money1 = new egret.Bitmap(RES.getRes("money1"))
@@ -91,10 +46,10 @@ module com.views.scene{
 //            this.addChild(this.money1);
             
             //话费流量2页
-            this.money2 = new egret.Bitmap(RES.getRes("money2"))
-            this.money2.x = 0;
-            this.money2.y = -100;
-            this.addChild(this.money2);
+//            this.money2 = new egret.Bitmap(RES.getRes("money2"))
+//            this.money2.x = 0;
+//            this.money2.y = -100;
+//            this.addChild(this.money2);
             
         }
     }

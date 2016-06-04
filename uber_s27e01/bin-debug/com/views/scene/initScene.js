@@ -90,7 +90,7 @@ var com;
                  * 开始游戏
                  */
                 p.startGame = function (evt) {
-                    com.MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
+                    com.MainView.instance.changeScene(com.constants.SceneConstants.TEACH);
                 };
                 p.showPage = function (evt, pageName) {
                     this.infoPage = new egret.Bitmap(RES.getRes(pageName));
