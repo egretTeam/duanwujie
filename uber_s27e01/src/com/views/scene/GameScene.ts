@@ -192,7 +192,6 @@ module com.views.scene {
                 if(items[i].y >= com.model.DataCenter.instance.configVO.appHeight - 10) {
                     if(this.contains(items[i]))
                         this.removeChild(items[i]);
-                    this.removeChild(items[i]);
                     items.splice(i,1);
                     continue;}
                 if(items[i].isHit || items[i].isEnd) {
@@ -231,7 +230,8 @@ module com.views.scene {
                             this.scoreLabel.text = this.score + "";
                         }
                     }
-                    this.removeChild(items[i]);
+                    if(this.contains(items[i]))
+                        this.removeChild(items[i]);
                     items.splice(i,1);
                 }
                 }

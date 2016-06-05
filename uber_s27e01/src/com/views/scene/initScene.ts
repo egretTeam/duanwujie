@@ -12,6 +12,7 @@ module com.views.scene {
         private infoPage: egret.Bitmap;
         private startBtn: egret.Shape;
         private ruleBtn: egret.Shape;
+        private music:egret.Sound;
 
         constructor() {
             super();
@@ -57,6 +58,9 @@ module com.views.scene {
             this.drum.display.touchEnabled=true;
             this.drum.display.addEventListener(egret.TouchEvent.TOUCH_TAP,this.swapDrumStatus,this);
             this.addChild(this.drum.display);
+            
+            //鼓点音乐
+            this.music=new egret.Sound(RES.getRes(""));
 
 
             //排行榜
