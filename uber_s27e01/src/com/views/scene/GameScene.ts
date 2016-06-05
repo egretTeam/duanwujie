@@ -190,11 +190,14 @@ module com.views.scene {
 
                 if(this.age % 3 == 0) {
                 if(items[i].y >= com.model.DataCenter.instance.configVO.appHeight - 10) {
+                    if(this.contains(items[i]))
+                        this.removeChild(items[i]);
                     this.removeChild(items[i]);
                     items.splice(i,1);
                     continue;}
                 if(items[i].isHit || items[i].isEnd) {
-                    this.removeChild(items[i]);
+                    if(this.contains(items[i]))
+                        this.removeChild(items[i]);
                     items.splice(i,1);
                     continue;
                 }
