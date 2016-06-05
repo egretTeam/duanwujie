@@ -36,7 +36,7 @@ var com;
                     }
                     if (new egret.Rectangle(240, 460, 160, 160).contains(evt.stageX, evt.stageY)) {
                         AwardDialog.balance--;
-                        com.MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
+                        this.update();
                     }
                 };
                 p.update = function () {

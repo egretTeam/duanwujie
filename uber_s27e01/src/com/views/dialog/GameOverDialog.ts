@@ -35,7 +35,7 @@ module com.views.dialog {
         
         public showShareArea():void{
         }
-     
+        
         public close(): void {
             this.jump(new AwardDialog());
         }
