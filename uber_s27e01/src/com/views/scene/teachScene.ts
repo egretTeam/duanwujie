@@ -204,15 +204,15 @@ module com.views.scene {
             },this,850);
 
 
-            this.bottomText = new egret.TextField();
-            this.bottomText.fontFamily = "Microsoft YaHei"
-            this.bottomText.textColor = 0xffffff;
-            this.bottomText.width = com.model.DataCenter.instance.configVO.appWidth;
-            this.bottomText.size = 25;
-            this.bottomText.text = "技术支持：拇指部落";
-            this.bottomText.y = com.model.DataCenter.instance.configVO.appHeight*27/28;
-            this.bottomText.textAlign = egret.HorizontalAlign.CENTER;
-            this.addChild(this.bottomText);
+//            this.bottomText = new egret.TextField();
+//            this.bottomText.fontFamily = "Microsoft YaHei"
+//            this.bottomText.textColor = 0xffffff;
+//            this.bottomText.width = com.model.DataCenter.instance.configVO.appWidth;
+//            this.bottomText.size = 25;
+//            this.bottomText.text = "技术支持：拇指部落";
+//            this.bottomText.y = com.model.DataCenter.instance.configVO.appHeight*27/28;
+//            this.bottomText.textAlign = egret.HorizontalAlign.CENTER;
+//            this.addChild(this.bottomText);
 
 
         }
