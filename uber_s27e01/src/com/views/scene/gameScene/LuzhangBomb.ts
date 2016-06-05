@@ -9,6 +9,10 @@ module com.views.ui.scene.gameScene {
             super();
         }
 
+        protected  getImageName(): string{
+        return ""
+    }
+        
         init(): void {
             if(this.texture==null)
                 this.texture = RES.getRes("luzhang");

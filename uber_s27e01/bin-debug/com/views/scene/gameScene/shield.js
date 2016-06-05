@@ -14,28 +14,14 @@ var com;
                             _super.call(this);
                         }
                         var d = __define,c=shield,p=c.prototype;
-                        p.init = function () {
-                            this.item = this.armature.display;
-                            this.addChild(this.item);
-                            //this.tweenGoToBottom();
-                            this.item.anchorOffsetX = this.width / 2;
-                            this.item.anchorOffsetY = this.height / 2;
-                            this.item.x = this.width / 2;
-                            this.item.y = this.height / 2;
-                            //            this.scaleX = .8;
-                            //            this.scaleY = .8;
-                            this.armature.animation.gotoAndPlay("logo", -1, -1, -0);
-                            //            dragonBones.WorldClock.clock.add(this.armature);
-                            //
-                            //            egret.Ticker.getInstance().register(this.dragonbones,this);
+                        p.getImageName = function () {
+                            return "logo";
                         };
                         p.dragonbones = function (advancedTime) {
                             dragonBones.WorldClock.clock.advanceTime(advancedTime / 5000);
                         };
                         p.onRemoveStage = function (e) {
                             _super.prototype.onRemoveStage.call(this, e);
-                            //            dragonBones.WorldClock.clock.remove(this.armature);
-                            //            egret.Ticker.getInstance().unregister(this.dragonbones,this);
                         };
                         p.getType = function () {
                             return com.constants.ItemConstant.SHILED;

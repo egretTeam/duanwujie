@@ -14,6 +14,9 @@ var com;
                             _super.call(this);
                         }
                         var d = __define,c=luzhangBomb,p=c.prototype;
+                        p.getImageName = function () {
+                            return "";
+                        };
                         p.init = function () {
                             if (this.texture == null)
                                 this.texture = RES.getRes("luzhang");
