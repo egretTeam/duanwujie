@@ -78,11 +78,6 @@
 				},
 				{
 					"isFolder":false,
-					"key":"MZloadingImg",
-					"name":"MZloadingImg"
-				},
-				{
-					"isFolder":false,
 					"key":"boattexturepng",
 					"name":"boattexturepng"
 				},
@@ -215,6 +210,16 @@
 					"isFolder":false,
 					"key":"oderbtn2",
 					"name":"oderbtn2"
+				},
+				{
+					"isFolder":false,
+					"key":"loaded",
+					"name":"loaded"
+				},
+				{
+					"isFolder":false,
+					"key":"loading",
+					"name":"loading"
 				}
 			]
 		}
