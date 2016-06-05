@@ -1,4 +1,4 @@
-﻿module com.model.localData {
+module com.model.localData {
     export class UserVO {
         /**
         * cookie
@@ -44,6 +44,10 @@
         * 操作combo数
         */
         combo: number = 0;//操作combo数
+        /**
+         * 判断用户是否彩铃用户
+         */ 
+        iscrbtuser:Boolean;
         /**
         * 分数配置
         */

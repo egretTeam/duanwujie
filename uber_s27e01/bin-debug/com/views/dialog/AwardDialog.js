@@ -56,7 +56,7 @@ var com;
                 };
                 p.close = function () {
                 };
-                AwardDialog.balance = 6;
+                AwardDialog.balance = 5;
                 return AwardDialog;
             }(dialog.Dialog));
             dialog.AwardDialog = AwardDialog;

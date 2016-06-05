@@ -28,14 +28,20 @@ module com.views.dialog {
 
         protected abstract createContent():void;
         
+        protected yOffset():number{
+            return 0;
+        }
+        
         private touchHandler(evt:egret.TouchEvent){
-            if(evt.stageX > 515 && evt.stageX<560&&evt.stageY>230&&evt.stageY<275){
+            console.log(evt.stageX+" "+evt.stageY)
+            if(evt.stageX > 515 && evt.stageX < 560 && evt.stageY + this.yOffset() > 230 && evt.stageY + this.yOffset()<275){
                 this.close();
             }else
                 this.customTouchHandler(evt);
         }
         
-        public close():void{
+        public close(): void {
+            console.log("dialog close");
         }
         
         protected customTouchHandler(evt: egret.TouchEvent) {

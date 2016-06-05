@@ -24,14 +24,19 @@ var com;
                     this.bg.touchEnabled = true;
                     this.bg.addEventListener(egret.TouchEvent.TOUCH_TAP, this.touchHandler, this);
                 };
+                p.yOffset = function () {
+                    return 0;
+                };
                 p.touchHandler = function (evt) {
-                    if (evt.stageX > 515 && evt.stageX < 560 && evt.stageY > 230 && evt.stageY < 275) {
+                    console.log(evt.stageX + " " + evt.stageY);
+                    if (evt.stageX > 515 && evt.stageX < 560 && evt.stageY + this.yOffset() > 230 && evt.stageY + this.yOffset() < 275) {
                         this.close();
                     }
                     else
                         this.customTouchHandler(evt);
                 };
                 p.close = function () {
+                    console.log("dialog close");
                 };
                 p.customTouchHandler = function (evt) {
                 };

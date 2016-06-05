@@ -11,6 +11,81 @@
 			"children":[
 				{
 					"isFolder":false,
+					"key":"Diamonds",
+					"name":"Diamonds"
+				},
+				{
+					"isFolder":false,
+					"key":"Diamonds2",
+					"name":"Diamonds2"
+				},
+				{
+					"isFolder":false,
+					"key":"Diamonds3",
+					"name":"Diamonds3"
+				},
+				{
+					"isFolder":false,
+					"key":"JD",
+					"name":"JD"
+				},
+				{
+					"isFolder":false,
+					"key":"backgroud",
+					"name":"backgroud"
+				},
+				{
+					"isFolder":false,
+					"key":"bell1",
+					"name":"bell1"
+				},
+				{
+					"isFolder":false,
+					"key":"bell2",
+					"name":"bell2"
+				},
+				{
+					"isFolder":false,
+					"key":"bell2_1",
+					"name":"bell2_1"
+				},
+				{
+					"isFolder":false,
+					"key":"bell2_1_1",
+					"name":"bell2_1_1"
+				},
+				{
+					"isFolder":false,
+					"key":"bell2_2",
+					"name":"bell2_2"
+				},
+				{
+					"isFolder":false,
+					"key":"boattexturepng",
+					"name":"boattexturepng"
+				},
+				{
+					"isFolder":false,
+					"key":"close1",
+					"name":"close1"
+				},
+				{
+					"isFolder":false,
+					"key":"close2",
+					"name":"close2"
+				},
+				{
+					"isFolder":false,
+					"key":"cloud",
+					"name":"cloud"
+				},
+				{
+					"isFolder":false,
+					"key":"drum/png",
+					"name":"drum/png"
+				},
+				{
+					"isFolder":false,
 					"key":"green",
 					"name":"green"
 				},
@@ -25,41 +100,9 @@
 					"name":"icon"
 				},
 				{
-					"children":[
-						{
-							"isFolder":false,
-							"key":"car1",
-							"name":"car1"
-						},
-						{
-							"isFolder":false,
-							"key":"carmarks1",
-							"name":"carmarks1"
-						},
-						{
-							"isFolder":false,
-							"key":"carmarks2",
-							"name":"carmarks2"
-						},
-						{
-							"isFolder":false,
-							"key":"initcar",
-							"name":"initcar"
-						},
-						{
-							"isFolder":false,
-							"key":"line1",
-							"name":"line1"
-						},
-						{
-							"isFolder":false,
-							"key":"line2",
-							"name":"line2"
-						}
-					],
 					"isFolder":false,
-					"key":"initscene",
-					"name":"initscene"
+					"key":"items/png",
+					"name":"items/png"
 				},
 				{
 					"isFolder":false,
@@ -73,33 +116,13 @@
 				},
 				{
 					"isFolder":false,
-					"key":"share_p0",
-					"name":"share_p0"
+					"key":"money1",
+					"name":"money1"
 				},
 				{
 					"isFolder":false,
-					"key":"MZloadingImg",
-					"name":"MZloadingImg"
-				},
-				{
-					"isFolder":false,
-					"key":"boattexturepng",
-					"name":"boattexturepng"
-				},
-				{
-					"isFolder":false,
-					"key":"items/png",
-					"name":"items/png"
-				},
-				{
-					"isFolder":false,
-					"key":"scorePanel",
-					"name":"scorePanel"
-				},
-				{
-					"isFolder":false,
-					"key":"cloud",
-					"name":"cloud"
+					"key":"money2",
+					"name":"money2"
 				},
 				{
 					"isFolder":false,
@@ -108,23 +131,8 @@
 				},
 				{
 					"isFolder":false,
-					"key":"drum/png",
-					"name":"drum/png"
-				},
-				{
-					"isFolder":false,
 					"key":"page1Bg",
 					"name":"page1Bg"
-				},
-				{
-					"isFolder":false,
-					"key":"close1",
-					"name":"close1"
-				},
-				{
-					"isFolder":false,
-					"key":"close2",
-					"name":"close2"
 				},
 				{
 					"isFolder":false,
@@ -133,13 +141,33 @@
 				},
 				{
 					"isFolder":false,
-					"key":"gameover",
-					"name":"gameover"
+					"key":"scorePanel",
+					"name":"scorePanel"
+				},
+				{
+					"isFolder":false,
+					"key":"share_p0",
+					"name":"share_p0"
+				},
+				{
+					"isFolder":false,
+					"key":"weipinhui",
+					"name":"weipinhui"
+				},
+				{
+					"isFolder":false,
+					"key":"MZloadingImg",
+					"name":"MZloadingImg"
 				},
 				{
 					"isFolder":false,
 					"key":"rise",
 					"name":"rise"
+				},
+				{
+					"isFolder":false,
+					"key":"gameover",
+					"name":"gameover"
 				}
 			]
 		}

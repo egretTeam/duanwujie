@@ -5,7 +5,7 @@
 			"name":"preload"
 		},
 		{
-			"keys":"green,luzhangkuang,luzhang,luzhangjson,finger,icon,hand,share_p0,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2,rule,gameover,rise,BGM",
+			"keys":"green,luzhangkuang,luzhang,luzhangjson,finger,icon,hand,share_p0,bgmusic,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2,rule,JD,weipinhui,Diamonds,Diamonds2,Diamonds3,bell1,bell2,backgroud,bell2_2,bell2_1,bell2_1_1,money1,money2,rise,BGM,gameover",
 			"name":"gameScene"
 		}
 	],
@@ -54,12 +54,6 @@
 			"name":"luzhangjson",
 			"type":"json",
 			"url":"assets/luzhang.json"
-		},
-		{
-			"name":"initscene",
-			"subkeys":"car1,carmarks1,carmarks2,initcar,line1,line2",
-			"type":"sheet",
-			"url":"assets/initScene/initscene.json"
 		},
 		{
 			"name":"boattexturepng",
@@ -152,9 +146,14 @@
 			"url":"assets/page1/rule.png"
 		},
 		{
-			"name":"gameover",
+			"name":"JD",
 			"type":"image",
-			"url":"assets/game/gameover.png"
+			"url":"assets/LUCK/JD.png"
+		},
+		{
+			"name":"weipinhui",
+			"type":"image",
+			"url":"assets/LUCK/weipinhui.png"
 		},
 		{
 			"name":"rise",
@@ -165,6 +164,66 @@
 			"name":"BGM",
 			"type":"sound",
 			"url":"assets/bgm.mp3"
+		},
+		{
+			"name":"Diamonds",
+			"type":"image",
+			"url":"assets/Diamonds.png"
+		},
+		{
+			"name":"Diamonds2",
+			"type":"image",
+			"url":"assets/LUCK/Dimonds2.png"
+		},
+		{
+			"name":"Diamonds3",
+			"type":"image",
+			"url":"assets/LUCK/Diamonds3.png"
+		},
+		{
+			"name":"bell1",
+			"type":"image",
+			"url":"assets/LUCK/bell1.png"
+		},
+		{
+			"name":"bell2",
+			"type":"image",
+			"url":"assets/LUCK/bell2.png"
+		},
+		{
+			"name":"backgroud",
+			"type":"image",
+			"url":"assets/LUCK/backgroud.png"
+		},
+		{
+			"name":"bell2_2",
+			"type":"image",
+			"url":"assets/LUCK/bell2_2.png"
+		},
+		{
+			"name":"bell2_1",
+			"type":"image",
+			"url":"assets/LUCK/bell2_1.png"
+		},
+		{
+			"name":"bell2_1_1",
+			"type":"image",
+			"url":"assets/LUCK/bell2_1_1.png"
+		},
+		{
+			"name":"money1",
+			"type":"image",
+			"url":"assets/LUCK/money1.png"
+		},
+		{
+			"name":"money2",
+			"type":"image",
+			"url":"assets/LUCK/money2.png"
+		},
+		{
+			"name":"gameover",
+			"type":"image",
+			"url":"assets/game/gameover.png"
 		}
 	]
 }

@@ -5,7 +5,7 @@ module com.views.dialog {
 	 *
 	 */
 	export class AwardDialog extends Dialog{
-    	  public static balance:number = 6;
+    	  public static balance:number = 5;
     	  
     	  text:egret.TextField;
     	
