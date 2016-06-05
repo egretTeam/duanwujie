@@ -195,6 +195,16 @@
 					"isFolder":false,
 					"key":"money2",
 					"name":"money2"
+				},
+				{
+					"isFolder":false,
+					"key":"gameover",
+					"name":"gameover"
+				},
+				{
+					"isFolder":false,
+					"key":"rise",
+					"name":"rise"
 				}
 			]
 		}
