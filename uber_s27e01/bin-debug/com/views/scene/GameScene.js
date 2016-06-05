@@ -188,12 +188,12 @@ var com;
                                         break;
                                     }
                                     case com.constants.ItemConstant.SCORE: {
-                                        this.score += 50;
+                                        this.score += GameScene.SCORE_STEP;
                                         this.scoreLabel.text = this.score + "";
                                         break;
                                     }
                                     case com.constants.ItemConstant.SHILED: {
-                                        this.score += 50;
+                                        this.score += GameScene.SCORE_STEP;
                                         car.setShield(true);
                                         this.scoreLabel.text = this.score + "";
                                     }
@@ -268,6 +268,7 @@ var com;
                         }
                     }
                 };
+                GameScene.SCORE_STEP = 1;
                 return GameScene;
             }(scene.AbstractScene));
             scene.GameScene = GameScene;

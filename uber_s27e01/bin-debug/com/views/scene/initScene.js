@@ -23,8 +23,13 @@ var com;
                     this.ruleBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.showRuleList, this);
                 };
                 p.onConfigComplete = function (e) {
+                    //鼓点音乐
+                    this.music = RES.getRes("bgm_mp3");
                     this.initInitLayout();
                     this.removeChild(this.loading);
+                    this.channel = this.music.play(0);
+                };
+                p.onAddStage = function () {
                 };
                 p.initInitLayout = function () {
                     //背景
@@ -109,6 +114,10 @@ var com;
                     this.addChild(this.infoPage);
                     this.addChild(this.close1Btn);
                     this.addChild(this.close2Btn);
+                    this.ruleBtn.touchEnabled = false;
+                    this.rankingBtn.touchEnabled = false;
+                    this.startBtn.touchEnabled = false;
+                    this.drum.display.touchEnabled = false;
                 };
                 /**
                  * 弹出规则页
@@ -121,20 +130,52 @@ var com;
                  */
                 p.showRankingList = function (evt) {
                     this.showPage(evt, "page1Bg");
+                    var list = new eui.List();
+                    list.dataProvider = new eui.ArrayCollection([1, 2, 3, 4, 5]);
+                    list.x = 100;
+                    list.y = 200;
+                    list.width = 300;
+                    list.height = 500;
+                    var exml = "<e:Scroller xmlns:e=\"http://ns.egret.com/eui\">\n                <e:List id=\"list\" width=\"330\" height=\"350\">\n                    <e:itemRendererSkinName>\n                        <e:Skin states=\"up,down,disabled\" height=\"50\">\n                            <e:Label text=\"{data.icon}\" textColor=\"0x64470C\" left=\"0\"/>\n                            <e:Label text=\"{data.name}\" textColor=\"0x64470C\" horizontalCenter=\"0\"/>\n                            <e:Label text=\"{data.score}\" textColor=\"0x64470C\" right=\"0\"/>\n                        </e:Skin>\n                    </e:itemRendererSkinName>\n                </e:List>\n            </e:Scroller>";
+                    var clazz = EXML.parse(exml);
+                    this.scroller = new clazz();
+                    this.addChild(this.scroller);
+                    var list = this.scroller.list;
+                    var collection = new eui.ArrayCollection();
+                    for (var i = 0; i < 20; i++) {
+                        collection.addItem({ "icon": i, "name": "name" + i, "score": i * 100 });
+                    }
+                    this.scroller.x = this.infoPage.width / 3 - 50;
+                    this.scroller.y = 360;
+                    list.dataProvider = collection;
+                };
+                p.hideRankingPage = function (evt) {
+                    this.removeChild(this.scroller);
+                    this.hidePage(evt);
                 };
                 p.hidePage = function (evt) {
+                    this.ruleBtn.touchEnabled = true;
+                    this.rankingBtn.touchEnabled = true;
+                    this.startBtn.touchEnabled = true;
+                    this.drum.display.touchEnabled = true;
                     this.removeChild(this.infoPage);
                     this.removeChild(this.close1Btn);
                     this.removeChild(this.close2Btn);
+                    if (this.scroller != null && this.contains(this.scroller))
+                        this.removeChild(this.scroller);
                     this.close1Btn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.hidePage, this);
                     this.close2Btn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.hidePage, this);
                 };
                 p.swapDrumStatus = function (evt) {
                     this.playing = !this.playing;
-                    if (this.playing)
+                    if (this.playing) {
                         this.drum.animation.gotoAndPlay("kai", -1, -1, 0);
-                    else
+                        this.channel = this.music.play(0);
+                    }
+                    else {
                         this.drum.animation.gotoAndPlay("guan", -1, -1, 1);
+                        this.channel.stop();
+                    }
                 };
                 return InitScene;
             }(scene.AbstractScene));

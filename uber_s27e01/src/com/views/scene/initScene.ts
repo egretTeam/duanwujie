@@ -13,6 +13,8 @@ module com.views.scene {
         private startBtn: egret.Shape;
         private ruleBtn: egret.Shape;
         private music:egret.Sound;
+        private channel:egret.SoundChannel;
+        private scroller;
 
         constructor() {
             super();
@@ -34,8 +36,15 @@ module com.views.scene {
             
         }
         onConfigComplete(e: com.model.localData.event.LoaderEvent) {//配置加载完成
+            //鼓点音乐
+            this.music = RES.getRes("bgm_mp3");
             this.initInitLayout();
             this.removeChild(this.loading);
+            
+            this.channel = this.music.play(0);
+        }
+        
+        protected onAddStage():void{
         }
         private initInitLayout(): void {
             //背景
@@ -59,8 +68,6 @@ module com.views.scene {
             this.drum.display.addEventListener(egret.TouchEvent.TOUCH_TAP,this.swapDrumStatus,this);
             this.addChild(this.drum.display);
             
-            //鼓点音乐
-            this.music=new egret.Sound(RES.getRes(""));
 
 
             //排行榜
@@ -150,6 +157,11 @@ module com.views.scene {
             this.addChild(this.infoPage);
             this.addChild(this.close1Btn);
             this.addChild(this.close2Btn);
+            
+            this.ruleBtn.touchEnabled=false;
+            this.rankingBtn.touchEnabled=false;
+            this.startBtn.touchEnabled = false;
+            this.drum.display.touchEnabled = false;
 
         }
 
@@ -164,12 +176,58 @@ module com.views.scene {
          */ 
         private showRankingList(evt: egret.TouchEvent): void {
             this.showPage(evt,"page1Bg");
-        }
-        private hidePage(evt: egret.TouchEvent): void {
 
+            var list = new eui.List();
+            list.dataProvider = new eui.ArrayCollection([1,2,3,4,5]);
+            list.x=100;
+            list.y=200;
+            list.width=300;
+            list.height=500;
+            
+            
+            var exml =
+                `<e:Scroller xmlns:e="http://ns.egret.com/eui">
+                <e:List id="list" width="330" height="350">
+                    <e:itemRendererSkinName>
+                        <e:Skin states="up,down,disabled" height="50">
+                            <e:Label text="{data.icon}" textColor="0x64470C" left="0"/>
+                            <e:Label text="{data.name}" textColor="0x64470C" horizontalCenter="0"/>
+                            <e:Label text="{data.score}" textColor="0x64470C" right="0"/>
+                        </e:Skin>
+                    </e:itemRendererSkinName>
+                </e:List>
+            </e:Scroller>`;
+
+            var clazz = EXML.parse(exml);
+            this.scroller = new clazz();
+            this.addChild(this.scroller);
+            var list: eui.List = this.scroller.list;
+            var collection = new eui.ArrayCollection();
+            for(var i = 0;i < 20;i++) {
+                collection.addItem({ "icon":  i,"name": "name" + i,"score": i*100 });
+            }
+            this.scroller.x = this.infoPage.width/3-50;
+            this.scroller.y=360;
+            list.dataProvider = collection;
+
+        }
+        private hideRankingPage(evt: egret.TouchEvent):void{
+            this.removeChild(this.scroller);
+            this.hidePage(evt);
+        }
+        
+        private hidePage(evt: egret.TouchEvent): void {
+            this.ruleBtn.touchEnabled = true;
+            this.rankingBtn.touchEnabled = true;
+            this.startBtn.touchEnabled = true;
+            this.drum.display.touchEnabled=true;
+            
             this.removeChild(this.infoPage);
             this.removeChild(this.close1Btn);
             this.removeChild(this.close2Btn);
+            if(this.scroller != null && this.contains(this.scroller))
+                this.removeChild(this.scroller);
+                
 
             this.close1Btn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.hidePage,this);
             this.close2Btn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.hidePage,this);
@@ -179,10 +237,13 @@ module com.views.scene {
         
         private swapDrumStatus(evt: egret.TouchEvent ):void{
             this.playing=!this.playing;
-            if(this.playing)
+            if(this.playing){
                 this.drum.animation.gotoAndPlay("kai",-1,-1,0);
-            else
+                this.channel = this.music.play(0);
+            }else{
                 this.drum.animation.gotoAndPlay("guan",-1,-1,1);
+                this.channel.stop();
+            }
         }
     }
 }

@@ -60,6 +60,30 @@ var com;
                 dragonbonesFactory.addTextureAtlas(new dragonBones.EgretTextureAtlas(t, textureData));
                 return dragonbonesFactory.buildArmature(armatureName);
             };
+            AppUtils.alert = function (stage, msg) {
+                if (stage == null)
+                    alert(msg);
+                else {
+                    var t = new egret.TextField();
+                    t.x = 0;
+                    t.y = stage.height / 3;
+                    t.width = stage.width;
+                    t.height = 60;
+                    t.verticalAlign = egret.VerticalAlign.MIDDLE;
+                    t.textAlign = egret.HorizontalAlign.CENTER;
+                    t.text = msg;
+                    t.textColor = 0xFFFFFF;
+                    t.size = 30;
+                    t.background = true;
+                    t.backgroundColor = 0x000000;
+                    stage.addChild(t);
+                    var timer = new egret.Timer(1500, 1);
+                    timer.addEventListener(egret.TimerEvent.TIMER, function () {
+                        stage.removeChild(t);
+                    }, this);
+                    timer.start();
+                }
+            };
             return AppUtils;
         }());
         utils.AppUtils = AppUtils;

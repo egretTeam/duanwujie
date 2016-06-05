@@ -145,15 +145,15 @@ var com;
                             com.MainView.instance.changeScene(1);
                         }, this);
                     }, this, 850);
-                    this.bottomText = new egret.TextField();
-                    this.bottomText.fontFamily = "Microsoft YaHei";
-                    this.bottomText.textColor = 0xffffff;
-                    this.bottomText.width = com.model.DataCenter.instance.configVO.appWidth;
-                    this.bottomText.size = 25;
-                    this.bottomText.text = "技术支持：拇指部落";
-                    this.bottomText.y = com.model.DataCenter.instance.configVO.appHeight * 27 / 28;
-                    this.bottomText.textAlign = egret.HorizontalAlign.CENTER;
-                    this.addChild(this.bottomText);
+                    //            this.bottomText = new egret.TextField();
+                    //            this.bottomText.fontFamily = "Microsoft YaHei"
+                    //            this.bottomText.textColor = 0xffffff;
+                    //            this.bottomText.width = com.model.DataCenter.instance.configVO.appWidth;
+                    //            this.bottomText.size = 25;
+                    //            this.bottomText.text = "技术支持：拇指部落";
+                    //            this.bottomText.y = com.model.DataCenter.instance.configVO.appHeight*27/28;
+                    //            this.bottomText.textAlign = egret.HorizontalAlign.CENTER;
+                    //            this.addChild(this.bottomText);
                 };
                 p.luzhangFactory = function (num) {
                     var luzhang = new com.views.ui.scene.gameScene.luzhang();

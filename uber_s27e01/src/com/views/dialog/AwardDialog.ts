@@ -36,6 +36,7 @@ module com.views.dialog {
         
         protected customTouchHandler(evt: egret.TouchEvent) {
             if(AwardDialog.balance<=0){
+                com.utils.AppUtils.alert(this.stage,"抽奖次数已用完");
                 return;
             }
             if(new egret.Rectangle(240,460,160,160).contains(evt.stageX,evt.stageY)){

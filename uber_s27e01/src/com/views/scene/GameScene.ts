@@ -3,6 +3,7 @@ module com.views.scene {
         carLeft:com.views.ui.scene.gameScene.car;//车子左边
         carRight:com.views.ui.scene.gameScene.car;//车子右边
         loading:com.views.ui.loading.LoaderLoading;
+        static SCORE_STEP:number=1;
 
         scoreLabel:egret.TextField;
         cloud:egret.Bitmap;
@@ -221,11 +222,11 @@ module com.views.scene {
                             break;
                         } 
                         case com.constants.ItemConstant.SCORE:{
-                            this.score+=50;
+                            this.score += GameScene.SCORE_STEP;
                             this.scoreLabel.text = this.score + "";
                             break;
                         } case com.constants.ItemConstant.SHILED: {
-                            this.score += 50;
+                            this.score += GameScene.SCORE_STEP;
                             car.setShield(true);
                             this.scoreLabel.text = this.score + "";
                         }
