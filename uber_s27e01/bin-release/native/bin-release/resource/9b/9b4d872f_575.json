@@ -1,0 +1,7 @@
+{"file":"initscene.png","frames":{
+"car1":{"x":0,"y":1092,"w":392,"h":400,"offX":0,"offY":0,"sourceW":392,"sourceH":400},
+"carmarks2":{"x":0,"y":562,"w":559,"h":528,"offX":10,"offY":32,"sourceW":575,"sourceH":560},
+"line1":{"x":493,"y":1092,"w":11,"h":948,"offX":0,"offY":0,"sourceW":11,"sourceH":948},
+"line2":{"x":506,"y":1092,"w":8,"h":948,"offX":0,"offY":0,"sourceW":8,"sourceH":948},
+"carmarks1":{"x":0,"y":0,"w":565,"h":560,"offX":10,"offY":0,"sourceW":575,"sourceH":560},
+"initcar":{"x":394,"y":1092,"w":97,"h":213,"offX":0,"offY":0,"sourceW":97,"sourceH":213}}}

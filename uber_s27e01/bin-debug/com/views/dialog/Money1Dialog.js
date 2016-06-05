@@ -20,6 +20,10 @@ var com;
                 };
                 p.checkphonenum = function () {
                     var pn = this.phonenum.getInput();
+                    if (pn == null) {
+                        return "请输入手机号码";
+                    }
+                    console.log("12345");
                     if (pn.length != 11) {
                         return "手机号码长度必须为11位";
                     }
