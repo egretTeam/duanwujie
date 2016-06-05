@@ -42,6 +42,7 @@ var LoadingUI = (function (_super) {
         this.textField.textAlign = "center";
     };
     p.setProgress = function (current, total) {
+        console.log(current);
         this.textField.text = "Loading..." + current + "/" + total;
     };
     return LoadingUI;
