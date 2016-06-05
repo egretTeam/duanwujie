@@ -2,7 +2,7 @@ module com.views.scene{
     export class luckScene extends AbstractScene {
        private backgroud:egret.Bitmap;
        private getnextpage():number{
-           return 4;
+           return 2;
 //           com.utils.AppUtils.GetRandomNum(0,5);
        }
         constructor() {

@@ -12,7 +12,7 @@ var com;
                 }
                 var d = __define,c=luckScene,p=c.prototype;
                 p.getnextpage = function () {
-                    return 4;
+                    return 2;
                     //           com.utils.AppUtils.GetRandomNum(0,5);
                 };
                 p.init = function () {
