@@ -82,6 +82,15 @@ var com;
                     dragonBones.WorldClock.clock.add(this.drum);
                     dragonBones.WorldClock.clock.add(this.armature);
                     egret.Ticker.getInstance().register(this.dragonbones, this);
+                    //TODO
+                    var input = new com.views.text.CText();
+                    input.x = 370;
+                    input.y = 760;
+                    input.maxChars = 11;
+                    input.applyModifyHandle = function (i) {
+                        console.log(i);
+                    };
+                    this.addChild(input);
                 };
                 p.dragonbones = function (advancedTime) {
                     dragonBones.WorldClock.clock.advanceTime(advancedTime / 1000);

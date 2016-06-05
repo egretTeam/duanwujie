@@ -111,6 +111,17 @@ module com.views.scene {
             dragonBones.WorldClock.clock.add(this.armature);
             egret.Ticker.getInstance().register(this.dragonbones,this);
             
+            //TODO
+
+            var input: com.views.text.CText = new com.views.text.CText();
+            input.x = 370;
+            input.y = 760;
+            input.maxChars = 11;
+            input.applyModifyHandle=function(i:string){
+                console.log(i);
+            }
+            this.addChild(input);
+            
         }
         dragonbones(advancedTime: number): void {
             dragonBones.WorldClock.clock.advanceTime(advancedTime / 1000);

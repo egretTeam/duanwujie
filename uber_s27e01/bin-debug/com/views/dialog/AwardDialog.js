@@ -26,16 +26,6 @@ var com;
                     this.addChild(this.text);
                     this.text.height = 50;
                     this.update();
-                    var input = new egret.TextField();
-                    input.x = 370;
-                    input.y = 760;
-                    input.size = 30;
-                    input.text = "123";
-                    input.background = true;
-                    input.border = true;
-                    input.type = egret.TextFieldType.INPUT;
-                    input.maxChars = 11;
-                    this.addChild(input);
                 };
                 p.onRemoveStage = function (e) {
                     _super.prototype.onRemoveStage.call(this, e);

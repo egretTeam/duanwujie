@@ -28,17 +28,6 @@ module com.views.dialog {
             this.text.height=50;
             this.update();
             
-            var input: egret.TextField = new egret.TextField();
-            input.x = 370;
-            input.y = 760;
-            input.size=30;
-            input.text="123";
-            input.background=true;
-            input.border=true;
-            input.type = egret.TextFieldType.INPUT;            
-            input.maxChars=11;
-            this.addChild(input);
-            
         }
         
         protected onRemoveStage(e: egret.Event) {//移除
