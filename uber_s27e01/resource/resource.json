@@ -5,7 +5,7 @@
 			"name":"preload"
 		},
 		{
-			"keys":"green,luzhangkuang,luzhang,luzhangjson,finger,icon,hand,share_p0,bgmusic,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2,rule,gameover,rise",
+			"keys":"green,luzhangkuang,luzhang,luzhangjson,finger,icon,hand,share_p0,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2,rule,gameover,rise,BGM",
 			"name":"gameScene"
 		}
 	],
@@ -60,11 +60,6 @@
 			"subkeys":"car1,carmarks1,carmarks2,initcar,line1,line2",
 			"type":"sheet",
 			"url":"assets/initScene/initscene.json"
-		},
-		{
-			"name":"bgmusic",
-			"type":"sound",
-			"url":"assets/bgmusic.mp3"
 		},
 		{
 			"name":"boattexturepng",
@@ -165,6 +160,11 @@
 			"name":"rise",
 			"type":"image",
 			"url":"assets/game/rise.png"
+		},
+		{
+			"name":"BGM",
+			"type":"sound",
+			"url":"assets/bgm.mp3"
 		}
 	]
 }
