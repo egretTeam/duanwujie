@@ -4,17 +4,19 @@ module com.views.dialog {
 	 * @author 
 	 *
 	 */
-    export class DiamondsDailog extends LuckDialog{
+    export class Diamonds2Dailog extends LuckDialog{
         constructor() {
             super();
+            
         }   
         
         
         protected  getImage():egret.Bitmap{
-            return new egret.Bitmap(RES.getRes("Diamonds"));
+            return new egret.Bitmap(RES.getRes("Diamonds2"));
         }
      
         protected  createContent(): void{
+
         }
         
         protected onRemoveStage(e: egret.Event) {//移除
@@ -22,17 +24,18 @@ module com.views.dialog {
         }
         
         protected customTouchHandler(evt: egret.TouchEvent) {
-            if(new egret.Rectangle(168,815,300,65).contains(evt.stageX,evt.stageY)){
-                this.jump(new AwardDialog());
+            if(new egret.Rectangle(168,540,300,65).contains(evt.stageX,evt.stageY)){
+//                this.jump(new AwardDialog());
+                console.log(1);
             }
-            else if(new egret.Rectangle(168,733,300,65).contains(evt.stageX,evt.stageY)){
-                this.jump(new Diamonds2Dailog());              
+            else if(new egret.Rectangle(168,459,300,65).contains(evt.stageX,evt.stageY)){
+                this.jump(new Diamonds3Dailog());              
             }
         }
         
         public close(): void {
             this.jump(new AwardDialog());
-            console.log("weipinhui");
+            console.log("Diamonds3");
         }
 	}
 }

@@ -48,6 +48,8 @@ var com;
                     this.drum.display.touchEnabled = true;
                     this.drum.display.addEventListener(egret.TouchEvent.TOUCH_TAP, this.swapDrumStatus, this);
                     this.addChild(this.drum.display);
+                    //鼓点音乐
+                    //            this.music=new egret.Sound(RES.getRes(""));
                     //排行榜
                     this.rankingBtn = new egret.Shape();
                     this.rankingBtn.width = 180;

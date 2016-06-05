@@ -13,6 +13,7 @@ var com;
                 __extends(Bell2Dialog, _super);
                 function Bell2Dialog() {
                     _super.call(this);
+                    this.checking = false;
                 }
                 var d = __define,c=Bell2Dialog,p=c.prototype;
                 p.setUrl = function (bellinfo) {
@@ -21,10 +22,31 @@ var com;
                     this.bellname = bellinfo[1];
                     this.bellnametext.text = this.bellname;
                 };
-                //需要调用接口实例化该user   
                 p.requstVerification = function () {
-                    this.user = new com.model.localData.UserVO();
-                    return false;
+                    if (!this.checking) {
+                        this.checking = true;
+                        this.oderbtn2 = new egret.Bitmap(RES.getRes("oderbtn2"));
+                        this.oderbtn2.x = 0;
+                        this.oderbtn2.y = -100;
+                        this.addChild(this.oderbtn2);
+                        this.odertext = new egret.TextField();
+                        this.odertext.x = 345;
+                        this.odertext.y = 535;
+                        this.odertext.size = 20;
+                        this.addChild(this.odertext);
+                        var i = 60;
+                        this.odertext.text = "已发送：" + i;
+                        var timer = new egret.Timer(1000, i + 1);
+                        timer.addEventListener(egret.TimerEvent.TIMER, function () {
+                            this.odertext.text = "已发送：" + i--;
+                        }, this);
+                        timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, function () {
+                            this.removeChild(this.oderbtn2);
+                            this.removeChild(this.odertext);
+                            this.checking = false;
+                        }, this);
+                        timer.start();
+                    }
                 };
                 p.getuser = function () {
                     if (this.user == null) {
@@ -45,17 +67,42 @@ var com;
                     return new egret.Bitmap(RES.getRes("bell2"));
                 };
                 p.createContent = function () {
+                    //歌手名
                     this.singertext = new egret.TextField();
                     this.singertext.x = 275;
                     this.singertext.y = 345;
                     this.singertext.size = 30;
+                    //歌曲名
                     this.bellnametext = new egret.TextField();
                     this.bellnametext.x = 275;
                     this.bellnametext.y = 380;
                     this.bellnametext.size = 30;
                     this.addChild(this.singertext);
                     this.addChild(this.bellnametext);
+                    //手机号码输入框
+                    this.phonenum = new com.views.text.CText;
+                    this.phonenum.x = 170;
+                    this.phonenum.y = 440;
+                    this.phonenum.width = 300;
+                    this.phonenum.restrict = "0-9";
+                    this.phonenum.maxChars = 11;
+                    this.phonenum.setLabel("请输入天翼手机号码");
+                    this.addChild(this.phonenum);
+                    //验证码输入框
+                    this.odernum = new com.views.text.CText;
+                    this.odernum.x = 170;
+                    this.odernum.y = 520;
+                    this.odernum.width = 150;
+                    this.odernum.restrict = "0-9";
+                    this.odernum.setLabel("请输入验证码");
+                    this.addChild(this.odernum);
+                    //验证码按钮
+                    this.oderbtn1 = new egret.Bitmap(RES.getRes("oderbtn1"));
+                    this.oderbtn1.x = 0;
+                    this.oderbtn1.y = -100;
+                    this.addChild(this.oderbtn1);
                 };
+                //点击验证码按钮事件
                 p.onRemoveStage = function (e) {
                     _super.prototype.onRemoveStage.call(this, e);
                 };
@@ -65,6 +112,9 @@ var com;
                     }
                     else if (new egret.Rectangle(168, 615, 300, 65).contains(evt.stageX, evt.stageY)) {
                         this.oder();
+                    }
+                    else if (new egret.Rectangle(340, 520, 120, 40).contains(evt.stageX, evt.stageY)) {
+                        this.requstVerification();
                     }
                 };
                 p.close = function () {

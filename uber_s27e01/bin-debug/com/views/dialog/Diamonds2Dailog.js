@@ -9,14 +9,14 @@ var com;
              * @author
              *
              */
-            var DiamondsDailog = (function (_super) {
-                __extends(DiamondsDailog, _super);
-                function DiamondsDailog() {
+            var Diamonds2Dailog = (function (_super) {
+                __extends(Diamonds2Dailog, _super);
+                function Diamonds2Dailog() {
                     _super.call(this);
                 }
-                var d = __define,c=DiamondsDailog,p=c.prototype;
+                var d = __define,c=Diamonds2Dailog,p=c.prototype;
                 p.getImage = function () {
-                    return new egret.Bitmap(RES.getRes("Diamonds"));
+                    return new egret.Bitmap(RES.getRes("Diamonds2"));
                 };
                 p.createContent = function () {
                 };
@@ -24,21 +24,22 @@ var com;
                     _super.prototype.onRemoveStage.call(this, e);
                 };
                 p.customTouchHandler = function (evt) {
-                    if (new egret.Rectangle(168, 815, 300, 65).contains(evt.stageX, evt.stageY)) {
-                        this.jump(new dialog.AwardDialog());
+                    if (new egret.Rectangle(168, 540, 300, 65).contains(evt.stageX, evt.stageY)) {
+                        //                this.jump(new AwardDialog());
+                        console.log(1);
                     }
-                    else if (new egret.Rectangle(168, 733, 300, 65).contains(evt.stageX, evt.stageY)) {
-                        this.jump(new dialog.Diamonds2Dailog());
+                    else if (new egret.Rectangle(168, 459, 300, 65).contains(evt.stageX, evt.stageY)) {
+                        this.jump(new dialog.Diamonds3Dailog());
                     }
                 };
                 p.close = function () {
                     this.jump(new dialog.AwardDialog());
-                    console.log("weipinhui");
+                    console.log("Diamonds3");
                 };
-                return DiamondsDailog;
+                return Diamonds2Dailog;
             }(dialog.LuckDialog));
-            dialog.DiamondsDailog = DiamondsDailog;
-            egret.registerClass(DiamondsDailog,'com.views.dialog.DiamondsDailog');
+            dialog.Diamonds2Dailog = Diamonds2Dailog;
+            egret.registerClass(Diamonds2Dailog,'com.views.dialog.Diamonds2Dailog');
         })(dialog = views.dialog || (views.dialog = {}));
     })(views = com.views || (com.views = {}));
 })(com || (com = {}));

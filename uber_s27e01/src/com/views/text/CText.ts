@@ -12,6 +12,8 @@ module com.views.text {
     	applyModifyHandle:Function;
         focusOutHandle: Function;
         focusInHandle: Function;
+        defaultTextColor: number = 0x000000;
+        defaultLabelColor: number = 0x888888;
     	
 		public constructor() {
     		super();
@@ -26,14 +28,16 @@ module com.views.text {
 		
 		private init():void{
 		    this.type=egret.TextFieldType.INPUT;
-		    this.size=28;
-		    this.textColor=0x444444;
+		    this.size=20;
+            this.textColor = this.defaultLabelColor;
 		    this.border=true;
 		    this.background=true;
 		    this.backgroundColor=0xFFFFFF;
 		    this.text=this.label;
-            this.height = 30;
+            this.height = 50;
             this.width = 200;
+            this.textAlign = egret.HorizontalAlign.CENTER; 
+            this.verticalAlign = egret.VerticalAlign.MIDDLE;
 		}
 		
 		setLabel(label:string):void{
@@ -55,7 +59,7 @@ module com.views.text {
         protected focusIn() {
             if(this.input==null||this.input == ""){
                 this.text="";
-                this.textColor = 0x000000;
+                this.textColor = this.defaultTextColor;
             }
             if(this.focusInHandle!=null)
                 this.focusInHandle(this.input);
@@ -63,7 +67,7 @@ module com.views.text {
 		
         protected focusOut() {
             if(this.text == "" || this.text == this.label) {
-                this.textColor = 0x444444;
+                this.textColor = this.defaultLabelColor;
                 this.text = this.label;
             }else{
                 this.input=this.text;
