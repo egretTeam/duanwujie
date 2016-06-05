@@ -255,7 +255,14 @@ module com.views.scene {
         }
 
         showGameOverPanel():void{
-            this.gameOverdialog=new com.views.dialog.GameOverDialog();
+            this.gameOverdialog = new com.views.dialog.GameOverDialog();
+            
+            this.gameOverdialog.scorePanel.text = this.score + '';
+
+            var godialog: com.views.dialog.GameOverDialog = this.gameOverdialog;
+            com.utils.NetworkUtil.sendScoreNGetRanking(function(ranking: string) {
+                godialog.rankingPanel.text = ranking;
+            },this.score);
             this.addChild(this.gameOverdialog);
         }
         

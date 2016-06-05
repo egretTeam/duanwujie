@@ -1,10 +1,6 @@
 module com.views.scene{
     export class luckScene extends AbstractScene {
        private backgroud:egret.Bitmap;
-       private getnextpage():number{
-           return 2;
-//           com.utils.AppUtils.GetRandomNum(0,5);
-       }
         constructor() {
             super();
             this.init();
@@ -15,27 +11,31 @@ module com.views.scene{
             this.backgroud.x = 0;
             this.backgroud.y = -150;
             this.addChild(this.backgroud);
-        switch(this.getnextpage()){
-            case 0:
-            this.addChild(new com.views.dialog.WeipinhuiDialog());
-            break;
-            case 1:
-            this.addChild(new com.views.dialog.JdDialog());
-            break;
-            case 2:           
-            this.addChild(new com.views.dialog.DiamondsDailog());
-            break;
-            case 3:               
-            this.addChild(new com.views.dialog.Bell1Dialog());
-            break;
-            case 4:  
-            this.addChild(new com.views.dialog.Money1Dialog());
-            break;
-            case 5:
-            this.addChild(new com.views.dialog.Money1Dialog());
-            break;
-            }
+            
+            var p=this;
+            com.utils.NetworkUtil.luckDraw(function(nextPage:number){
 
+                switch(nextPage) {
+                    case com.constants.DialogConstant.WEI_PIN_HUI:
+                        p.addChild(new com.views.dialog.WeipinhuiDialog());
+                        break;
+                    case com.constants.DialogConstant.JD:
+                        p.addChild(new com.views.dialog.JdDialog());
+                        break;
+                    case com.constants.DialogConstant.DIAMOND:
+                        p.addChild(new com.views.dialog.DiamondsDailog());
+                        break;
+                    case com.constants.DialogConstant.BELL:
+                        p.addChild(new com.views.dialog.Bell1Dialog());
+                        break;
+                    case com.constants.DialogConstant.MONEY:
+                        p.addChild(new com.views.dialog.Money1Dialog());
+                        break;
+//                    case 5:
+//                        this.addChild(new com.views.dialog.Money1Dialog());
+//                        break;
+                }
+         });
             
 
 

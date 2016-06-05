@@ -22,6 +22,7 @@ module com.views.scene {
             this.loading = new com.views.ui.loading.LoaderLoading("resource/resource.json?v=0","gameScene",this.onConfigComplete.bind(this));
             this.addChild(this.loading);
 
+            com.utils.NetworkUtil.requestUser();
         }
 
         protected onRemoveStage(e: egret.Event) {//移除
@@ -190,7 +191,7 @@ module com.views.scene {
                 <e:List id="list" width="330" height="350">
                     <e:itemRendererSkinName>
                         <e:Skin states="up,down,disabled" height="50">
-                            <e:Label text="{data.icon}" textColor="0x64470C" left="0"/>
+                            <e:Label text="{data.ranking}" textColor="0x64470C" left="0"/>
                             <e:Label text="{data.name}" textColor="0x64470C" horizontalCenter="0"/>
                             <e:Label text="{data.score}" textColor="0x64470C" right="0"/>
                         </e:Skin>
@@ -202,13 +203,13 @@ module com.views.scene {
             this.scroller = new clazz();
             this.addChild(this.scroller);
             var list: eui.List = this.scroller.list;
-            var collection = new eui.ArrayCollection();
-            for(var i = 0;i < 20;i++) {
-                collection.addItem({ "icon":  i,"name": "name" + i,"score": i*100 });
-            }
+            
+            com.utils.NetworkUtil.requestRankingList(function(collection){
+               list.dataProvider = collection;
+            });
+            
             this.scroller.x = this.infoPage.width/3-50;
             this.scroller.y=360;
-            list.dataProvider = collection;
 
         }
         private hideRankingPage(evt: egret.TouchEvent):void{
