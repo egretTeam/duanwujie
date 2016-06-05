@@ -60,7 +60,7 @@ module com.views.scene {
             this.addChild(this.drum.display);
             
             //鼓点音乐
-            this.music=new egret.Sound(RES.getRes(""));
+//            this.music=new egret.Sound(RES.getRes(""));
 
 
             //排行榜

@@ -44,11 +44,16 @@ var game_file_list = [
 	"bin-debug/com/views/dialog/LuckDialog.js",
 	"bin-debug/com/views/dialog/Bell1Dialog.js",
 	"bin-debug/com/views/dialog/Bell2Dialog.js",
+	"bin-debug/com/views/dialog/Bell2_1Dialog.js",
+	"bin-debug/com/views/dialog/Bell2_1_1Dialog.js",
+	"bin-debug/com/views/dialog/Bell2_2Dialog.js",
 	"bin-debug/com/views/dialog/Diamonds2Dailog.js",
 	"bin-debug/com/views/dialog/Diamonds3Dailog.js",
 	"bin-debug/com/views/dialog/DiamondsDailog.js",
 	"bin-debug/com/views/dialog/GameOverDialog.js",
 	"bin-debug/com/views/dialog/JdDialog.js",
+	"bin-debug/com/views/dialog/Money1Dialog.js",
+	"bin-debug/com/views/dialog/Money2Dialog.js",
 	"bin-debug/com/views/dialog/ShareDialog.js",
 	"bin-debug/com/views/dialog/WeipinhuiDialog.js",
 	"bin-debug/com/views/scene/AbstractScene.js",
@@ -96,11 +101,6 @@ var game_file_list = [
 	"bin-debug/com/views/window/sysWin/SysWin.js",
 	"bin-debug/LoadingUI.js",
 	"bin-debug/Main.js",
-	"bin-debug/com/views/dialog/Bell2_2Dialog.js",
-	"bin-debug/com/views/dialog/Bell2_1Dialog.js",
-	"bin-debug/com/views/dialog/Bell2_1_1Dialog.js",
-	"bin-debug/com/views/dialog/Money1Dialog.js",
-	"bin-debug/com/views/dialog/Money2Dialog.js",
 	//----auto game_file_list end----
 ];
 
