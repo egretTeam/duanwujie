@@ -14,7 +14,38 @@ module com.views.dialog {
         constructor() {
             super();
         }   
+        
+        checkphonenum():string{
+            var pn = this.phonenum.getInput();
+            if(pn.length!=11){
+                return "手机号码长度必须为11位";
+            }
+            
+            switch(pn.substring(0,3)){
+                case "133":
+                case "153":
+                case "180":
+                case "189":
+                case "181":
+                case "170":
+                case "171":
+                case "173":
+                case "177":
+                case "149":
+                break;
+                default:
+                    return "必须为电信用户";         
+            }
+            return null;
+        }
         requstVerification(): void {
+            var msg=this.checkphonenum();
+            if(msg!=null){
+                com.utils.AppUtils.alert(this.stage,msg)
+                return;
+            }
+            
+            
             if(!this.checking) {
                 this.checking = true;
                 this.oderbtn2 = new egret.Bitmap(RES.getRes("oderbtn2"));
@@ -39,6 +70,7 @@ module com.views.dialog {
                 },this);
                 timer.start();
             }
+            
         }
         protected  getImage():egret.Bitmap{
             return new egret.Bitmap(RES.getRes("Diamonds"));
@@ -87,6 +119,7 @@ module com.views.dialog {
             else if(new egret.Rectangle(340,600,120,65).contains(evt.stageX,evt.stageY)){
                 this.requstVerification();
             }
+        
         }
         
         public close(): void {
