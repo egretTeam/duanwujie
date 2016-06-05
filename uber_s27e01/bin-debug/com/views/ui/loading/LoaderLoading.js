@@ -17,34 +17,51 @@ var com;
                      */
                     function LoaderLoading(dataJSON, groupName, func, loadingSkin, loadingJson) {
                         _super.call(this);
+                        //        mc: egret.MovieClip;//MovieClip
                         this.dataJSON = ""; //配置文件
                         this.groupName = ""; //组名称
                         this.func = null; //回调
-                        if (!(com.utils.AppUtils.isExitsVariable(loadingSkin))) {
-                            loadingSkin = "MZloadingImg";
-                            loadingJson = "MZloadingJson";
-                        }
-                        var data = RES.getRes(loadingJson);
-                        var txtr = RES.getRes(loadingSkin);
-                        var mcFactory = new egret.MovieClipDataFactory(data, txtr);
+                        //            if (!(com.utils.AppUtils.isExitsVariable(loadingSkin))) {
+                        //                loadingSkin = "MZloadingImg";
+                        //                loadingJson = "MZloadingJson";
+                        //            }
+                        //
+                        //            var data = RES.getRes(loadingJson);
+                        //            var txtr = RES.getRes(loadingSkin);
+                        //            var mcFactory: egret.MovieClipDataFactory = new egret.MovieClipDataFactory(data, txtr);
+                        this.loading = new egret.Bitmap(RES.getRes("loading"));
+                        this.loaded = new egret.Bitmap(RES.getRes("loaded"));
+                        this.loading.x = 0;
+                        this.loading.y = 0;
+                        this.loaded.x = 0;
+                        this.loaded.y = 0;
+                        //            this.m = new egret.Rectangle(0,0,30,30);
+                        this.m = new egret.Rectangle(0, 0, this.loading.width, this.loading.height);
+                        this.loading.mask = this.m;
+                        this.addChild(this.loaded);
+                        this.addChild(this.loading);
                         this.dataJSON = dataJSON;
                         this.groupName = groupName;
                         this.func = func;
-                        this.mc = new egret.MovieClip(mcFactory.generateMovieClipData("mzloading"));
-                        this.mc.play(-1);
-                        this.addChild(this.mc);
+                        //            this.mc = new egret.MovieClip( mcFactory.generateMovieClipData( "mzloading" ) );
+                        //            this.mc.play(-1);
+                        //            this.addChild(this.mc);
                         this.txt = new egret.TextField();
                         this.addChild(this.txt);
                         this.txt.textAlign = egret.HorizontalAlign.CENTER;
                         this.txt.stroke = 1;
                         this.txt.textColor = 0x000000;
                         this.txt.strokeColor = 0xffffff;
+                        this.txt.x = 100;
                         this.txt.y = 120;
                         this.txt.size = 20;
-                        this.txt.width = 2 * this.mc.width;
-                        this.txt.x = 0 - this.mc.width / 2;
-                        this.x = (com.model.DataCenter.instance.configVO.appWidth - this.mc.width) / 2;
-                        this.y = (com.model.DataCenter.instance.configVO.appHeight - this.mc.height) / 2;
+                        this.txt.width = 100;
+                        this.txt.height = 100;
+                        //            this.txt.width = 2*this.mc.width
+                        //            this.txt.x = 0 - this.mc.width / 2;
+                        //
+                        this.x = (com.model.DataCenter.instance.configVO.appWidth - this.loading.width) / 2;
+                        this.y = (com.model.DataCenter.instance.configVO.appHeight - this.loading.height) / 2;
                         com.controller.EventManager.instance.addEventListener(this, com.model.localData.event.LoaderEvent.CONFIG_COMPLETE, this.onConfigComplete.bind(this));
                         com.controller.EventManager.instance.addEventListener(this, com.model.localData.event.LoaderEvent.COMPLETE, this.onComplete.bind(this));
                         com.controller.EventManager.instance.addEventListener(this, com.model.localData.event.LoaderEvent.PROGRESS, this.onProgress.bind(this));
@@ -63,14 +80,14 @@ var com;
                         com.controller.EventManager.instance.removeEventListener(this, com.model.localData.event.LoaderEvent.COMPLETE);
                         com.controller.EventManager.instance.removeEventListener(this, com.model.localData.event.LoaderEvent.PROGRESS);
                         _super.prototype.onRemoveStage.call(this, e);
-                        this.mc = null;
+                        //            this.mc = null;
                         this.txt = null;
                         this.func = null;
                     };
                     p.onConfigComplete = function (e) {
                         com.controller.EventManager.instance.removeEventListener(this, com.model.localData.event.LoaderEvent.CONFIG_COMPLETE);
                         com.controller.ResManager.instance.loadGroup(this.groupName);
-                        console.log(this.groupName);
+                        //            console.log(this.groupName);
                     };
                     p.onComplete = function (e) {
                         com.controller.EventManager.instance.removeEventListener(this, com.model.localData.event.LoaderEvent.COMPLETE);
@@ -79,7 +96,10 @@ var com;
                             this.func(e);
                     };
                     p.onProgress = function (e) {
-                        this.setPercent(e.data["loaded"] / e.data["total"] * 100.0);
+                        var p = e.data["loaded"] / e.data["total"];
+                        this.m.height = this.loading.height * (1 - p);
+                        this.loading.mask = this.m;
+                        this.setPercent(p * 100.0);
                     };
                     return LoaderLoading;
                 }(ui.BasicView));

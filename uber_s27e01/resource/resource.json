@@ -1,7 +1,7 @@
 {
 	"groups":[
 		{
-			"keys":"MZloadingImg,MZloadingJson",
+			"keys":"loading,loaded",
 			"name":"preload"
 		},
 		{
@@ -10,16 +10,6 @@
 		}
 	],
 	"resources":[
-		{
-			"name":"MZloadingImg",
-			"type":"image",
-			"url":"assets/MZloading.png"
-		},
-		{
-			"name":"MZloadingJson",
-			"type":"json",
-			"url":"assets/MZloading.json"
-		},
 		{
 			"name":"green",
 			"type":"image",
@@ -240,6 +230,16 @@
 			"name":"oderbtn2",
 			"type":"image",
 			"url":"assets/LUCK/oderbuttom2.png"
+		},
+		{
+			"name":"loading",
+			"type":"image",
+			"url":"assets/loading.png"
+		},
+		{
+			"name":"loaded",
+			"type":"image",
+			"url":"assets/loaded.png"
 		}
 	]
 }
