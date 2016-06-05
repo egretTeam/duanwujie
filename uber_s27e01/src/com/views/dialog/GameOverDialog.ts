@@ -5,17 +5,49 @@ module com.views.dialog {
 	 *
 	 */
 	export class GameOverDialog extends Dialog{
+    	  highestScore:number;
+    	  ranking:number;
+        scorePanel: egret.TextField;
+        private highestScorePanel: egret.TextField;
+        rankingPanel: egret.TextField;
+    	
         constructor() {
             super();
         }   
-        
         
         protected  getImage():egret.Bitmap{
             return new egret.Bitmap(RES.getRes("gameover"));
         }
      
-        protected  createContent(): void{
+        protected createContent(): void {
+            this.scorePanel = new egret.TextField;
+            this.scorePanel.x=340;
+            this.scorePanel.y = 410;
+            this.scorePanel.size = 25;
+            this.scorePanel.width = 250;
+            this.scorePanel.textColor = 0x64470C;
             
+            this.highestScorePanel = new egret.TextField;
+            this.highestScorePanel.x = 340;
+            this.highestScorePanel.y = 455;
+            this.highestScorePanel.size = 25;
+            this.highestScorePanel.width = 250;
+            this.highestScorePanel.textColor = 0x64470C;
+            
+            this.rankingPanel = new egret.TextField;
+            this.rankingPanel.x = 340;
+            this.rankingPanel.y = 500;
+            this.rankingPanel.size = 25;
+            this.rankingPanel.width = 250;
+            this.rankingPanel.textColor = 0x64470C;
+            
+            var hs: string = egret.localStorage.getItem("highestScore");
+            this.highestScorePanel.text = hs==null?0+"":hs;
+            
+            
+            this.addChild(this.highestScorePanel);
+            this.addChild(this.scorePanel);
+            this.addChild(this.rankingPanel);
         }
         
         protected onRemoveStage(e: egret.Event) {//移除
