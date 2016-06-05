@@ -35,6 +35,10 @@ module com.views.ui.scene.gameScene {
         protected abstract  getImageName():string;
         init(): void {
 
+            //换成图片的话这里要注释掉
+            this.armature.animation.gotoAndPlay(this.getImageName(),-1,-1,-0);
+            this.item = this.armature.display;
+            
             //this.tweenGoToBottom();
             this.item.anchorOffsetX = this.width / 2;
             this.item.anchorOffsetY = this.height / 2;
@@ -43,9 +47,6 @@ module com.views.ui.scene.gameScene {
             //            this.scaleX = .8;
             //            this.scaleY = .8;
 
-            //换成图片的话这里要注释掉
-            this.armature.animation.gotoAndPlay(this.getImageName(),-1,-1,-0);
-            this.item = this.armature.display;
             
             this.addChild(this.item);
 
