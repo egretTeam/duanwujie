@@ -6,7 +6,7 @@ module com.utils {
 	 */
     export class NetworkUtil {
         static HOSTNAME = document.domain;
-        static apiHost = NetworkUtil.HOSTNAME == 'm.muzhibuluo.com' ? 'http://api.m.muzhi.us' : 'test.api.m.muzhi.us';
+        static apiHost = (NetworkUtil.HOSTNAME == 'm.muzhibuluo.com') ? 'http://api.m.muzhi.us' : 'http://test.api.m.muzhi.us';
         static apiPrefix = NetworkUtil.apiHost + '/api/imusic_s12e01';
         static mz_jwt;
         static jssdk;
@@ -29,10 +29,11 @@ module com.utils {
                     console.log('login unauth',res.url);
                     location.href = res.url;
                 } else {
+                    var r=JSON.parse(res);
                     console.log('logined',res);
-                    console.log('current wechat user',res.user);
-                    console.log('current wechat mz',res.mz_jwt);
-                    console.log('current wechat result',res.result);
+                    console.log('current wechat user',r.user);
+                    console.log('current wechat mz',r.mz_jwt);
+                    console.log('current wechat result',r.result);
                     NetworkUtil.mz_jwt = res.mz_jwt;
                     request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
                     NetworkUtil.getJSSDK();
@@ -48,7 +49,7 @@ module com.utils {
         
         
         private static getJSSDK():void {
-           var request:egret.HttpRequest= UrlTool.get('/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
+            var request: egret.HttpRequest = UrlTool.get('/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
                    var res=event.currentTarget.response; 
                    var jssdk = res.jssdk;
                    if(jssdk==null){
@@ -138,7 +139,8 @@ module com.utils {
                 console.log("提交分数失败: ");
                 console.log(res);
             });
-            var data = { "score": score };
+            var data = new FormData();
+            data.append( "score",score );
             request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
             request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send(data);
@@ -192,10 +194,13 @@ module com.utils {
                 });
             request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
             request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            request.send({
-                "prizeLevel": score,
-                "phone": pn,
-	            "fromWechat":true});
+            
+
+            var data = new FormData();
+            data.append("prizeLevel",score);
+            data.append("phone",pn);
+            data.append("fromWechat",true);
+            request.send(data);
         }
         
         /**
@@ -215,11 +220,13 @@ module com.utils {
                 });
             request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
             request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            request.send({
-                "phone": pn,
-                "code":code,
-                "fromWechat": true
-            });
+            
+
+            var data = new FormData();
+            data.append("code",code);
+            data.append("phone",pn);
+            data.append("fromWechat",true);
+            request.send(data);
         }
         
         /**
@@ -239,10 +246,12 @@ module com.utils {
                 });
             request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
             request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            request.send({
-                "phone": pn,
-                "fromWechat": true
-            });
+            
+
+            var data = new FormData();
+            data.append("phone",pn);
+            data.append("fromWechat",true);
+            request.send(data);
         }
         
         /**
@@ -261,10 +270,11 @@ module com.utils {
                 });
             request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
             request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            request.send({
-                "phone": pn,
-                "fromWechat": true
-            });
+
+            var data = new FormData();
+            data.append("phone",pn);
+            data.append("fromWechat",true);
+            request.send(data);
         }
         
         
@@ -284,9 +294,10 @@ module com.utils {
                 });
             request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
             request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            request.send({
-                "phone": pn,
-            });
+
+            var data = new FormData();
+            data.append("phone",pn);
+            request.send(data);
         }
         
         /**
@@ -305,11 +316,12 @@ module com.utils {
                 });
             request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
             request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            request.send({
-                "phone": pn,
-                "fromWechat": true,
-                "code": code
-            });
+
+            var data = new FormData();
+            data.append("phone",pn);
+            data.append("fromWechat",true);
+            data.append("code",code);
+            request.send(data);
         }
         
 
@@ -329,11 +341,12 @@ module com.utils {
                 });
             request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
             request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            request.send({
-                "phone": pn,
-                "fromWechat": true,
-                "crbtId": crbtId
-            });
+
+            var data = new FormData();
+            data.append("phone",pn);
+            data.append("fromWechat",true);
+            data.append("crbtId",crbtId);
+            request.send(data);
         }
         
         /**
@@ -352,9 +365,9 @@ module com.utils {
                 });
             request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
             request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            request.send({
-                "fromWechat": true
-            });
+            var data = new FormData();
+            data.append("fromWechat",true);
+            request.send(data);
         }
 
 	}
