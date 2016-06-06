@@ -93,6 +93,7 @@ module com.utils {
             },function(res) {
                 console.log("请求排名失败: " + res);
             });
+            request.send();
         }
         
         /**
