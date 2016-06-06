@@ -31,27 +31,11 @@ module com.views.scene{
                     case com.constants.DialogConstant.MONEY:
                         p.addChild(new com.views.dialog.Money1Dialog());
                         break;
-//                    case 5:
-//                        this.addChild(new com.views.dialog.Money1Dialog());
-//                        break;
+                    case 5:
+                        this.addChild(new com.views.dialog.Money1Dialog());
+                        break;
                 }
-         });
-            
-
-
-            
-            //话费流量1页
-//            this.money1 = new egret.Bitmap(RES.getRes("money1"))
-//            this.money1.x = 0;
-//            this.money1.y = -100;
-//            this.addChild(this.money1);
-            
-            //话费流量2页
-//            this.money2 = new egret.Bitmap(RES.getRes("money2"))
-//            this.money2.x = 0;
-//            this.money2.y = -100;
-//            this.addChild(this.money2);
-            
+         });      
         }
     }
     
