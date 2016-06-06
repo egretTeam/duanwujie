@@ -73,14 +73,14 @@ module com.views.dialog {
         private goToNextPage(): void {
             var ra=this.riseAmt;
             var page=this;
-            com.utils.NetworkUtil.luckDraw(function(num:number,flag:number,record){
-                if(flag){
-                    AwardDialog.balance=num;
+            com.utils.NetworkUtil.luckDraw(function(res){
+                if(res.lotteryFlag==1){
+                    AwardDialog.balance = res.lotteryNum;
                     MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
-                    com.views.scene.luckScene.getInstance().goToPage(parseInt(record.score),record);
+                    com.views.scene.luckScene.getInstance().goToPage(parseInt(res.record.score),res.record);
                     ra.removeEventListener(dragonBones.AnimationEvent.COMPLETE,page.goToNextPage,page);
                 }else{
-                    com.utils.AppUtils.alert(null,"很抱歉，什么都没有抽中");
+                    com.utils.AppUtils.alert(page.stage,res.msg);
                 }
             });
             

@@ -260,8 +260,12 @@ module com.views.scene {
             this.gameOverdialog.scorePanel.text = this.score + '';
 
             var godialog: com.views.dialog.GameOverDialog = this.gameOverdialog;
-            com.utils.NetworkUtil.sendScoreNGetRanking(function(ranking: string) {
-                godialog.rankingPanel.text = ranking;
+            com.utils.NetworkUtil.sendScoreNGetRanking(function(res) {
+                if(res.rankInfo!=null){
+                    var ranking = res.rankInfo.rank;
+                    godialog.rankingPanel.text = ranking;
+                }
+                com.views.dialog.AwardDialog.balance=parseInt(res.lotteryNum);
             },this.score);
             this.addChild(this.gameOverdialog);
         }

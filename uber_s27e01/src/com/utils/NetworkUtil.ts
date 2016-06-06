@@ -49,7 +49,7 @@ module com.utils {
             var request: egret.HttpRequest = UrlTool.post('/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
                 var res = JSON.parse(event.currentTarget.response);
                 var jssdk = res.jssdk;
-                console.log("获取jssdk： "+res);
+                console.log("获取jssdk： ",res);
                    if(jssdk==null){
                         AppUtils.alert(null,"请使用微信客户端打开本应用")
                         return;
@@ -97,7 +97,10 @@ module com.utils {
                 var r=res.rankInfos;
                 if(r != null) {
                     for(var i=0,len=r.length-1;i<len;i++){
-                        collection.addItem({ "ranking": i+1,"name": r[i].name,"score": r[i].score });
+                        var name = r[i].name;
+                        if(name.length>10)
+                            name=name.substring(0,7)+'...';
+                        collection.addItem({ "ranking": i+1,"name": name,"score": r[i].score });
                     };
                 }
                 returnRankingList(collection);
@@ -122,12 +125,7 @@ module com.utils {
                 var res = JSON.parse(event.currentTarget.response);
                 console.log("提交分数成功: ");
                 console.log(res);
-                if(res.rankInfo!=null){
-                    var ranking=res.rankInfo.rank;
-                    returnRanking(ranking);
-                }else{
-                    com.utils.AppUtils.alert(null,"暂无数据排名");
-                }
+                returnRanking(res);
             },function(event:egret.Event){
                 var res = JSON.parse(event.currentTarget.response);
                 console.log("提交分数失败: ");
@@ -153,11 +151,7 @@ module com.utils {
                 console.log("获取抽奖结果成功: " );
                 console.log(res);
                 //避免结果可能不是boolean异常所以使用==false
-                if(res.result == false) {
-                    AppUtils.alert(null,res.msg);
-                } else {
-                    result(res.lotteryNum,res.lotteryFlag,res.record);
-                } 
+                result(res);
                 
             },function(event:egret.Event) {
                 var res = JSON.parse(event.currentTarget.response);
