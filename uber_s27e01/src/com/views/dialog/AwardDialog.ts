@@ -34,7 +34,7 @@ module com.views.dialog {
             this.rise=this.riseAmt.display;
             this.rise.x=320;
             this.rise.y=440;
-            this.riseAmt.animation.gotoAndPlay("1dianjiqian",-1,-1,0);
+            this.riseAmt.animation.gotoAndPlay("1dianjiqian",-1,-1,1);
 
             this.bg.touchEnabled = false;
 
