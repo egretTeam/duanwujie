@@ -11,6 +11,8 @@ module com.utils {
          * 该函数由initScene#constructor调用。
          */
         static requestUser(): void {
+            
+            
         }
         
         /**

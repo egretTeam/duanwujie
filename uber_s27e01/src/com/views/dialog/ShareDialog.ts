@@ -11,7 +11,7 @@ module com.views.dialog {
         
         
         protected  getImage():egret.Bitmap{
-            return new egret.Bitmap(RES.getRes("gameover"));
+            return new egret.Bitmap(RES.getRes("share_png"));
         }
      
         protected  createContent(): void{
@@ -23,14 +23,6 @@ module com.views.dialog {
         }
         
         protected customTouchHandler(evt: egret.TouchEvent) {
-//            console.log(evt.stageX+" "+evt.stageY)
-            if(this.getAwardArea().contains(evt.stageX,evt.stageY)) {
-                this.close();    
-            } else if(this.getShareArea().contains(evt.stageX,evt.stageY)) {
-                this.showShareArea();
-            } else if(this.getTryAgainArea().contains(evt.stageX,evt.stageY)) {
-               MainView.instance.changeScene(com.constants.SceneConstants.GAME);
-            }
         }
         
         public showShareArea():void{
@@ -40,14 +32,5 @@ module com.views.dialog {
         public close(): void {
         }
         
-        private getAwardArea():egret.Rectangle{
-            return new egret.Rectangle(170,565,280,60);
-        }
-        private getShareArea(): egret.Rectangle {
-            return new egret.Rectangle(170,680,280,60);
-        }
-        private getTryAgainArea(): egret.Rectangle {
-            return new egret.Rectangle(170,760,280,60);
-        }
 	}
 }

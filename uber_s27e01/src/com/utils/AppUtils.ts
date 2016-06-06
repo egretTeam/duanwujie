@@ -48,7 +48,6 @@ module com.utils {
         }
         
         static loadArmature(json:string,texture:string,png:string,armatureName:string):dragonBones.Armature{
-            console.log("json: " + json);
             var dragonbonesData = RES.getRes(json);
             var textureData = RES.getRes(texture);
             var t = RES.getRes(png);

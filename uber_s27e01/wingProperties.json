@@ -220,6 +220,16 @@
 					"isFolder":false,
 					"key":"loading",
 					"name":"loading"
+				},
+				{
+					"isFolder":false,
+					"key":"share_png",
+					"name":"share_png"
+				},
+				{
+					"isFolder":false,
+					"key":"award/png",
+					"name":"award/png"
 				}
 			]
 		}

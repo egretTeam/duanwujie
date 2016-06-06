@@ -8,7 +8,7 @@ module com.views.ui.scene.gameScene {
         }
 
         dragonbones(advancedTime: number): void {
-            dragonBones.WorldClock.clock.advanceTime(advancedTime / 5000);
+            dragonBones.WorldClock.clock.advanceTime(advancedTime / 1000);
         }
         protected onRemoveStage(e: egret.Event) {//移除
 
@@ -16,7 +16,11 @@ module com.views.ui.scene.gameScene {
 //            dragonBones.WorldClock.clock.remove(this.armature);
 //            egret.Ticker.getInstance().unregister(this.dragonbones,this);
         }
-
+        protected customInit(): void {
+//            dragonBones.WorldClock.clock.add(this.armature);
+//            egret.Ticker.getInstance().register(this.dragonbones,this);
+        }
+        
         getType(): number {
             return com.constants.ItemConstant.BLOCK;
         }

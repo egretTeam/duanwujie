@@ -10,6 +10,9 @@ module com.views.dialog {
         scorePanel: egret.TextField;
         private highestScorePanel: egret.TextField;
         rankingPanel: egret.TextField;
+        
+        private sharing: Boolean = false;
+        private shareDialog: ShareDialog;
     	
         constructor() {
             super();
@@ -44,6 +47,8 @@ module com.views.dialog {
             var hs: string = egret.localStorage.getItem("highestScore");
             this.highestScorePanel.text = hs==null?0+"":hs;
             
+
+            this.shareDialog = new ShareDialog();
             
             this.addChild(this.highestScorePanel);
             this.addChild(this.scorePanel);
@@ -65,7 +70,13 @@ module com.views.dialog {
             }
         }
         
-        public showShareArea():void{
+        public showShareArea(): void {
+            this.sharing = !this.sharing;
+            if(this.sharing) {
+                this.addChild(this.shareDialog);
+            } else {
+                this.removeChild(this.shareDialog);
+            }
         }
         
         public close(): void {

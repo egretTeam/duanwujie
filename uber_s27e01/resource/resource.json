@@ -5,7 +5,7 @@
 			"name":"preload"
 		},
 		{
-			"keys":"green,luzhangkuang,luzhang,luzhangjson,finger,icon,hand,share_p0,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2,rule,JD,weipinhui,Diamonds,Diamonds2,Diamonds3,bell1,bell2,backgroud,bell2_2,bell2_1,bell2_1_1,money1,money2,rise,gameover,bgm_mp3,oderbtn1,oderbtn2",
+			"keys":"green,luzhangkuang,luzhang,luzhangjson,finger,icon,hand,share_p0,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2,rule,JD,weipinhui,Diamonds,Diamonds2,Diamonds3,bell1,bell2,backgroud,bell2_2,bell2_1,bell2_1_1,money1,money2,rise,gameover,bgm_mp3,oderbtn1,oderbtn2,share_png,award/json,award/texture,award/png",
 			"name":"gameScene"
 		}
 	],
@@ -64,7 +64,7 @@
 		{
 			"name":"boatjson",
 			"type":"json",
-			"url":"assets/boat/boat.json"
+			"url":"assets/boat/boat_1.json"
 		},
 		{
 			"name":"items/texture",
@@ -94,17 +94,17 @@
 		{
 			"name":"page1/png",
 			"type":"image",
-			"url":"assets/page1/texture.png"
+			"url":"assets/initScene/texture.png"
 		},
 		{
 			"name":"page1/texture",
 			"type":"json",
-			"url":"assets/page1/texture.json"
+			"url":"assets/initScene/texture.json"
 		},
 		{
 			"name":"page1/json",
 			"type":"json",
-			"url":"assets/page1/page1.json"
+			"url":"assets/initScene/initPage.json"
 		},
 		{
 			"name":"drum/png",
@@ -240,6 +240,26 @@
 			"name":"loaded",
 			"type":"image",
 			"url":"assets/loaded.png"
+		},
+		{
+			"name":"share_png",
+			"type":"image",
+			"url":"assets/game/share.png"
+		},
+		{
+			"name":"award/json",
+			"type":"json",
+			"url":"assets/award/award.json"
+		},
+		{
+			"name":"award/texture",
+			"type":"json",
+			"url":"assets/award/texture.json"
+		},
+		{
+			"name":"award/png",
+			"type":"image",
+			"url":"assets/award/texture.png"
 		}
 	]
 }

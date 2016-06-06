@@ -15,6 +15,7 @@ module com.views.scene {
         private music:egret.Sound;
         private channel:egret.SoundChannel;
         private scroller;
+        private titleAmt:dragonBones.Armature;
 
         constructor() {
             super();
@@ -29,6 +30,7 @@ module com.views.scene {
             super.onRemoveStage(e);
             dragonBones.WorldClock.clock.remove(this.armature);
             dragonBones.WorldClock.clock.remove(this.drum);
+            dragonBones.WorldClock.clock.remove(this.titleAmt);
             egret.Ticker.getInstance().unregister(this.dragonbones,this);
             this.drum.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.swapDrumStatus,this);
             this.rankingBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.showRankingList,this);
@@ -37,27 +39,43 @@ module com.views.scene {
             
         }
         onConfigComplete(e: com.model.localData.event.LoaderEvent) {//配置加载完成
+            console.log("init scene start");
             //鼓点音乐
             this.music = RES.getRes("bgm_mp3");
             this.initInitLayout();
             this.removeChild(this.loading);
             
             this.channel = this.music.play(0);
+            console.log("init scene complete");
         }
         
         protected onAddStage():void{
         }
         private initInitLayout(): void {
+            var dragonbonesData = RES.getRes("page1/json");
+            var textureData = RES.getRes("page1/texture");
+            var t = RES.getRes("page1/png");
+            var dragonbonesFactory: dragonBones.EgretFactory = new dragonBones.EgretFactory();
+            dragonbonesFactory.addDragonBonesData(dragonBones.DataParser.parseDragonBonesData(dragonbonesData));
+            dragonbonesFactory.addTextureAtlas(new dragonBones.EgretTextureAtlas(t,textureData));
             //背景
-            this.armature = com.utils.AppUtils.loadArmature("page1/json","page1/texture","page1/png","armatureName");
+            this.armature = dragonbonesFactory.buildArmature("armatureName");
             
-            this.armature.animation.gotoAndPlay("newAnimation",-1,-1,1);
+            this.armature.animation.gotoAndPlay("beijing",-1,-1,0);
             this.display = this.armature.display;
             this.addChild(this.display);
             
 //            console.log(this.display.x+" "+this.display.y+" "+this.display.anchor)
             this.display.x=this.display.width/2;
-            this.display.y = this.display.height / 4+56;
+            this.display.y = this.display.height / 2-100;
+            
+
+            //标题
+            this.titleAmt = dragonbonesFactory.buildArmature("armatureName");
+            this.addChild(this.titleAmt.display);
+            this.titleAmt.display.x = this.display.width / 2;
+            this.titleAmt.display.y = this.display.height /2-100;
+            this.titleAmt.animation.gotoAndPlay("biaoti",-1,-1,1);
 
             //鼓
             this.drum = com.utils.AppUtils.loadArmature("drum/json","drum/texture","drum/png","Armature");
@@ -70,15 +88,17 @@ module com.views.scene {
             this.addChild(this.drum.display);
             
 
-
+            var alpha=0;
+            var yOff=20;
+            
             //排行榜
             this.rankingBtn=new egret.Shape();
             this.rankingBtn.width = 180;
             this.rankingBtn.height = 130;
             this.rankingBtn.x = this.stage.width * 2 / 3 - 20;
-            this.rankingBtn.y = this.stage.height * 2 / 5;
+            this.rankingBtn.y = this.stage.height * 2 / 5+yOff;
             
-            this.rankingBtn.graphics.beginFill(0x00FF00,0);
+            this.rankingBtn.graphics.beginFill(0x00FF00,alpha);
             this.rankingBtn.graphics.drawRect(0,0,this.rankingBtn.width,this.rankingBtn.height);
             this.rankingBtn.graphics.endFill();
             
@@ -90,11 +110,11 @@ module com.views.scene {
             //规则说明
             this.ruleBtn = new egret.Shape();
             this.ruleBtn.width = 200;
-            this.ruleBtn.height = 500;
+            this.ruleBtn.height = 500 + yOff;;
             this.ruleBtn.x = 40;
             this.ruleBtn.y = 0;
 
-            this.ruleBtn.graphics.beginFill(0x00FF00,0);
+            this.ruleBtn.graphics.beginFill(0x00FF00,alpha);
             this.ruleBtn.graphics.drawRect(0,0,this.ruleBtn.width,this.ruleBtn.height);
             this.ruleBtn.graphics.endFill();
 
@@ -108,9 +128,9 @@ module com.views.scene {
             this.startBtn.width = 280;
             this.startBtn.height = 150;
             this.startBtn.x = this.stage.width * 1 / 3 -20;
-            this.startBtn.y = this.stage.height * 5 / 9 - 40;
+            this.startBtn.y = this.stage.height * 5 / 9 - 40 + yOff;
 
-            this.startBtn.graphics.beginFill(0x00FF00,0);
+            this.startBtn.graphics.beginFill(0x00FF00,alpha);
             this.startBtn.graphics.drawRect(0,0,this.startBtn.width,this.startBtn.height);
             this.startBtn.graphics.endFill();
             
@@ -121,6 +141,7 @@ module com.views.scene {
             
             dragonBones.WorldClock.clock.add(this.drum);
             dragonBones.WorldClock.clock.add(this.armature);
+            dragonBones.WorldClock.clock.add(this.titleAmt);
             egret.Ticker.getInstance().register(this.dragonbones,this);
             
         }
