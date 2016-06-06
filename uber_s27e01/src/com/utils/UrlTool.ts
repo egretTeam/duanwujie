@@ -10,13 +10,12 @@ module com.utils {
         static post(url: string,onLoadComplete: Function,onLoadError: Function) {
             console.log("POST: "+url); 
             var request: egret.HttpRequest = new egret.HttpRequest;
-
+            request.open(url,egret.HttpMethod.POST);
             if(NetworkUtil.mz_jwt!=null)
                 request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
             else
-                console.log("mz_jwt is null");
+                console.log("mz_jwt is null")
             request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            request.open(url,"post");
             request.addEventListener(egret.Event.COMPLETE,onLoadComplete,this);
             request.addEventListener(egret.IOErrorEvent.IO_ERROR,onLoadError,this);
             return request;
@@ -28,11 +27,12 @@ module com.utils {
             console.log("GET: " + url);
 
             var request: egret.HttpRequest = new egret.HttpRequest;
+            request.open(url,egret.HttpMethod.GET);
             if(NetworkUtil.mz_jwt != null)
                 request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
             else
-                console.log("mz_jwt is null");
-            request.open(url,"get");
+                console.log("mz_jwt is null")
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded1");
             request.addEventListener(egret.Event.COMPLETE,onLoadComplete,this);
             request.addEventListener(egret.IOErrorEvent.IO_ERROR,onLoadError,this);
             return request;
