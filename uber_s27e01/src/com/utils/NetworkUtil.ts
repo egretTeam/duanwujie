@@ -18,7 +18,7 @@ module com.utils {
          * 该函数由initScene#constructor调用。
          */
         static requestUser(): void {
-            var request: egret.HttpRequest = UrlTool.post(NetworkUtil.apiPrefix+'/auth/anonymous/login?t=' + new Date().getTime() + '&gamesRedirectUri=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
+            var request: egret.HttpRequest = UrlTool.post('/auth/anonymous/login?t=' + new Date().getTime() + '&gamesRedirectUri=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
                 console.log('location.href',location.href);
                 var res=event.currentTarget.response;
                 console.log(event)
@@ -33,8 +33,8 @@ module com.utils {
                     console.log('current wechat user',res.user);
                     console.log('current wechat mz',res.mz_jwt);
                     console.log('current wechat result',res.result);
-                    request.setRequestHeader("Authorization","Bearer " + res.mz_jwt);
-                    NetworkUtil.mz_jwt=res.mz_jwt;
+                    NetworkUtil.mz_jwt = res.mz_jwt;
+                    request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
                     NetworkUtil.getJSSDK();
                 }
             },function(event:egret.Event){
@@ -42,12 +42,13 @@ module com.utils {
                 console.log("error: ");
                 console.log(res);
             });
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send();
         }
         
         
         private static getJSSDK():void {
-           var request:egret.HttpRequest= UrlTool.get(NetworkUtil.apiPrefix +'/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
+           var request:egret.HttpRequest= UrlTool.get('/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
                    var res=event.currentTarget.response; 
                    var jssdk = res.jssdk;
                    if(jssdk==null){
@@ -107,7 +108,9 @@ module com.utils {
                 var res = event.currentTarget.response;
                 console.log("请求排名失败: ");
                 console.log(res);
-            });
+                });
+            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send();
         }
         
@@ -136,6 +139,8 @@ module com.utils {
                 console.log(res);
             });
             var data = { "score": score };
+            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send(data);
             console.log("提交分数: " + data);
         }
@@ -164,7 +169,9 @@ module com.utils {
                 var res = event.currentTarget.response;
                 console.log("获取抽奖结果失败: ");
                 console.log(res);
-            });
+                });
+            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send();
         }
         /**
@@ -182,7 +189,9 @@ module com.utils {
                 var res = event.currentTarget.response;
                 console.log("领取话费和流量失败: " );
                 console.log(res);
-            });
+                });
+            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send({
                 "prizeLevel": score,
                 "phone": pn,
@@ -203,7 +212,9 @@ module com.utils {
                 var res = event.currentTarget.response;
                 console.log("领取钻石会员失败: ");
                 console.log(res);
-            });
+                });
+            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send({
                 "phone": pn,
                 "code":code,
@@ -225,7 +236,9 @@ module com.utils {
                 var res = event.currentTarget.response;
                 console.log("发送钻石会员验证码失败: ");
                 console.log(res);
-            });
+                });
+            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send({
                 "phone": pn,
                 "fromWechat": true
@@ -245,7 +258,9 @@ module com.utils {
                 var res = event.currentTarget.response;
                 console.log("发送音乐盒验证码失败: ");
                 console.log(res);
-            });
+                });
+            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send({
                 "phone": pn,
                 "fromWechat": true
@@ -266,7 +281,9 @@ module com.utils {
                 var res = event.currentTarget.response;
                 console.log("查询是否彩铃用户失败: ");
                 console.log(res);
-            });
+                });
+            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send({
                 "phone": pn,
             });
@@ -285,7 +302,9 @@ module com.utils {
                 var res = event.currentTarget.response;
                 console.log("开通彩铃失败: ");
                 console.log(res);
-            });
+                });
+            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send({
                 "phone": pn,
                 "fromWechat": true,
@@ -307,7 +326,9 @@ module com.utils {
                 var res = event.currentTarget.response;
                 console.log("领取彩铃失败: ");
                 console.log(res);
-            });
+                });
+            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send({
                 "phone": pn,
                 "fromWechat": true,
@@ -328,7 +349,9 @@ module com.utils {
                 var res = event.currentTarget.response;
                 console.log("查询音乐盒失败: ");
                 console.log(res);
-            });
+                });
+            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send({
                 "fromWechat": true
             });
