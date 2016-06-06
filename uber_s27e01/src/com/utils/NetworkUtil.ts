@@ -20,7 +20,7 @@ module com.utils {
         static requestUser(): void {
             var request: egret.HttpRequest = UrlTool.post('/auth/anonymous/login?t=' + new Date().getTime() + '&gamesRedirectUri=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
                 console.log('location.href',location.href);
-                var res=event.currentTarget.response;
+                var res=JSON.parse(event.currentTarget.response);
                 console.log(event)
                 if(res.result === 'error') {
                     console.log('login error',res.errmsg);
@@ -29,16 +29,15 @@ module com.utils {
                     console.log('login unauth',res.url);
                     location.href = res.url;
                 } else {
-                    var r=JSON.parse(res);
                     console.log('logined',res);
-                    console.log('current wechat user',r.user);
-                    console.log('current wechat mz',r.mz_jwt);
-                    console.log('current wechat result',r.result);
-                    NetworkUtil.mz_jwt = r.mz_jwt;
+                    console.log('current wechat user',res.user);
+                    console.log('current wechat mz',res.mz_jwt);
+                    console.log('current wechat result',res.result);
+                    NetworkUtil.mz_jwt = res.mz_jwt;
                     NetworkUtil.getJSSDK();
                 }
             },function(event:egret.Event){
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("error: ");
                 console.log(res);
             });
@@ -49,8 +48,8 @@ module com.utils {
         
         private static getJSSDK():void {
             var request: egret.HttpRequest = UrlTool.post('/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
-                   var res=event.currentTarget.response; 
-                   var jssdk = res.jssdk;
+                var res = JSON.parse(event.currentTarget.response);
+                    var jssdk  = res.jssdk;
                    if(jssdk==null){
                         AppUtils.alert(null,"请使用微信客户端打开本应用")
                         return;
@@ -71,7 +70,7 @@ module com.utils {
                     NetworkUtil.jssdk=jssdk;
                     console.log("请求JSSDK成功： "+jssdk);
                 },function(event:egret.Event){
-                    var res = event.currentTarget.response;
+                    var res = JSON.parse(event.currentTarget.response);
                     console.log("通讯失败： ");
                     console.log(res);
                 });
@@ -92,9 +91,8 @@ module com.utils {
             
             
             var request: egret.HttpRequest = UrlTool.post(NetworkUtil.apiPrefix + '/getRankList',function(event:egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("请求排名榜成功： ")
-                console.log(res);
                 var collection = new eui.ArrayCollection();
                 var r=res.rankInfos;
                 if(r != null) {
@@ -104,7 +102,7 @@ module com.utils {
                 }
                 returnRankingList(collection);
             },function(event:egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("请求排名失败: ");
                 console.log(res);
                 });
@@ -121,7 +119,7 @@ module com.utils {
 //            returnRanking(ranking);
             
             var request: egret.HttpRequest = UrlTool.post(NetworkUtil.apiPrefix + '/submitScore',function(event:egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("提交分数成功: ");
                 console.log(res);
                 if(res.rankInfo!=null){
@@ -131,7 +129,7 @@ module com.utils {
                     com.utils.AppUtils.alert(null,"暂无数据排名");
                 }
             },function(event:egret.Event){
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("提交分数失败: ");
                 console.log(res);
             });
@@ -153,7 +151,7 @@ module com.utils {
 //            result(r);
             
             var request: egret.HttpRequest = UrlTool.post(NetworkUtil.apiPrefix + '/lottery',function(event:egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("获取抽奖结果成功: " );
                 console.log(res);
                 //避免结果可能不是boolean异常所以使用==false
@@ -164,7 +162,7 @@ module com.utils {
                 } 
                 
             },function(event:egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("获取抽奖结果失败: ");
                 console.log(res);
                 });
@@ -177,14 +175,14 @@ module com.utils {
          */ 
         static getPrice(score:string,pn:number,callback:Function):void{
             var request: egret.HttpRequest = UrlTool.post(NetworkUtil.apiPrefix + '/getPrize',function(event:egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("领取话费和流量成功: ");
                 console.log(res);
                 if(!res.sucess)
                     callback(res.msg);
 
             },function(event:egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("领取话费和流量失败: " );
                 console.log(res);
                 });
@@ -204,13 +202,13 @@ module com.utils {
          */
         static getMember(code: string,pn: number,callback: Function): void {
             var request: egret.HttpRequest = UrlTool.post(NetworkUtil.apiPrefix + '/getMember',function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("领取钻石会员成功: ");
                 console.log(res);
                 if(!res.sucess)
                     callback(res.msg);
             },function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("领取钻石会员失败: ");
                 console.log(res);
                 });
@@ -230,13 +228,13 @@ module com.utils {
          */
         static memberRandomCode(pn: number,callback: Function): void {
             var request: egret.HttpRequest = UrlTool.post(NetworkUtil.apiPrefix + '/memberRandomCode',function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("发送钻石会员验证码成功: ");
                 console.log(res);
                 if(!res.sucess)
                     callback(res.msg);
             },function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("发送钻石会员验证码失败: ");
                 console.log(res);
                 });
@@ -255,12 +253,12 @@ module com.utils {
          */
         static musicRandomCode(pn: number,callback: Function): void {
             var request: egret.HttpRequest = UrlTool.post(NetworkUtil.apiPrefix + '/musicRandomCode',function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("发送音乐盒验证码成功: ");
                 console.log(res);
                 callback(res);
             },function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("发送音乐盒验证码失败: ");
                 console.log(res);
                 });
@@ -279,12 +277,12 @@ module com.utils {
          */
         static iscrbtuser(pn: number,callback: Function): void {
             var request: egret.HttpRequest = UrlTool.post(NetworkUtil.apiPrefix + '/iscrbtuser',function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("查询是否彩铃用户成功: ");
                 console.log(res);
                 callback(res);
             },function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("查询是否彩铃用户失败: ");
                 console.log(res);
                 });
@@ -301,12 +299,12 @@ module com.utils {
          */
         static openCrbt(pn: number,code:number,callback: Function): void {
             var request: egret.HttpRequest = UrlTool.post(NetworkUtil.openCrbt + '/openCrbt',function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("开通彩铃成功: ");
                 console.log(res);
                 callback(res);
             },function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("开通彩铃失败: ");
                 console.log(res);
                 });
@@ -326,12 +324,12 @@ module com.utils {
          */
         static getRingtone(pn: number,crbtId: string,callback: Function): void {
             var request: egret.HttpRequest = UrlTool.post(NetworkUtil.openCrbt + '/getRingtone',function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("领取彩铃成功: ");
                 console.log(res);
                 callback(res);
             },function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("领取彩铃失败: ");
                 console.log(res);
                 });
@@ -350,12 +348,12 @@ module com.utils {
           */
         static songs(callback: Function): void {
             var request: egret.HttpRequest = UrlTool.post(NetworkUtil.openCrbt + '/songs',function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("查询音乐盒成功: ");
                 console.log(res);
                 callback(res.data);
             },function(event: egret.Event) {
-                var res = event.currentTarget.response;
+                var res = JSON.parse(event.currentTarget.response);
                 console.log("查询音乐盒失败: ");
                 console.log(res);
                 });
