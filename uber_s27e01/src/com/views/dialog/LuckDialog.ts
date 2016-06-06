@@ -5,6 +5,7 @@ module com.views.dialog {
 	 *
 	 */
     export abstract class LuckDialog extends Dialog{
+        
         protected yOffset(): number {
             return 50;
         }

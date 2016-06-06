@@ -1,6 +1,14 @@
 module com.views.scene{
     export class luckScene extends AbstractScene {
        private backgroud:egret.Bitmap;
+       private static ins:luckScene;
+       
+       public static getInstance():luckScene{
+           if(luckScene.ins==null)
+               luckScene.ins=new luckScene();
+            return luckScene.ins;
+       }
+       
         constructor() {
             super();
             this.init();
@@ -12,30 +20,34 @@ module com.views.scene{
             this.backgroud.y = -150;
             this.addChild(this.backgroud);
             
-            var p=this;
-            com.utils.NetworkUtil.luckDraw(function(nextPage:number){
 
-                switch(nextPage) {
-                    case com.constants.DialogConstant.WEI_PIN_HUI:
-                        p.addChild(new com.views.dialog.WeipinhuiDialog());
-                        break;
-                    case com.constants.DialogConstant.JD:
-                        p.addChild(new com.views.dialog.JdDialog());
-                        break;
-                    case com.constants.DialogConstant.DIAMOND:
-                        p.addChild(new com.views.dialog.DiamondsDailog());
-                        break;
-                    case com.constants.DialogConstant.BELL:
-                        p.addChild(new com.views.dialog.Bell1Dialog());
-                        break;
-                    case com.constants.DialogConstant.MONEY:
-                        p.addChild(new com.views.dialog.Money1Dialog());
-                        break;
-                    case 5:
-                        this.addChild(new com.views.dialog.Money1Dialog());
-                        break;
-                }
-         });      
+            
+        }
+        
+
+
+        public goToPage(pageId:number,record){
+            this.removeChildren();
+            switch(pageId) {
+                case com.constants.DialogConstant.WEI_PIN_HUI:
+                    this.addChild(new com.views.dialog.WeipinhuiDialog());
+                    break;
+                case com.constants.DialogConstant.JD:
+                    this.addChild(new com.views.dialog.JdDialog());
+                    break;
+                case com.constants.DialogConstant.DIAMOND:
+                    this.addChild(new com.views.dialog.DiamondsDailog());
+                    break;
+                case com.constants.DialogConstant.BELL:
+                    this.addChild(new com.views.dialog.Bell1Dialog());
+                    break;
+                case com.constants.DialogConstant.MONEY:
+                    this.addChild(new com.views.dialog.Money1Dialog(record));
+                    break;
+                case com.constants.DialogConstant.FLOW:
+                    this.addChild(new com.views.dialog.Money1Dialog(record));
+                    break;
+            }
         }
     }
     

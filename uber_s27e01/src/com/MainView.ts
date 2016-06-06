@@ -31,7 +31,7 @@ module com {
                     this.scene = <com.views.ui.BasicView>(new com.views.scene.TeachScene());
                     break;
                 case com.constants.SceneConstants.LUCK://教学场景
-                    this.scene = <com.views.ui.BasicView>(new com.views.scene.luckScene());
+                    this.scene = <com.views.ui.BasicView>com.views.scene.luckScene.getInstance();
                     break;
                 default:
                     break;

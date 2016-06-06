@@ -60,10 +60,10 @@ module com.views.dialog {
         
         protected customTouchHandler(evt: egret.TouchEvent) {
             if(AwardDialog.balance<=0){
-                com.utils.AppUtils.alert(this.stage,"抽奖次数已用完");
+                com.utils.AppUtils.alert(this.stage,"对不起，您今天的抽奖机会用完了！");
                 return;
             }
-            AwardDialog.balance--;
+//            AwardDialog.balance--;
             
             this.riseAmt.addEventListener(dragonBones.AnimationEvent.COMPLETE,this.goToNextPage,this);
             
@@ -71,8 +71,20 @@ module com.views.dialog {
         }
         
         private goToNextPage(): void {
-            MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
-            this.riseAmt.removeEventListener(dragonBones.AnimationEvent.COMPLETE,this.goToNextPage,this);
+            var ra=this.riseAmt;
+            com.utils.NetworkUtil.luckDraw(function(num:number,flag:number,record){
+                if(flag){
+                    AwardDialog.balance=num;
+                    MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
+                    com.views.scene.luckScene.getInstance().goToPage(parseInt(record.score),record);
+                    ra.removeEventListener(dragonBones.AnimationEvent.COMPLETE,this.goToNextPage,this);
+                }else{
+                    com.utils.AppUtils.alert(null,"很抱歉，什么都没有抽中");
+                }
+            });
+            
+            
+//            MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
         }
         
         public update():void{

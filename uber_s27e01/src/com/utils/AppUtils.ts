@@ -57,34 +57,32 @@ module com.utils {
             
             return dragonbonesFactory.buildArmature(armatureName);
         }
-        
+
         static alert(stage: egret.Stage,msg:string):void{
             if(stage==null)
-                alert(msg);
-            else{
-               var t:egret.TextField=new egret.TextField();
-               t.x=0;
-               t.y=stage.height/3;
-               t.width=stage.width;
-               t.height=60;
-               
-               t.verticalAlign=egret.VerticalAlign.MIDDLE;
-               t.textAlign=egret.HorizontalAlign.CENTER;
-               
-               t.text=msg;
-               t.textColor=0xFFFFFF;
-               t.size=30;
-               t.background=true;
-               t.backgroundColor=0x000000;
-               stage.addChild(t);
-               
-               var timer:egret.Timer=new egret.Timer(1500,1);
-               timer.addEventListener(egret.TimerEvent.TIMER,function(){
-                    stage.removeChild(t);
-                },this);
-               timer.start();
-               
-            }
+               stage =MainView.instance.stage;
+           var t:egret.TextField=new egret.TextField();
+           t.x=0;
+           t.y=stage.height/3;
+           t.width=stage.width;
+           t.height=60;
+           
+           t.verticalAlign=egret.VerticalAlign.MIDDLE;
+           t.textAlign=egret.HorizontalAlign.CENTER;
+           
+           t.text=msg;
+           t.textColor=0xFFFFFF;
+           t.size=30;
+           t.background=true;
+           t.backgroundColor=0x000000;
+           stage.addChild(t);
+           
+           var timer:egret.Timer=new egret.Timer(1500,1);
+           timer.addEventListener(egret.TimerEvent.TIMER,function(){
+                stage.removeChild(t);
+            },this);
+           timer.start();
+           
         }
     }
 } 

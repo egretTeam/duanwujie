@@ -8,7 +8,7 @@ module com.constants {
     	/**
     	 * 唯品会
     	 */ 
-    	public static WEI_PIN_HUI=0;
+    	public static WEI_PIN_HUI=3;
     	/**
     	 * 京东
     	 */ 
@@ -16,15 +16,19 @@ module com.constants {
         /**
          * 钻石
          */ 
-        public static DIAMOND = 1;
+        public static DIAMOND = 2;
         /**
          * 彩铃
          */ 
-        public static BELL = 1;
+        public static BELL = 4;
         /**
          * 话费
          */ 
-        public static MONEY = 1;
+        public static MONEY = 5;
+        /**
+         * 流量
+         */     
+        public static FLOW=6;
     	
 	}
 }
