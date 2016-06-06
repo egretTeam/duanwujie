@@ -48,7 +48,9 @@ module com.views.dialog {
             this.highestScorePanel.text = hs==null?0+"":hs;
             
 
-            this.shareDialog = new ShareDialog();
+            this.shareDialog = new ShareDialog(); 
+            this.shareDialog.visible=false;
+            this.addChild(this.shareDialog);
             
             this.addChild(this.highestScorePanel);
             this.addChild(this.scorePanel);
@@ -71,12 +73,8 @@ module com.views.dialog {
         }
         
         public showShareArea(): void {
-            this.sharing = !this.sharing;
-            if(this.sharing) {
-                this.addChild(this.shareDialog);
-            } else {
-                this.removeChild(this.shareDialog);
-            }
+//            this.addChild(this.shareDialog);
+            this.shareDialog.visible=true;
         }
         
         public close(): void {

@@ -23,6 +23,7 @@ module com.views.dialog {
         }
         
         protected customTouchHandler(evt: egret.TouchEvent) {
+            this.visible=false;
         }
         
         public showShareArea():void{
