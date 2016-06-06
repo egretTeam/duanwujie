@@ -34,7 +34,7 @@ module com.utils {
                     console.log('current wechat user',r.user);
                     console.log('current wechat mz',r.mz_jwt);
                     console.log('current wechat result',r.result);
-                    NetworkUtil.mz_jwt = res.mz_jwt;
+                    NetworkUtil.mz_jwt = r.mz_jwt;
                     NetworkUtil.getJSSDK();
                 }
             },function(event:egret.Event){
@@ -48,7 +48,7 @@ module com.utils {
         
         
         private static getJSSDK():void {
-            var request: egret.HttpRequest = UrlTool.get('/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
+            var request: egret.HttpRequest = UrlTool.post('/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
                    var res=event.currentTarget.response; 
                    var jssdk = res.jssdk;
                    if(jssdk==null){
