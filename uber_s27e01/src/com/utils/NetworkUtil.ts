@@ -6,7 +6,7 @@ module com.utils {
 	 */
     export class NetworkUtil {
         static HOSTNAME = document.domain;
-        static apiHost = NetworkUtil.HOSTNAME == 'm.muzhibuluo.com' ? 'http://api.m.muzhi.us' : 'http://test.api.muzhibuluo.com';
+        static apiHost = NetworkUtil.HOSTNAME == 'm.muzhibuluo.com' ? 'http://api.m.muzhi.us' : 'test.api.m.muzhi.us';
         static apiPrefix = NetworkUtil.apiHost + '/api/imusic_s12e01';
         static mz_jwt;
         static jssdk;
