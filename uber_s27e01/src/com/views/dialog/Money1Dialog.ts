@@ -59,8 +59,9 @@ module com.views.dialog {
                 if(!com.utils.AppUtils.checkPhoneNo(this.phonenum.getInput()))
                     return;
                 //获取流量或者话费
+                var page=this;
                 com.utils.NetworkUtil.getPrice(this.score+'',parseFloat(this.phonenum.getInput()),function(res) {
-                    this.jump(new Money2Dialog());
+                    page.jump(new Money2Dialog());
                 });
             }
         }

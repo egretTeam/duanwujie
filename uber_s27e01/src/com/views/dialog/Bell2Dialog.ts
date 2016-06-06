@@ -45,8 +45,8 @@ module com.views.dialog {
                         com.utils.AppUtils.alert(page.stage,res.msg);
                         page.checking=false;
                     } else {
-                        page.addChild(this.oderbtn2);
-                        page.addChild(this.odertext);
+                        page.addChild(page.oderbtn2);
+                        page.addChild(page.odertext);
                         var i = 60;
                         page.odertext.text = "已发送：" + i;
                         var timer: egret.Timer = new egret.Timer(1000,i + 1);
