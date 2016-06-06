@@ -48,7 +48,8 @@ module com.utils {
         private static getJSSDK():void {
             var request: egret.HttpRequest = UrlTool.post('/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
                 var res = JSON.parse(event.currentTarget.response);
-                    var jssdk  = res.jssdk;
+                var jssdk = res.jssdk;
+                console.log("获取jssdk： "+res);
                    if(jssdk==null){
                         AppUtils.alert(null,"请使用微信客户端打开本应用")
                         return;
