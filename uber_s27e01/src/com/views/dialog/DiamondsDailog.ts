@@ -15,29 +15,33 @@ module com.views.dialog {
             super();
         }   
         requstVerification(): void {
+            if(!com.utils.AppUtils.checkPhoneNo(this.phonenum.getInput()))
+                return;
             if(!this.checking) {
                 this.checking = true;
-                this.oderbtn2 = new egret.Bitmap(RES.getRes("oderbtn2"));
-                this.oderbtn2.x = 0;
-                this.oderbtn2.y = -20;
-                this.addChild(this.oderbtn2);
-                this.odertext = new egret.TextField();
-                this.odertext.x = 345;
-                this.odertext.y = 615;
-                this.odertext.size = 20;
-                this.addChild(this.odertext);
-                var i = 60;
-                this.odertext.text = "已发送：" + i;
-                var timer: egret.Timer = new egret.Timer(1000,i + 1);
-                timer.addEventListener(egret.TimerEvent.TIMER,function() {
-                    this.odertext.text = "已发送：" + i--;
-                },this);
-                timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE,function() {
-                    this.removeChild(this.oderbtn2);
-                    this.removeChild(this.odertext);
-                    this.checking = false;
-                },this);
-                timer.start();
+                var page = this;
+                //获取钻石会员验证码
+                com.utils.NetworkUtil.memberRandomCode(parseInt(this.phonenum.getInput()),function(res) {
+                    if(res.success == false) {
+                        com.utils.AppUtils.alert(page.stage,res.msg);
+                        page.checking = false;
+                    } else {
+                        page.addChild(this.oderbtn2);
+                        page.addChild(this.odertext);
+                        var i = 60;
+                        page.odertext.text = "已发送：" + i;
+                        var timer: egret.Timer = new egret.Timer(1000,i + 1);
+                        timer.addEventListener(egret.TimerEvent.TIMER,function() {
+                            page.odertext.text = "已发送：" + i--;
+                        },page);
+                        timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE,function() {
+                            page.removeChild(page.oderbtn2);
+                            page.removeChild(page.odertext);
+                            page.checking = false;
+                        },page);
+                        timer.start();
+                    }
+                });
             }
         }
         protected  getImage():egret.Bitmap{
@@ -68,7 +72,15 @@ module com.views.dialog {
             this.oderbtn1.x = 0;
             this.oderbtn1.y = -20;
             this.addChild(this.oderbtn1);    
-            
+
+            //灰色验证码按钮
+            this.oderbtn2 = new egret.Bitmap(RES.getRes("oderbtn2"));
+            this.oderbtn2.x = 0;
+            this.oderbtn2.y = -20;
+            this.odertext = new egret.TextField();
+            this.odertext.x = 345;
+            this.odertext.y = 615;
+            this.odertext.size = 20;
             
  
         }
@@ -82,7 +94,7 @@ module com.views.dialog {
                 this.jump(new AwardDialog());
             }
             else if(new egret.Rectangle(168,733,300,65).contains(evt.stageX,evt.stageY)){
-                this.jump(new Diamonds2Dailog());              
+                this.jump(new Diamonds2Dailog(this.phonenum.getInput(),this.odernum.getInput()));              
             }
             else if(new egret.Rectangle(340,600,120,65).contains(evt.stageX,evt.stageY)){
                 this.requstVerification();

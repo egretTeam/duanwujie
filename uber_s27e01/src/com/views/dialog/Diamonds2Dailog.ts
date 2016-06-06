@@ -5,9 +5,12 @@ module com.views.dialog {
 	 *
 	 */
     export class Diamonds2Dailog extends LuckDialog{
-        constructor() {
+        private pn:string;
+        private code:string;
+        constructor(pn:string,code:string) {
             super();
-            
+            this.pn=pn;
+            this.code=code;
         }   
         
         
@@ -25,11 +28,17 @@ module com.views.dialog {
         
         protected customTouchHandler(evt: egret.TouchEvent) {
             if(new egret.Rectangle(168,540,300,65).contains(evt.stageX,evt.stageY)){
-//                this.jump(new AwardDialog());
-                console.log(1);
+                this.jump(new AwardDialog());
+//                console.log(1);
             }
             else if(new egret.Rectangle(168,459,300,65).contains(evt.stageX,evt.stageY)){
-                this.jump(new Diamonds3Dailog());              
+                var page=this;
+                com.utils.NetworkUtil.getMember(this.code,parseInt(this.pn),function(res) {
+                    if(res.success==false){
+                        com.utils.AppUtils.alert(page.stage,res.msg);
+                    }else
+                        page.jump(new Diamonds3Dailog());        
+                });      
             }
         }
         

@@ -56,7 +56,10 @@ module com.views.dialog {
         
         protected customTouchHandler(evt: egret.TouchEvent) {
             if(new egret.Rectangle(168,480,300,65).contains(evt.stageX,evt.stageY)) {
-                com.utils.NetworkUtil.getPrice(this.score,this.phonenum.getInput(),function(res) {
+                if(!com.utils.AppUtils.checkPhoneNo(this.phonenum.getInput()))
+                    return;
+                //获取流量或者话费
+                com.utils.NetworkUtil.getPrice(this.score+'',parseFloat(this.phonenum.getInput()),function(res) {
                     this.jump(new Money2Dialog());
                 });
             }

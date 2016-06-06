@@ -5,8 +5,13 @@ module com.views.dialog {
 	 *
 	 */
     export class Bell2_1Dialog extends LuckDialog{
-        constructor() {
+        
+        private code:number;
+        private pn:number;
+        constructor(code:number,pn:number) {
             super();
+            this.code=code;
+            this.pn=pn;
         }   
             
         
@@ -23,7 +28,11 @@ module com.views.dialog {
         
         protected customTouchHandler(evt: egret.TouchEvent) {
             if(new egret.Rectangle(168,480,300,65).contains(evt.stageX,evt.stageY)) {
-                this.jump(new Bell2_1_1Dialog());
+                var page=this;
+                com.utils.NetworkUtil.openCrbt(this.code,this.pn,function(res) {
+                    page.jump(new Bell2_1_1Dialog());
+                });
+                
             }
             else if(new egret.Rectangle(168,545,300,65).contains(evt.stageX,evt.stageY)){
                 this.jump(new AwardDialog());

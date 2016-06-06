@@ -10,7 +10,10 @@ module com.views.dialog {
         private oderbtn1: egret.Bitmap;
         private oderbtn2: egret.Bitmap;
         private odertext: egret.TextField;
-        private checking:Boolean = false;
+        private checking: Boolean = false;
+        private bellId:string;
+        user: com.model.localData.UserVO;
+        
         constructor() {
             super();
         }   
@@ -18,37 +21,46 @@ module com.views.dialog {
         bellname:string;
         singertext:egret.TextField;
         bellnametext: egret.TextField;
-        setUrl(bellinfo):void{
-            this.singer = bellinfo[0];
+        setData(bellinfo):void{
+            this.singer = bellinfo.singer;
             this.singertext.text = this.singer;
-            this.bellname = bellinfo[1];
+            this.bellname = bellinfo.name;
             this.bellnametext.text = this.bellname;
+            this.bellId=bellinfo.bellId;
         }  
-        requstVerification():void{
-            if(!this.checking){
+        
+        /**
+         * 请求验证码
+         */ 
+        requstVerification(): void {
+            if(!com.utils.AppUtils.checkPhoneNo(this.phonenum.getInput()))
+                return;
+            if(!this.checking) {
                 this.checking = true;
-                this.oderbtn2 = new egret.Bitmap(RES.getRes("oderbtn2"));
-                this.oderbtn2.x = 0;
-                this.oderbtn2.y = -100;
-                this.addChild(this.oderbtn2);   
-                this.odertext = new egret.TextField();
-                this.odertext.x = 345;
-                this.odertext.y = 535;
-                this.odertext.size = 20;
-                this.addChild(this.odertext);
-                var i = 60;
-                this.odertext.text = "已发送："+i;
-                var timer:egret.Timer = new egret.Timer(1000,i+1);
-                timer.addEventListener(egret.TimerEvent.TIMER,function() {
-                    this.odertext.text = "已发送：" + i--;
-                },this);
-                timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE,function() {
-                        this.removeChild(this.oderbtn2);
-                        this.removeChild(this.odertext);
-                        this.checking = false;
-                },this);
-                timer.start();
 
+                var page=this;
+                //发送音乐盒验证码
+                com.utils.NetworkUtil.musicRandomCode(parseInt(this.phonenum.getInput()),function(res){
+                    if(res.success == false) {
+                        com.utils.AppUtils.alert(page.stage,res.msg);
+                        page.checking=false;
+                    } else {
+                        page.addChild(this.oderbtn2);
+                        page.addChild(this.odertext);
+                        var i = 60;
+                        page.odertext.text = "已发送：" + i;
+                        var timer: egret.Timer = new egret.Timer(1000,i + 1);
+                        timer.addEventListener(egret.TimerEvent.TIMER,function() {
+                            page.odertext.text = "已发送：" + i--;
+                        },page);
+                        timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE,function() {
+                            page.removeChild(page.oderbtn2);
+                            page.removeChild(page.odertext);
+                            page.checking = false;
+                        },page);
+                        timer.start();
+                    }
+                    });
             }
         }
         getuser(): com.model.localData.UserVO{
@@ -58,15 +70,38 @@ module com.views.dialog {
             }
             return this.user;            
         }
-        user:com.model.localData.UserVO;
+        /**
+         * 预订
+         */ 
         oder():void{
-            if(this.getuser().iscrbtuser){
-                this.jump(new Bell2_2Dialog())
-            }
-            else{
-                this.jump(new Bell2_1Dialog())
-                
-            }
+            if(!com.utils.AppUtils.checkPhoneNo(this.phonenum.getInput()))
+                return;
+            var page=this;
+            com.utils.NetworkUtil.iscrbtuser(parseInt(this.phonenum.getInput()),function(res){
+                if(res.success == false) {
+                    com.utils.AppUtils.alert(page.stage,res.msg);
+                }else{
+                    if(res.iscrbtuser == false) {
+                        //开通彩铃
+                        page.jump(new Bell2_1Dialog(page.getCode(),page.getPhoneNo()));
+                        
+                    } else {
+                        //领取彩铃
+                        com.utils.NetworkUtil.getRingtone(page.getPhoneNo(),page.bellId,function(res){
+                            if(res.success == false) {
+                                com.utils.AppUtils.alert(page.stage,res.msg);
+                            }else
+                                page.jump(new Bell2_2Dialog())
+                        });
+                    }
+                }
+            });   
+        }
+        getCode(): number {
+            return parseInt(this.odernum.getInput());
+        }
+        getPhoneNo():number{
+            return parseInt(this.phonenum.getInput());
         }
         
         
@@ -109,6 +144,15 @@ module com.views.dialog {
             this.oderbtn1.x = 0;    
             this.oderbtn1.y = -100;
             this.addChild(this.oderbtn1);     
+            //灰色验证码按钮
+            this.oderbtn2 = new egret.Bitmap(RES.getRes("oderbtn2"));
+            this.oderbtn2.x = 0;
+            this.oderbtn2.y = -100;
+            
+            this.odertext = new egret.TextField();
+            this.odertext.x = 345;
+            this.odertext.y = 535;
+            this.odertext.size = 20;
         }
             //点击验证码按钮事件
         protected onRemoveStage(e: egret.Event) {//移除

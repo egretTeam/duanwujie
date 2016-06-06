@@ -58,6 +58,33 @@ module com.utils {
             return dragonbonesFactory.buildArmature(armatureName);
         }
 
+        static checkPhoneNo(n:any): boolean {
+            var pn=n+'';
+            if(pn.length != 11) {
+                AppUtils.alert(null,"手机号码长度必须为11位");
+                return false;
+            }
+            
+            switch(pn.substring(0,3)) {
+                case "133":
+                case "153":
+                case "180":
+                case "189":
+                case "181":
+                case "170":
+                case "171":
+                case "173":
+                case "177":
+                case "149":
+                    break;
+                default:
+                    AppUtils.alert(null,"必须为电信用户");
+                return false;
+            }
+
+            
+            return true;
+        }
         static alert(stage: egret.Stage,msg:string):void{
             if(stage==null)
                stage =MainView.instance.stage;
@@ -84,5 +111,18 @@ module com.utils {
            timer.start();
            
         }
+        
+        static playSound(url:string,callback:Function): void {
+            //创建 URLLoader 对象
+            var loader: egret.URLLoader = new egret.URLLoader();
+            //设置加载方式为声音
+            loader.dataFormat = egret.URLLoaderDataFormat.SOUND;
+            //添加加载完成侦听
+            loader.addEventListener(egret.Event.COMPLETE,callback,this);
+            var request: egret.URLRequest = new egret.URLRequest(url);
+            //开始加载
+            loader.load(request);
+        }
+
     }
 } 

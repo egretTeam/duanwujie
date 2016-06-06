@@ -74,7 +74,7 @@ module com.views.scene {
             this.titleAmt = dragonbonesFactory.buildArmature("armatureName");
             this.addChild(this.titleAmt.display);
             this.titleAmt.display.x = this.display.width / 2;
-            this.titleAmt.display.y = this.display.height /2-100;
+            this.titleAmt.display.y = this.display.height /2-150;
             this.titleAmt.animation.gotoAndPlay("biaoti",-1,-1,1);
 
             //鼓
@@ -110,7 +110,7 @@ module com.views.scene {
             //规则说明
             this.ruleBtn = new egret.Shape();
             this.ruleBtn.width = 200;
-            this.ruleBtn.height = 500 + yOff;;
+            this.ruleBtn.height = 450 + yOff;;
             this.ruleBtn.x = 40;
             this.ruleBtn.y = 0;
 

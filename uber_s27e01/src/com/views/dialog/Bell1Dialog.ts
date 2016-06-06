@@ -5,15 +5,17 @@ module com.views.dialog {
 	 *
 	 */
     export class Bell1Dialog extends LuckDialog{
+        private bells;
         constructor() {
             super();
+            this.bells = com.constants.Bell.Bells;
         }   
-        bells = [["凤凰传奇","最炫名族风"],["凤凰传奇","最炫名族风"],["凤凰传奇","最炫名族风"],["凤凰传奇","最炫名族风"],["凤凰传奇","最炫名族风"]];
+        channel: egret.SoundChannel;
 
         showbelldeitel(i:number){
-            var Dailog=new Bell2Dialog();
-            Dailog.setUrl(this.bells[i]);
-            this.jump(Dailog);
+            var nextDialog=new Bell2Dialog();
+            nextDialog.setData(com.constants.Bell.Bells[i]);
+            this.jump(nextDialog);
             
         }
         
@@ -22,6 +24,23 @@ module com.views.dialog {
         }
      
         protected  createContent(): void{
+        }
+
+        /**
+         * 播放音乐的方法，url为 数组this.bells[n].url
+         */ 
+        private play(url:string):void{
+            com.utils.AppUtils.playSound(url,this.onLoadComplete);
+        }
+
+         onLoadComplete(event: egret.Event): void {
+            var loader: egret.URLLoader = <egret.URLLoader>event.target;
+            //获取加载到的 Sound 对象
+            var sound: egret.Sound = <egret.Sound>loader.data;
+            if(this.channel!=null){
+                this.channel.stop();
+            }
+            this.channel= sound.play(0,1);
         }
         
         protected onRemoveStage(e: egret.Event) {//移除
