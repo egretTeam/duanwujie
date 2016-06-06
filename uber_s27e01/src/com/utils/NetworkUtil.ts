@@ -133,12 +133,10 @@ module com.utils {
                 console.log("提交分数失败: ");
                 console.log(res);
             });
-            var data = new FormData();
-            data.append( "score",score );
-            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
-            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            request.send(data);
-            console.log("提交分数: " + data);
+//            var data = new FormData();
+//            data.append( "score",score );
+            request.send("score="+score);
+            console.log("提交分数: " + score);
         }
         
         /**
@@ -158,7 +156,7 @@ module com.utils {
                 if(res.result == false) {
                     AppUtils.alert(null,res.msg);
                 } else {
-                    result(res.lottyNum,res.lotteryFlag,res.record);
+                    result(res.lotteryNum,res.lotteryFlag,res.record);
                 } 
                 
             },function(event:egret.Event) {
