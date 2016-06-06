@@ -35,7 +35,6 @@ module com.utils {
                     console.log('current wechat mz',r.mz_jwt);
                     console.log('current wechat result',r.result);
                     NetworkUtil.mz_jwt = res.mz_jwt;
-                    request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
                     NetworkUtil.getJSSDK();
                 }
             },function(event:egret.Event){
@@ -76,7 +75,6 @@ module com.utils {
                     console.log("通讯失败： ");
                     console.log(res);
                 });
-           request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
            request.send();       
         }
         
@@ -110,8 +108,6 @@ module com.utils {
                 console.log("请求排名失败: ");
                 console.log(res);
                 });
-            request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
-            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.send();
         }
         
