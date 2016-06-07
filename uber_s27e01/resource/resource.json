@@ -5,7 +5,7 @@
 			"name":"preload"
 		},
 		{
-			"keys":"green,luzhangkuang,luzhang,luzhangjson,finger,icon,hand,share_p0,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2,rule,JD,weipinhui,Diamonds,Diamonds2,Diamonds3,bell1,bell2,backgroud,bell2_2,bell2_1,bell2_1_1,money1,money2,rise,gameover,bgm_mp3,oderbtn1,oderbtn2,share_png,award/json,award/texture,award/png",
+			"keys":"green,luzhangkuang,playbellbuttom,stopbellbuttom,luzhang,luzhangjson,finger,icon,hand,share_p0,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2,rule,JD,weipinhui,Diamonds,Diamonds2,Diamonds3,bell1,bell2,backgroud,bell2_2,bell2_1,bell2_1_1,money1,money2,rise,gameover,bgm_mp3,oderbtn1,oderbtn2,share_png,award/json,award/texture,award/png,lost",
 			"name":"gameScene"
 		}
 	],
@@ -260,6 +260,96 @@
 			"name":"award/png",
 			"type":"image",
 			"url":"assets/award/texture.png"
+		},
+		{
+			"name":"01_png",
+			"type":"image",
+			"url":"assets/car/01.png"
+		},
+		{
+			"name":"02_png",
+			"type":"image",
+			"url":"assets/car/02.png"
+		},
+		{
+			"name":"03_png",
+			"type":"image",
+			"url":"assets/car/03.png"
+		},
+		{
+			"name":"04_png",
+			"type":"image",
+			"url":"assets/car/04.png"
+		},
+		{
+			"name":"05_png",
+			"type":"image",
+			"url":"assets/car/05.png"
+		},
+		{
+			"name":"06_png",
+			"type":"image",
+			"url":"assets/car/06.png"
+		},
+		{
+			"name":"07_png",
+			"type":"image",
+			"url":"assets/car/07.png"
+		},
+		{
+			"name":"08_png",
+			"type":"image",
+			"url":"assets/car/08.png"
+		},
+		{
+			"name":"car_json",
+			"type":"json",
+			"url":"assets/car/car.json"
+		},
+		{
+			"name":"texture_json",
+			"type":"json",
+			"url":"assets/car/texture.json"
+		},
+		{
+			"name":"texture_png",
+			"type":"image",
+			"url":"assets/car/texture.png"
+		},
+		{
+			"name":"Diamonds_png",
+			"type":"image",
+			"url":"assets/LUCK/Diamonds.png"
+		},
+		{
+			"name":"rotate_jpg",
+			"type":"image",
+			"url":"assets/rotate.jpg"
+		},
+		{
+			"name":"playbellbuttom",
+			"type":"image",
+			"url":"assets/LUCK/playbellbuttom.png"
+		},
+		{
+			"name":"stopbellbuttom",
+			"type":"image",
+			"url":"assets/LUCK/stopbellbuttom.png"
+		},
+		{
+			"name":"description_json",
+			"type":"json",
+			"url":"config/description.json"
+		},
+		{
+			"name":"share_icon_jpg",
+			"type":"image",
+			"url":"assets/share_icon.jpg"
+		},
+		{
+			"name":"lost",
+			"type":"image",
+			"url":"assets/LUCK/lost.png"
 		}
 	]
 }

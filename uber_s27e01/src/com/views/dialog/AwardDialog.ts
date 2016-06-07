@@ -74,13 +74,14 @@ module com.views.dialog {
             var ra=this.riseAmt;
             var page=this;
             com.utils.NetworkUtil.luckDraw(function(res){
-                if(res.lotteryFlag==1){
+                if(AwardDialog.balance>0){
                     AwardDialog.balance = res.lotteryNum;
                     MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
                     com.views.scene.luckScene.getInstance().goToPage(parseInt(res.record.score),res.record);
                     ra.removeEventListener(dragonBones.AnimationEvent.COMPLETE,page.goToNextPage,page);
                 }else{
                     com.utils.AppUtils.alert(page.stage,res.msg);
+                    page.riseAmt.animation.gotoAndPlay("1dianjiqian",-1,-1,1);
                 }
             });
             

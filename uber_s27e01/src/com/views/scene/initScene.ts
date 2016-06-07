@@ -40,13 +40,17 @@ module com.views.scene {
         }
         onConfigComplete(e: com.model.localData.event.LoaderEvent) {//配置加载完成
             console.log("init scene start");
-            //鼓点音乐
-            this.music = RES.getRes("bgm_mp3");
+            
             this.initInitLayout();
             this.removeChild(this.loading);
             
-            this.channel = this.music.play(0);
+            
             console.log("init scene complete");
+        }
+        public playBackgroundMusic():void {
+            //鼓点音乐
+            this.music = RES.getRes("bgm_mp3");
+            this.channel = this.music.play(0);
         }
         
         protected onAddStage():void{
@@ -152,6 +156,7 @@ module com.views.scene {
          * 开始游戏
          */ 
         private startGame(evt: egret.TouchEvent): void {
+            console.log('+++++++++++++++++++++++++',MainView.instance.stage.stageWidth)
             MainView.instance.changeScene(com.constants.SceneConstants.TEACH);
         }
 

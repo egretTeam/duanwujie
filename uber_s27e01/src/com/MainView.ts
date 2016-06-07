@@ -10,6 +10,7 @@ module com {
             super();
 
             MainView.instance = this;
+            this.init();
 
         }
 
@@ -37,6 +38,117 @@ module com {
                     break;
             }
             this.addChild(this.scene);
+        }
+        public mz_jwt: string = '';
+        private init(): void {
+            var request = new egret.HttpRequest(),
+                self = this,
+                url: string = '/auth/anonymous/login?t=' + new Date().getTime() + '&gamesRedirectUri=' + encodeURIComponent(location.href.split('#')[0]);
+            function done(event: egret.Event) {
+                var request = <egret.HttpRequest>event.currentTarget,
+                    data: any = JSON.parse(request.response);
+                if(data.result === 'success') {
+                    self.mz_jwt = data['mz_jwt'];
+                    com.utils.NetworkUtil.mz_jwt = data['mz_jwt'];
+                    self.getJSSDK();
+                } else {
+                    window.location.href = data.url;
+                }
+            }
+            function error() {
+                console.log('网络异常，请稍后再试');
+            }
+            function removeEvent() {
+                request.removeEventListener(egret.Event.COMPLETE,done,self);
+                request.removeEventListener(egret.IOErrorEvent.IO_ERROR,error,self);
+            }
+            request.responseType = egret.HttpResponseType.TEXT;
+            request.open(url,egret.HttpMethod.POST);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            request.send();
+            request.addEventListener(egret.Event.COMPLETE,done,this);
+            request.addEventListener(egret.IOErrorEvent.IO_ERROR,error,this);
+        }
+        private getJSSDK() {
+            var url: string = '/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),
+                request = new egret.HttpRequest(),
+                self = this;
+
+            function done(event: egret.Event) {
+                var request = <egret.HttpRequest>event.currentTarget,
+                    data: any = JSON.parse(request.response),
+                    jssdk = data.jssdk,
+                    domain = document.domain;
+
+                window['wx'].config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: jssdk.appId, // 必填，公众号的唯一标识
+                    timestamp: jssdk.timestamp, // 必填，生成签名的时间戳
+                    nonceStr: jssdk.nonceStr,   // 必填，生成签名的随机串
+                    signature: jssdk.signature, // 必填，签名，见附录1
+                    jsApiList: [
+                        'onMenuShareTimeline',
+                        'onMenuShareAppMessage',
+                        'onMenuShareQQ',
+                        'onMenuShareWeibo'
+                    ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                });
+
+                window['wx'].ready(function() {
+                    //com.views.scene.InitScene.playBackgroundMusic();
+                    //分享给朋友
+                    window['wx'].onMenuShareAppMessage({
+                        title:'史上最难龙舟，我排名前100，你敢挑战我吗？',
+                        desc: '描述',
+                        link: window.location.href,
+                        imgUrl: 'http://' + domain + '/2016/biz/imusic_s12e01/resource/assets/share_icon.jpg',
+                        trigger: function(res) {
+                            window['_czc'].push(["_trackEvent","点击弹出分享给朋友","click",'startup',1]);
+                        },
+                        success: function(res) {
+                            window['_czc'].push(["_trackEvent","分享给朋友","click",'startup',1]);
+                        },
+                        cancel: function(res) {
+                            window['_czc'].push(["_trackEvent","取消分享给朋友","click",'startup',1]);
+                        },
+                        fail: function(res) {
+                            window['_czc'].push(["_trackEvent","分享到朋友失败","click",'startup',1]);
+                        }
+                    });
+                    //分享到朋友圈
+                    window['wx'].onMenuShareTimeline({
+                        title: '史上最难龙舟，我排名前100，你敢挑战我吗？',
+                        desc: '描述',
+                        link: window.location.href,
+                        imgUrl: 'http://' + domain + '/2016/biz/imusic_s12e01/resource/assets/share_icon.jpg',
+                        trigger: function(res) {
+                            window['_czc'].push(["_trackEvent","点击弹出分享到朋友圈","click",'startup',1]);
+                        },
+                        success: function(res) {
+                            window['_czc'].push(["_trackEvent","分享给朋友","click",'startup',1]);
+                        },
+                        cancel: function(res) {
+                            window['_czc'].push(["_trackEvent","取消分享到朋友圈","click",'startup',1]);
+                        },
+                        fail: function(res) {
+                            window['_czc'].push(["_trackEvent","分享到朋友圈失败","click",'startup',1]);
+                        }
+                    });
+                });
+            }
+            function error() {
+                console.log('网络异常，请稍后再试');
+            }
+            function removeEvent() {
+                request.removeEventListener(egret.Event.COMPLETE,done,self);
+                request.removeEventListener(egret.IOErrorEvent.IO_ERROR,error,self);
+            }
+            request.responseType = egret.HttpResponseType.TEXT;
+            request.open(url,egret.HttpMethod.GET);
+            request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            request.send();
+            request.addEventListener(egret.Event.COMPLETE,done,this);
+            request.addEventListener(egret.IOErrorEvent.IO_ERROR,error,this);
         }
 
         protected onAddStage(e: egret.Event) {//添加到场景

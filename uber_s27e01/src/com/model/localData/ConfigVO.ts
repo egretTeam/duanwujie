@@ -1,4 +1,4 @@
-﻿module com.model.localData {
+module com.model.localData {
     export class ConfigVO {
         /**
         * 宽

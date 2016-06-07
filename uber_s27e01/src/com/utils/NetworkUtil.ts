@@ -34,7 +34,7 @@ module com.utils {
                     console.log('current wechat mz',res.mz_jwt);
                     console.log('current wechat result',res.result);
                     NetworkUtil.mz_jwt = res.mz_jwt;
-                    NetworkUtil.getJSSDK();
+//                    NetworkUtil.getJSSDK();
                 }
             },function(event:egret.Event){
                 var res = JSON.parse(event.currentTarget.response);
@@ -45,37 +45,37 @@ module com.utils {
         }
         
         
-        private static getJSSDK():void {
-            var request: egret.HttpRequest = UrlTool.post('/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
-                var res = JSON.parse(event.currentTarget.response);
-                var jssdk = res.jssdk;
-                console.log("获取jssdk： ",res);
-                   if(jssdk==null){
-                        AppUtils.alert(null,"请使用微信客户端打开本应用")
-                        return;
-                   }
-                    wx.config({
-                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                        appId: jssdk.appId, // 必填，公众号的唯一标识
-                        timestamp: jssdk.timestamp, // 必填，生成签名的时间戳
-                        nonceStr: jssdk.nonceStr,   // 必填，生成签名的随机串
-                        signature: jssdk.signature, // 必填，签名，见附录1
-                        jsApiList: [
-                            'onMenuShareTimeline',
-                            'onMenuShareAppMessage',
-                            'onMenuShareQQ',
-                            'onMenuShareWeibo'
-                        ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-                    });
-                    NetworkUtil.jssdk=jssdk;
-                    console.log("请求JSSDK成功： "+jssdk);
-                },function(event:egret.Event){
-                    var res = JSON.parse(event.currentTarget.response);
-                    console.log("通讯失败： ");
-                    console.log(res);
-                });
-           request.send();       
-        }
+//        private static getJSSDK():void {
+//            var request: egret.HttpRequest = UrlTool.post('/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),function(event:egret.Event) {
+//                var res = JSON.parse(event.currentTarget.response);
+//                var jssdk = res.jssdk;
+//                console.log("获取jssdk： ",res);
+//                   if(jssdk==null){
+//                        AppUtils.alert(null,"请使用微信客户端打开本应用")
+//                        return;
+//                   }
+//                    wx.config({
+//                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+//                        appId: jssdk.appId, // 必填，公众号的唯一标识
+//                        timestamp: jssdk.timestamp, // 必填，生成签名的时间戳
+//                        nonceStr: jssdk.nonceStr,   // 必填，生成签名的随机串
+//                        signature: jssdk.signature, // 必填，签名，见附录1
+//                        jsApiList: [
+//                            'onMenuShareTimeline',
+//                            'onMenuShareAppMessage',
+//                            'onMenuShareQQ',
+//                            'onMenuShareWeibo'
+//                        ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+//                    });
+//                    NetworkUtil.jssdk=jssdk;
+//                    console.log("请求JSSDK成功： "+jssdk);
+//                },function(event:egret.Event){
+//                    var res = JSON.parse(event.currentTarget.response);
+//                    console.log("通讯失败： ");
+//                    console.log(res);
+//                });
+//           request.send();       
+//        }
         
         /**
          * 从全局位置获取用户信息，并查询。
@@ -99,7 +99,7 @@ module com.utils {
                     for(var i=0,len=r.length-1;i<len;i++){
                         var name = r[i].name;
                         if(name.length>10)
-                            name=name.substring(0,7)+'...';
+                            name=name.substring(0,6)+'...';
                         collection.addItem({ "ranking": i+1,"name": name,"score": r[i].score });
                     };
                 }
@@ -226,7 +226,7 @@ module com.utils {
                 console.log(res);
                 });
 
-//            var data = new FormData();
+//            var data = new FormData()
 //            data.append("phone",pn);
 //            data.append("fromWechat",true);
 //            request.send(data);

@@ -11,6 +11,7 @@ module com.utils {
             console.log("POST: "+url); 
             var request: egret.HttpRequest = new egret.HttpRequest;
             request.open(url,egret.HttpMethod.POST);
+            console.log('++++++++++',NetworkUtil.mz_jwt)
             if(NetworkUtil.mz_jwt!=null)
                 request.setRequestHeader("Authorization","Bearer " + NetworkUtil.mz_jwt);
             else

@@ -41,6 +41,7 @@
 
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
+	<script egret="game" src="bin-debug/com/constants/Bell.js"></script>
 	<script egret="game" src="bin-debug/com/constants/DialogConstant.js"></script>
 	<script egret="game" src="bin-debug/com/constants/ItemConstant.js"></script>
 	<script egret="game" src="bin-debug/com/constants/SceneConstants.js"></script>
@@ -80,6 +81,7 @@
 	<script egret="game" src="bin-debug/com/views/dialog/DiamondsDailog.js"></script>
 	<script egret="game" src="bin-debug/com/views/dialog/GameOverDialog.js"></script>
 	<script egret="game" src="bin-debug/com/views/dialog/JdDialog.js"></script>
+	<script egret="game" src="bin-debug/com/views/dialog/Lost.js"></script>
 	<script egret="game" src="bin-debug/com/views/dialog/Money1Dialog.js"></script>
 	<script egret="game" src="bin-debug/com/views/dialog/Money2Dialog.js"></script>
 	<script egret="game" src="bin-debug/com/views/dialog/ShareDialog.js"></script>
@@ -141,7 +143,9 @@
          data-show-fps="false" data-show-log="false"
          data-log-filter="" data-show-fps-style="x:0,y:0,size:30,textColor:0x00c200,bgAlpha:0.9">
     </div>
-    <script>
+<script>
+var _czc = _czc || [];
+	_czc.push(["_setAccount", "1259459302"]);
         egret.runEgret();
 
         window.onload = function () {
@@ -156,6 +160,12 @@
             window.onresize = orientationChange;
 
         }
-    </script>
+</script>
+<div style="display:none">
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1259459302'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1259459302' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
 </body>
 </html>

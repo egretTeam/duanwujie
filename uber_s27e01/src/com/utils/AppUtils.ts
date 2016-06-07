@@ -86,14 +86,16 @@ module com.utils {
             return true;
         }
         static alert(stage: egret.Stage,msg:string):void{
-            if(stage==null)
-               stage =MainView.instance.stage;
+            if(stage==null) {
+                stage = MainView.instance.stage;
+            }
+               
            var t:egret.TextField=new egret.TextField();
-           t.x=0;
-           t.y=stage.height/3;
+           t.y = com.model.DataCenter.instance.configVO.appHeight / 3;
+           t.width = com.model.DataCenter.instance.configVO.appWidth;
            t.width=stage.width;
            t.height=60;
-           
+           console.log(stage.width,egret.HorizontalAlign.CENTER)
            t.verticalAlign=egret.VerticalAlign.MIDDLE;
            t.textAlign=egret.HorizontalAlign.CENTER;
            

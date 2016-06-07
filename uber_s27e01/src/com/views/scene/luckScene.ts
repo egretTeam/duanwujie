@@ -18,16 +18,14 @@ module com.views.scene{
             this.backgroud = new egret.Bitmap(RES.getRes("backgroud"))
             this.backgroud.x = 0;
             this.backgroud.y = -150;
-            this.addChild(this.backgroud);
-            
-
-            
+            this.addChild(this.backgroud);   
         }
-        
 
 
         public goToPage(pageId:number,record){
             this.removeChildren();
+            this.addChild(this.backgroud);
+// 测试用          pageId = com.constants.DialogConstant.DIAMOND;
             switch(pageId) {
                 case com.constants.DialogConstant.WEI_PIN_HUI:
                     this.addChild(new com.views.dialog.WeipinhuiDialog());
