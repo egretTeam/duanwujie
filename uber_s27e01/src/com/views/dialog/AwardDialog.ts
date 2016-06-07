@@ -82,6 +82,8 @@ module com.views.dialog {
                 }else{
                     com.utils.AppUtils.alert(page.stage,res.msg);
                     page.riseAmt.animation.gotoAndPlay("1dianjiqian",-1,-1,1);
+//                    MainView.instance.changeScene(com.constants.SceneConstants.LUCK);                                                                                           //测试用
+//                    com.views.scene.luckScene.getInstance().goToPage(com.constants.DialogConstant.BELL,null);                                                                   //测试用
                 }
             });
             

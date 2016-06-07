@@ -11,6 +11,9 @@ module com.views.dialog {
         private oderbtn2: egret.Bitmap;
         private odertext: egret.TextField;
         private checking: Boolean = false;
+        private checkbox1: egret.Bitmap;
+        private checkbox2: egret.Bitmap;
+        private checkbox: Boolean = true;
         constructor() {
             super();
         }   
@@ -62,7 +65,7 @@ module com.views.dialog {
             //验证码输入框
             this.odernum = new com.views.text.CText;
             this.odernum.x = 170;
-            this.odernum.y = 600;
+            this.odernum.y = 580;
             this.odernum.width = 150;
             this.odernum.restrict = "0-9"
             this.odernum.setLabel("请输入验证码");
@@ -70,7 +73,7 @@ module com.views.dialog {
             //验证码按钮
             this.oderbtn1 = new egret.Bitmap(RES.getRes("oderbtn1"));
             this.oderbtn1.x = 0;
-            this.oderbtn1.y = -20;
+            this.oderbtn1.y = -40;
             this.addChild(this.oderbtn1);    
 
             //灰色验证码按钮
@@ -81,6 +84,13 @@ module com.views.dialog {
             this.odertext.x = 345;
             this.odertext.y = 615;
             this.odertext.size = 20;
+            
+            //勾选框
+            this.checkbox1 = new egret.Bitmap(RES.getRes("checkbox1"));
+            this.checkbox1.x = 0;
+            this.checkbox1.y = -100;
+            this.addChild(this.checkbox1);
+            
             
  
         }
@@ -96,8 +106,11 @@ module com.views.dialog {
             else if(new egret.Rectangle(168,733,300,65).contains(evt.stageX,evt.stageY)){
                 this.jump(new Diamonds2Dailog(this.phonenum.getInput(),this.odernum.getInput()));              
             }
-            else if(new egret.Rectangle(340,600,120,65).contains(evt.stageX,evt.stageY)){
+            else if(new egret.Rectangle(340,580,120,40).contains(evt.stageX,evt.stageY)){
                 this.requstVerification();
+            }
+            else if(new egret.Rectangle(240,655,200,20).contains(evt.stageX,evt.stageY)){
+                window.location.href = "http://m.118100.cn/others/vip/notices"
             }
         }
         
