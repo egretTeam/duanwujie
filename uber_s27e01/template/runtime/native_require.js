@@ -53,7 +53,7 @@ var game_file_list = [
 	"bin-debug/com/views/dialog/DiamondsDailog.js",
 	"bin-debug/com/views/dialog/GameOverDialog.js",
 	"bin-debug/com/views/dialog/JdDialog.js",
-	"bin-debug/com/views/dialog/Lost.js",
+	"bin-debug/com/views/dialog/LostDialog.js",
 	"bin-debug/com/views/dialog/Money1Dialog.js",
 	"bin-debug/com/views/dialog/Money2Dialog.js",
 	"bin-debug/com/views/dialog/ShareDialog.js",

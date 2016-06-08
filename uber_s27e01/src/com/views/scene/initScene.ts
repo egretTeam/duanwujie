@@ -17,8 +17,10 @@ module com.views.scene {
 
         constructor() {
             super();
-            this.loading = new com.views.ui.loading.LoaderLoading("resource/resource.json?v=0","gameScene",this.onConfigComplete.bind(this));
-            this.addChild(this.loading);
+            if(!com.views.ui.loading.LoaderLoading.loaded){
+                this.loading = new com.views.ui.loading.LoaderLoading("resource/resource.json?v=0","gameScene",this.onConfigComplete.bind(this));
+                this.addChild(this.loading);
+            }
             com.utils.NetworkUtil.requestUser();
         }
 
@@ -38,7 +40,8 @@ module com.views.scene {
             console.log("init scene start");
             
             this.initInitLayout();
-            this.removeChild(this.loading);
+            if(this.contains(this.loading))
+                this.removeChild(this.loading);
             
             
             console.log("init scene complete");
@@ -239,10 +242,13 @@ module com.views.scene {
             this.rankingBtn.touchEnabled = true;
             this.startBtn.touchEnabled = true;
             this.drum.display.touchEnabled=true;
-            
-            this.removeChild(this.infoPage);
-            this.removeChild(this.close1Btn);
-            this.removeChild(this.close2Btn);
+
+            if(this.scroller != null && this.contains(this.infoPage))
+                this.removeChild(this.infoPage);
+            if(this.scroller != null && this.contains(this.close1Btn))
+                 this.removeChild(this.close1Btn);
+            if(this.scroller != null && this.contains(this.close2Btn))
+                this.removeChild(this.close2Btn);
             if(this.scroller != null && this.contains(this.scroller))
                 this.removeChild(this.scroller);
                 

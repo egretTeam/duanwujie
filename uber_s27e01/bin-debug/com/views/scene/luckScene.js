@@ -26,7 +26,7 @@ var com;
                 p.goToPage = function (pageId, record) {
                     this.removeChildren();
                     this.addChild(this.backgroud);
-                    //          pageId = com.constants.DialogConstant.BELL;    //测试用
+                    //          pageId = com.constants.DialogConstant.DIAMOND;    //测试用
                     switch (pageId) {
                         case com.constants.DialogConstant.WEI_PIN_HUI:
                             this.addChild(new com.views.dialog.WeipinhuiDialog());

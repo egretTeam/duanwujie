@@ -35,7 +35,7 @@ var com;
             this.addChild(this.scene);
         };
         p.init = function () {
-            var request = new egret.HttpRequest(), self = this, url = '/auth/anonymous/login?t=' + new Date().getTime() + '&gamesRedirectUri=' + encodeURIComponent(location.href.split('#')[0]);
+            var request = new egret.HttpRequest(), self = this, url = '/auth/wechat/login?t=' + new Date().getTime() + '&gamesRedirectUri=' + encodeURIComponent(location.href.split('#')[0]);
             function done(event) {
                 var request = event.currentTarget, data = JSON.parse(request.response);
                 if (data.result === 'success') {

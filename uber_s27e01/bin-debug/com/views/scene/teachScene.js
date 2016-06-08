@@ -97,7 +97,7 @@ var com;
                     this.minititle.fontFamily = "Microsoft YaHei";
                     this.minititle.textColor = 0xffffff;
                     this.minititle.size = 30;
-                    this.minititle.text = "轻触屏幕换线，龙舟必须避过所有的石块";
+                    this.minititle.text = "点击屏幕换线，龙舟必须避过所有的石块";
                     this.minititle.textHeight = 40;
                     this.minititle.x = 45;
                     this.minititle.width = com.model.DataCenter.instance.configVO.appWidth * 7 / 8;

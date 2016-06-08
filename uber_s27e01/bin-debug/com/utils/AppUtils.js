@@ -90,7 +90,6 @@ var com;
                 var t = new egret.TextField();
                 t.y = com.model.DataCenter.instance.configVO.appHeight / 3;
                 t.width = com.model.DataCenter.instance.configVO.appWidth;
-                t.width = stage.width;
                 t.height = 60;
                 console.log(stage.width, egret.HorizontalAlign.CENTER);
                 t.verticalAlign = egret.VerticalAlign.MIDDLE;

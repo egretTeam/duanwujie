@@ -31,10 +31,17 @@ var com;
                     this.rise.x = 320;
                     this.rise.y = 440;
                     this.riseAmt.animation.gotoAndPlay("1dianjiqian", -1, -1, 1);
-                    this.bg.touchEnabled = false;
                     this.rise.touchEnabled = true;
                     this.rise.addEventListener(egret.TouchEvent.TOUCH_TAP, this.customTouchHandler, this);
                     this.addChild(this.rise);
+                    //再来一次按钮
+                    this.againgame = new egret.Bitmap(RES.getRes("againgame"));
+                    this.againgame.x = 0;
+                    this.againgame.y = 0;
+                    this.againgame.touchEnabled = true;
+                    this.againgame.addEventListener(egret.TouchEvent.TOUCH_TAP, this.againgameTouchHandler, this);
+                    this.addChild(this.againgame);
+                    this.bg.touchEnabled = false;
                     dragonBones.WorldClock.clock.add(this.riseAmt);
                     egret.Ticker.getInstance().register(this.dragonbones, this);
                 };
@@ -56,6 +63,9 @@ var com;
                     this.riseAmt.addEventListener(dragonBones.AnimationEvent.COMPLETE, this.goToNextPage, this);
                     this.riseAmt.animation.gotoAndPlay("2dianjihou", -1, -1, 1);
                 };
+                p.againgameTouchHandler = function (evt) {
+                    com.MainView.instance.changeScene(com.constants.SceneConstants.INIT);
+                };
                 p.goToNextPage = function () {
                     var ra = this.riseAmt;
                     var page = this;
@@ -63,7 +73,10 @@ var com;
                         if (AwardDialog.balance > 0) {
                             AwardDialog.balance = res.lotteryNum;
                             com.MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
-                            com.views.scene.luckScene.getInstance().goToPage(parseInt(res.record.score), res.record);
+                            if (res.record == null || res.success == false)
+                                com.views.scene.luckScene.getInstance().goToPage(-1, null);
+                            else
+                                com.views.scene.luckScene.getInstance().goToPage(parseInt(res.record.score), res.record);
                             ra.removeEventListener(dragonBones.AnimationEvent.COMPLETE, page.goToNextPage, page);
                         }
                         else {
