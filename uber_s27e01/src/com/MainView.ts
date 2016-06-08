@@ -43,7 +43,7 @@ module com {
         private init(): void {
             var request = new egret.HttpRequest(),
                 self = this,
-                url: string = '/auth/anonymous/login?t=' + new Date().getTime() + '&gamesRedirectUri=' + encodeURIComponent(location.href.split('#')[0]);
+                url: string = '/auth/wechat/login?t=' + new Date().getTime() + '&gamesRedirectUri=' + encodeURIComponent(location.href.split('#')[0]);
             function done(event: egret.Event) {
                 var request = <egret.HttpRequest>event.currentTarget,
                     data: any = JSON.parse(request.response);

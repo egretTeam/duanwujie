@@ -9,6 +9,7 @@ module com.views.dialog {
     	  
     	  text:egret.TextField;
     	  private riseAmt:dragonBones.Armature;
+    	  private againgame:egret.Bitmap;
     	  private rise;
     	
         constructor() {
@@ -35,13 +36,23 @@ module com.views.dialog {
             this.rise.x=320;
             this.rise.y=440;
             this.riseAmt.animation.gotoAndPlay("1dianjiqian",-1,-1,1);
+            
+            this.rise.touchEnabled = true;
+            this.rise.addEventListener(egret.TouchEvent.TOUCH_TAP,this.customTouchHandler,this);
+            this.addChild(this.rise);
+            
+            //再来一次按钮
+            this.againgame = new egret.Bitmap(RES.getRes("againgame"));
+            this.againgame.x = 0;
+            this.againgame.y = 0;
+            this.againgame.touchEnabled = true;
+            this.againgame.addEventListener(egret.TouchEvent.TOUCH_TAP,this.againgameTouchHandler,this);
+            this.addChild(this.againgame);
+            
 
             this.bg.touchEnabled = false;
 
-            this.rise.touchEnabled = true;
-            this.rise.addEventListener(egret.TouchEvent.TOUCH_TAP,this.customTouchHandler,this);
-            
-            this.addChild(this.rise);
+           
             
             dragonBones.WorldClock.clock.add(this.riseAmt);
             egret.Ticker.getInstance().register(this.dragonbones,this);
@@ -62,12 +73,15 @@ module com.views.dialog {
             if(AwardDialog.balance<=0){
                 com.utils.AppUtils.alert(this.stage,"对不起，您今天的抽奖机会用完了！");
                 return;
-            }
+                }  
 //            AwardDialog.balance--;
             
             this.riseAmt.addEventListener(dragonBones.AnimationEvent.COMPLETE,this.goToNextPage,this);
             
             this.riseAmt.animation.gotoAndPlay("2dianjihou",-1,-1,1);
+        }
+        protected againgameTouchHandler(evt: egret.TouchEvent) {
+            MainView.instance.changeScene(com.constants.SceneConstants.INIT);
         }
         
         private goToNextPage(): void {

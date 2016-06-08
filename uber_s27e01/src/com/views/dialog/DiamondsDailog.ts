@@ -79,10 +79,10 @@ module com.views.dialog {
             //灰色验证码按钮
             this.oderbtn2 = new egret.Bitmap(RES.getRes("oderbtn2"));
             this.oderbtn2.x = 0;
-            this.oderbtn2.y = -20;
+            this.oderbtn2.y = -40;
             this.odertext = new egret.TextField();
             this.odertext.x = 345;
-            this.odertext.y = 615;
+            this.odertext.y = 595;
             this.odertext.size = 20;
             
             //勾选框
@@ -104,6 +104,8 @@ module com.views.dialog {
                 this.jump(new AwardDialog());
             }
             else if(new egret.Rectangle(168,733,300,65).contains(evt.stageX,evt.stageY)){
+                if(!com.utils.AppUtils.checkPhoneNo(this.phonenum.getInput())) 
+                    return;
                 this.jump(new Diamonds2Dailog(this.phonenum.getInput(),this.odernum.getInput()));              
             }
             else if(new egret.Rectangle(340,580,120,40).contains(evt.stageX,evt.stageY)){

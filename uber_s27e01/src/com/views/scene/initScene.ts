@@ -17,10 +17,8 @@ module com.views.scene {
 
         constructor() {
             super();
-
             this.loading = new com.views.ui.loading.LoaderLoading("resource/resource.json?v=0","gameScene",this.onConfigComplete.bind(this));
             this.addChild(this.loading);
-
             com.utils.NetworkUtil.requestUser();
         }
 
@@ -76,7 +74,7 @@ module com.views.scene {
 
             //鼓
             this.drum = com.utils.AppUtils.loadArmature("drum/json","drum/texture","drum/png","Armature");
-            this.drum.display.x = this.display.width / 5*4;
+            this.drum.display.x = this.display.width / 5*4+50;
             this.drum.display.y = 100;
             this.drum.animation.gotoAndPlay("kai",-1,-1,0);
 
@@ -86,14 +84,13 @@ module com.views.scene {
             
 
             var alpha=0;
-            var yOff=20;
-            
+            var yOff= 300;          
             //排行榜
             this.rankingBtn=new egret.Shape();
             this.rankingBtn.width = 180;
             this.rankingBtn.height = 130;
-            this.rankingBtn.x = this.stage.width * 2 / 3 - 20;
-            this.rankingBtn.y = this.stage.height * 2 / 5+yOff;
+            this.rankingBtn.x = com.model.DataCenter.instance.configVO.appWidth * 2 / 3 - 20;
+            this.rankingBtn.y = com.model.DataCenter.instance.configVO.appHeight * 2 / 5+yOff;
             
             this.rankingBtn.graphics.beginFill(0x00FF00,alpha);
             this.rankingBtn.graphics.drawRect(0,0,this.rankingBtn.width,this.rankingBtn.height);
@@ -120,12 +117,13 @@ module com.views.scene {
             this.ruleBtn.touchEnabled = true;
             this.ruleBtn.addEventListener(egret.TouchEvent.TOUCH_TAP,this.showRuleList,this);
             
+            
             //开始游戏
             this.startBtn = new egret.Shape();
             this.startBtn.width = 280;
             this.startBtn.height = 150;
-            this.startBtn.x = this.stage.width * 1 / 3 -20;
-            this.startBtn.y = this.stage.height * 5 / 9 - 40 + yOff;
+            this.startBtn.x = com.model.DataCenter.instance.configVO.appWidth * 1 / 3 -20;
+            this.startBtn.y = com.model.DataCenter.instance.configVO.appHeight * 5 / 9 - 40 + yOff;
 
             this.startBtn.graphics.beginFill(0x00FF00,alpha);
             this.startBtn.graphics.drawRect(0,0,this.startBtn.width,this.startBtn.height);

@@ -5,7 +5,7 @@
 			"name":"preload"
 		},
 		{
-			"keys":"green,luzhangkuang,playbellbuttom,stopbellbuttom,luzhang,luzhangjson,finger,icon,hand,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2,rule,JD,weipinhui,Diamonds2,Diamonds3,bell1,bell2,backgroud,bell2_2,bell2_1,bell2_1_1,money1,money2,rise,gameover,bgm_mp3,oderbtn1,oderbtn2,share_png,award/json,award/texture,award/png,lost,Diamonds,checkbox1,checkbox2",
+			"keys":"green,luzhangkuang,playbellbuttom,stopbellbuttom,luzhang,luzhangjson,finger,icon,hand,boattexturepng,boattexturejson,boatjson,items/texture,items/png,items/json,scorePanel,cloud,page1/png,page1/texture,page1/json,drum/png,drum/texture,drum/json,page1Bg,close1,close2,rule,JD,weipinhui,Diamonds2,Diamonds3,bell1,bell2,backgroud,bell2_2,bell2_1,bell2_1_1,money1,money2,rise,gameover,bgm_mp3,oderbtn1,oderbtn2,share_png,award/json,award/texture,award/png,lost,checkbox1,checkbox2,Diamonds,againgame",
 			"name":"gameScene"
 		}
 	],
@@ -252,11 +252,6 @@
 			"url":"assets/award/texture.png"
 		},
 		{
-			"name":"Diamonds",
-			"type":"image",
-			"url":"assets/LUCK/Diamonds.png"
-		},
-		{
 			"name":"playbellbuttom",
 			"type":"image",
 			"url":"assets/LUCK/playbellbuttom.png"
@@ -290,6 +285,16 @@
 			"name":"checkbox2",
 			"type":"image",
 			"url":"assets/LUCK/checkbox2.png"
+		},
+		{
+			"name":"Diamonds",
+			"type":"image",
+			"url":"assets/LUCK/Diamonds.png"
+		},
+		{
+			"name":"againgame",
+			"type":"image",
+			"url":"assets/award/againgame.png"
 		}
 	]
 }
