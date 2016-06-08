@@ -69,6 +69,22 @@ module com {
             request.addEventListener(egret.Event.COMPLETE,done,this);
             request.addEventListener(egret.IOErrorEvent.IO_ERROR,error,this);
         }
+        music:egret.Sound;
+        channel:egret.SoundChannel
+
+        public playBackgroundMusic(): void {
+            //鼓点音乐
+            if(this.music ==null)
+                this.music = RES.getRes("bgm_mp3");
+            this.channel = this.music.play(0);
+        } 
+        
+        public stopBackgroundMusic(): void {
+            if(this.channel!=null){
+                this.channel.stop();
+            }
+        }
+        
         private getJSSDK() {
             var url: string = '/auth/wechat/jssdk?t=' + new Date().getTime() + '&originalUrl=' + encodeURIComponent(location.href.split('#')[0]),
                 request = new egret.HttpRequest(),
@@ -271,7 +287,8 @@ module com {
                                 _czc && _czc.push(["_trackEvent", "分享到微博失败", "share", "分享", 1]);
                             }
                             wx.onMenuShareWeibo(bodyMenuShareWeibo);
-
+                            //自动播放
+                            MainView.instance.playBackgroundMusic();
                         });
                     }
                 } else {

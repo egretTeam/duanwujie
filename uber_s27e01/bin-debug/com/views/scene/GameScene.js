@@ -220,6 +220,16 @@ var com;
                 };
                 p.showGameOverPanel = function () {
                     this.gameOverdialog = new com.views.dialog.GameOverDialog();
+                    this.gameOverdialog.scorePanel.text = this.score + '';
+                    var godialog = this.gameOverdialog;
+                    com.utils.NetworkUtil.sendScoreNGetRanking(function (res) {
+                        if (res.rankInfo != null) {
+                            var ranking = res.rankInfo.rank;
+                            godialog.rankingPanel.text = ranking;
+                            godialog.highestScorePanel.text = res.historyMaxScore;
+                        }
+                        com.views.dialog.AwardDialog.balance = parseInt(res.lotteryNum);
+                    }, this.score);
                     this.addChild(this.gameOverdialog);
                 };
                 p.luzhangFactory = function (num) {

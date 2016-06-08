@@ -8,7 +8,7 @@ module com.views.dialog {
     	  highestScore:number;
     	  ranking:number;
         scorePanel: egret.TextField;
-        private highestScorePanel: egret.TextField;
+        highestScorePanel: egret.TextField;
         rankingPanel: egret.TextField;
         
         private sharing: Boolean = false;
@@ -44,8 +44,8 @@ module com.views.dialog {
             this.rankingPanel.width = 250;
             this.rankingPanel.textColor = 0x64470C;
             
-            var hs: string = egret.localStorage.getItem("highestScore");
-            this.highestScorePanel.text = hs==null?0+"":hs;
+//            var hs: string = egret.localStorage.getItem("highestScore");
+//            this.highestScorePanel.text = hs==null?0+"":hs;
             
 
             this.shareDialog = new ShareDialog(); 

@@ -18,12 +18,16 @@ var com;
                             return "zhangai";
                         };
                         p.dragonbones = function (advancedTime) {
-                            dragonBones.WorldClock.clock.advanceTime(advancedTime / 5000);
+                            dragonBones.WorldClock.clock.advanceTime(advancedTime / 1000);
                         };
                         p.onRemoveStage = function (e) {
                             _super.prototype.onRemoveStage.call(this, e);
                             //            dragonBones.WorldClock.clock.remove(this.armature);
                             //            egret.Ticker.getInstance().unregister(this.dragonbones,this);
+                        };
+                        p.customInit = function () {
+                            //            dragonBones.WorldClock.clock.add(this.armature);
+                            //            egret.Ticker.getInstance().register(this.dragonbones,this);
                         };
                         p.getType = function () {
                             return com.constants.ItemConstant.BLOCK;

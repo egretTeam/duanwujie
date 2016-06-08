@@ -264,6 +264,7 @@ module com.views.scene {
                 if(res.rankInfo!=null){
                     var ranking = res.rankInfo.rank;
                     godialog.rankingPanel.text = ranking;
+                    godialog.highestScorePanel.text = res.historyMaxScore;
                 }
                 com.views.dialog.AwardDialog.balance=parseInt(res.lotteryNum);
             },this.score);

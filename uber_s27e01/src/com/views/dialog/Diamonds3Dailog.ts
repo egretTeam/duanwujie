@@ -22,7 +22,9 @@ module com.views.dialog {
         }
         
         protected customTouchHandler(evt: egret.TouchEvent) {
-            if(new egret.Rectangle(168,474,300,65).contains(evt.stageX,evt.stageY)){
+            if(new egret.Rectangle(168,474,300,65).contains(evt.stageX,evt.stageY)) {
+                //办理成功后 + 5
+                AwardDialog.balance += 5;
                 this.jump(new AwardDialog());
             }
 

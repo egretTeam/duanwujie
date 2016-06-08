@@ -230,6 +230,36 @@
 					"isFolder":false,
 					"key":"award/png",
 					"name":"award/png"
+				},
+				{
+					"isFolder":false,
+					"key":"checkbox1",
+					"name":"checkbox1"
+				},
+				{
+					"isFolder":false,
+					"key":"checkbox2",
+					"name":"checkbox2"
+				},
+				{
+					"isFolder":false,
+					"key":"lost",
+					"name":"lost"
+				},
+				{
+					"isFolder":false,
+					"key":"playbellbuttom",
+					"name":"playbellbuttom"
+				},
+				{
+					"isFolder":false,
+					"key":"stopbellbuttom",
+					"name":"stopbellbuttom"
+				},
+				{
+					"isFolder":false,
+					"key":"share_icon_jpg",
+					"name":"share_icon_jpg"
 				}
 			]
 		}

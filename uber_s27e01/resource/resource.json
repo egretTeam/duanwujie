@@ -257,69 +257,9 @@
 			"url":"assets/award/texture.png"
 		},
 		{
-			"name":"01_png",
-			"type":"image",
-			"url":"assets/car/01.png"
-		},
-		{
-			"name":"02_png",
-			"type":"image",
-			"url":"assets/car/02.png"
-		},
-		{
-			"name":"03_png",
-			"type":"image",
-			"url":"assets/car/03.png"
-		},
-		{
-			"name":"04_png",
-			"type":"image",
-			"url":"assets/car/04.png"
-		},
-		{
-			"name":"05_png",
-			"type":"image",
-			"url":"assets/car/05.png"
-		},
-		{
-			"name":"06_png",
-			"type":"image",
-			"url":"assets/car/06.png"
-		},
-		{
-			"name":"07_png",
-			"type":"image",
-			"url":"assets/car/07.png"
-		},
-		{
-			"name":"08_png",
-			"type":"image",
-			"url":"assets/car/08.png"
-		},
-		{
-			"name":"car_json",
-			"type":"json",
-			"url":"assets/car/car.json"
-		},
-		{
-			"name":"texture_json",
-			"type":"json",
-			"url":"assets/car/texture.json"
-		},
-		{
-			"name":"texture_png",
-			"type":"image",
-			"url":"assets/car/texture.png"
-		},
-		{
 			"name":"Diamonds",
 			"type":"image",
 			"url":"assets/LUCK/Diamonds.png"
-		},
-		{
-			"name":"rotate_jpg",
-			"type":"image",
-			"url":"assets/rotate.jpg"
 		},
 		{
 			"name":"playbellbuttom",

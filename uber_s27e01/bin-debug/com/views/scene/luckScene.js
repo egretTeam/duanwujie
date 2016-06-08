@@ -11,9 +11,10 @@ var com;
                     this.init();
                 }
                 var d = __define,c=luckScene,p=c.prototype;
-                p.getnextpage = function () {
-                    return 2;
-                    //           com.utils.AppUtils.GetRandomNum(0,5);
+                luckScene.getInstance = function () {
+                    if (luckScene.ins == null)
+                        luckScene.ins = new luckScene();
+                    return luckScene.ins;
                 };
                 p.init = function () {
                     //背景
@@ -21,36 +22,34 @@ var com;
                     this.backgroud.x = 0;
                     this.backgroud.y = -150;
                     this.addChild(this.backgroud);
-                    switch (this.getnextpage()) {
-                        case 0:
+                };
+                p.goToPage = function (pageId, record) {
+                    this.removeChildren();
+                    this.addChild(this.backgroud);
+                    //          pageId = com.constants.DialogConstant.BELL;    //测试用
+                    switch (pageId) {
+                        case com.constants.DialogConstant.WEI_PIN_HUI:
                             this.addChild(new com.views.dialog.WeipinhuiDialog());
                             break;
-                        case 1:
+                        case com.constants.DialogConstant.JD:
                             this.addChild(new com.views.dialog.JdDialog());
                             break;
-                        case 2:
+                        case com.constants.DialogConstant.DIAMOND:
                             this.addChild(new com.views.dialog.DiamondsDailog());
                             break;
-                        case 3:
+                        case com.constants.DialogConstant.BELL:
                             this.addChild(new com.views.dialog.Bell1Dialog());
                             break;
-                        case 4:
-                            this.addChild(new com.views.dialog.Money1Dialog());
+                        case com.constants.DialogConstant.MONEY:
+                            this.addChild(new com.views.dialog.Money1Dialog(record));
                             break;
-                        case 5:
-                            this.addChild(new com.views.dialog.Money1Dialog());
+                        case com.constants.DialogConstant.FLOW:
+                            this.addChild(new com.views.dialog.Money1Dialog(record));
+                            break;
+                        default:
+                            this.addChild(new com.views.dialog.LostDialog());
                             break;
                     }
-                    //话费流量1页
-                    //            this.money1 = new egret.Bitmap(RES.getRes("money1"))
-                    //            this.money1.x = 0;
-                    //            this.money1.y = -100;
-                    //            this.addChild(this.money1);
-                    //话费流量2页
-                    //            this.money2 = new egret.Bitmap(RES.getRes("money2"))
-                    //            this.money2.x = 0;
-                    //            this.money2.y = -100;
-                    //            this.addChild(this.money2);
                 };
                 return luckScene;
             }(scene.AbstractScene));

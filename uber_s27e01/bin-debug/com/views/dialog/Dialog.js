@@ -20,9 +20,9 @@ var com;
                     this.bg = this.getImage();
                     this.addChild(this.bg);
                     this.bg.y = -100;
-                    this.createContent();
                     this.bg.touchEnabled = true;
                     this.bg.addEventListener(egret.TouchEvent.TOUCH_TAP, this.touchHandler, this);
+                    this.createContent();
                 };
                 p.yOffset = function () {
                     return 0;

@@ -12,8 +12,6 @@ module com.views.scene {
         private infoPage: egret.Bitmap;
         private startBtn: egret.Shape;
         private ruleBtn: egret.Shape;
-        private music:egret.Sound;
-        private channel:egret.SoundChannel;
         private scroller;
         private titleAmt:dragonBones.Armature;
 
@@ -46,11 +44,6 @@ module com.views.scene {
             
             
             console.log("init scene complete");
-        }
-        public playBackgroundMusic():void {
-            //鼓点音乐
-            this.music = RES.getRes("bgm_mp3");
-            this.channel = this.music.play(0);
         }
         
         protected onAddStage():void{
@@ -266,10 +259,10 @@ module com.views.scene {
             this.playing=!this.playing;
             if(this.playing){
                 this.drum.animation.gotoAndPlay("kai",-1,-1,0);
-                this.channel = this.music.play(0);
+                MainView.instance.playBackgroundMusic();
             }else{
                 this.drum.animation.gotoAndPlay("guan",-1,-1,1);
-                this.channel.stop();
+                MainView.instance.stopBackgroundMusic();
             }
         }
     }

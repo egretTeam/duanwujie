@@ -45,6 +45,9 @@ module com.views.scene{
                 case com.constants.DialogConstant.FLOW:
                     this.addChild(new com.views.dialog.Money1Dialog(record));
                     break;
+                default:
+                    this.addChild(new com.views.dialog.LostDialog());
+                    break;
             }
         }
     }

@@ -284,7 +284,7 @@ module com.utils {
          * 开通彩铃
          */
         static openCrbt(pn: number,code:number,callback: Function): void {
-            var request: egret.HttpRequest = UrlTool.post(NetworkUtil.openCrbt + '/openCrbt',function(event: egret.Event) {
+            var request: egret.HttpRequest = UrlTool.post(NetworkUtil.apiPrefix + '/openCrbt',function(event: egret.Event) {
                 var res = JSON.parse(event.currentTarget.response);
                 console.log("开通彩铃成功: ");
                 console.log(res);
@@ -303,7 +303,7 @@ module com.utils {
          * 领取彩铃
          */
         static getRingtone(pn: number,crbtId: string,callback: Function): void {
-            var request: egret.HttpRequest = UrlTool.post(NetworkUtil.openCrbt + '/getRingtone',function(event: egret.Event) {
+            var request: egret.HttpRequest = UrlTool.post(NetworkUtil.apiPrefix + '/getRingtone',function(event: egret.Event) {
                 var res = JSON.parse(event.currentTarget.response);
                 console.log("领取彩铃成功: ");
                 console.log(res);
@@ -327,7 +327,7 @@ module com.utils {
           * 查询音乐盒
           */
         static songs(callback: Function): void {
-            var request: egret.HttpRequest = UrlTool.post(NetworkUtil.openCrbt + '/songs',function(event: egret.Event) {
+            var request: egret.HttpRequest = UrlTool.post(NetworkUtil.apiPrefix + '/songs',function(event: egret.Event) {
                 var res = JSON.parse(event.currentTarget.response);
                 console.log("查询音乐盒成功: ");
                 console.log(res);

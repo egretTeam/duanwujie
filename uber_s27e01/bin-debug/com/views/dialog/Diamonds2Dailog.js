@@ -11,8 +11,10 @@ var com;
              */
             var Diamonds2Dailog = (function (_super) {
                 __extends(Diamonds2Dailog, _super);
-                function Diamonds2Dailog() {
+                function Diamonds2Dailog(pn, code) {
                     _super.call(this);
+                    this.pn = pn;
+                    this.code = code;
                 }
                 var d = __define,c=Diamonds2Dailog,p=c.prototype;
                 p.getImage = function () {
@@ -25,11 +27,17 @@ var com;
                 };
                 p.customTouchHandler = function (evt) {
                     if (new egret.Rectangle(168, 540, 300, 65).contains(evt.stageX, evt.stageY)) {
-                        //                this.jump(new AwardDialog());
-                        console.log(1);
+                        this.jump(new dialog.AwardDialog());
                     }
                     else if (new egret.Rectangle(168, 459, 300, 65).contains(evt.stageX, evt.stageY)) {
-                        this.jump(new dialog.Diamonds3Dailog());
+                        var page = this;
+                        com.utils.NetworkUtil.getMember(this.code, parseInt(this.pn), function (res) {
+                            if (res.success == false) {
+                                com.utils.AppUtils.alert(page.stage, res.msg);
+                            }
+                            else
+                                page.jump(new dialog.Diamonds3Dailog());
+                        });
                     }
                 };
                 p.close = function () {

@@ -35,7 +35,7 @@ var com;
                         var d = __define,c=AbstractItem,p=c.prototype;
                         p.init = function () {
                             //换成图片的话这里要注释掉
-                            this.armature.animation.gotoAndPlay(this.getImageName(), -1, -1, -0);
+                            this.armature.animation.gotoAndPlay(this.getImageName(), -1, -1, 0);
                             this.item = this.armature.display;
                             //this.tweenGoToBottom();
                             this.item.anchorOffsetX = this.width / 2;
@@ -53,6 +53,8 @@ var com;
                             //            this.anchorOffsetY = this.height*3/4;
                             //            this.scaleX = 1.2;
                             //            this.scaleY = 1.2;
+                        };
+                        p.customInit = function () {
                         };
                         p.getType = function () {
                             return -1;

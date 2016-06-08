@@ -25,6 +25,8 @@ var com;
                 };
                 p.customTouchHandler = function (evt) {
                     if (new egret.Rectangle(168, 474, 300, 65).contains(evt.stageX, evt.stageY)) {
+                        //办理成功后 + 5
+                        dialog.AwardDialog.balance += 5;
                         this.jump(new dialog.AwardDialog());
                     }
                 };

@@ -16,7 +16,7 @@ var com;
                 }
                 var d = __define,c=ShareDialog,p=c.prototype;
                 p.getImage = function () {
-                    return new egret.Bitmap(RES.getRes("gameover"));
+                    return new egret.Bitmap(RES.getRes("share_png"));
                 };
                 p.createContent = function () {
                 };
@@ -24,29 +24,11 @@ var com;
                     _super.prototype.onRemoveStage.call(this, e);
                 };
                 p.customTouchHandler = function (evt) {
-                    //            console.log(evt.stageX+" "+evt.stageY)
-                    if (this.getAwardArea().contains(evt.stageX, evt.stageY)) {
-                        this.close();
-                    }
-                    else if (this.getShareArea().contains(evt.stageX, evt.stageY)) {
-                        this.showShareArea();
-                    }
-                    else if (this.getTryAgainArea().contains(evt.stageX, evt.stageY)) {
-                        com.MainView.instance.changeScene(com.constants.SceneConstants.GAME);
-                    }
+                    this.visible = false;
                 };
                 p.showShareArea = function () {
                 };
                 p.close = function () {
-                };
-                p.getAwardArea = function () {
-                    return new egret.Rectangle(170, 565, 280, 60);
-                };
-                p.getShareArea = function () {
-                    return new egret.Rectangle(170, 680, 280, 60);
-                };
-                p.getTryAgainArea = function () {
-                    return new egret.Rectangle(170, 760, 280, 60);
                 };
                 return ShareDialog;
             }(dialog.Dialog));

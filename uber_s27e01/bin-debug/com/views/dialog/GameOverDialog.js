@@ -13,12 +13,39 @@ var com;
                 __extends(GameOverDialog, _super);
                 function GameOverDialog() {
                     _super.call(this);
+                    this.sharing = false;
                 }
                 var d = __define,c=GameOverDialog,p=c.prototype;
                 p.getImage = function () {
                     return new egret.Bitmap(RES.getRes("gameover"));
                 };
                 p.createContent = function () {
+                    this.scorePanel = new egret.TextField;
+                    this.scorePanel.x = 340;
+                    this.scorePanel.y = 410;
+                    this.scorePanel.size = 25;
+                    this.scorePanel.width = 250;
+                    this.scorePanel.textColor = 0x64470C;
+                    this.highestScorePanel = new egret.TextField;
+                    this.highestScorePanel.x = 340;
+                    this.highestScorePanel.y = 455;
+                    this.highestScorePanel.size = 25;
+                    this.highestScorePanel.width = 250;
+                    this.highestScorePanel.textColor = 0x64470C;
+                    this.rankingPanel = new egret.TextField;
+                    this.rankingPanel.x = 340;
+                    this.rankingPanel.y = 500;
+                    this.rankingPanel.size = 25;
+                    this.rankingPanel.width = 250;
+                    this.rankingPanel.textColor = 0x64470C;
+                    //            var hs: string = egret.localStorage.getItem("highestScore");
+                    //            this.highestScorePanel.text = hs==null?0+"":hs;
+                    this.shareDialog = new dialog.ShareDialog();
+                    this.shareDialog.visible = false;
+                    this.addChild(this.shareDialog);
+                    this.addChild(this.highestScorePanel);
+                    this.addChild(this.scorePanel);
+                    this.addChild(this.rankingPanel);
                 };
                 p.onRemoveStage = function (e) {
                     _super.prototype.onRemoveStage.call(this, e);
@@ -36,6 +63,8 @@ var com;
                     }
                 };
                 p.showShareArea = function () {
+                    //            this.addChild(this.shareDialog);
+                    this.shareDialog.visible = true;
                 };
                 p.close = function () {
                     this.jump(new dialog.AwardDialog());

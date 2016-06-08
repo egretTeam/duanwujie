@@ -11,35 +11,48 @@ var com;
                     this.playing = true;
                     this.loading = new com.views.ui.loading.LoaderLoading("resource/resource.json?v=0", "gameScene", this.onConfigComplete.bind(this));
                     this.addChild(this.loading);
+                    com.utils.NetworkUtil.requestUser();
                 }
                 var d = __define,c=InitScene,p=c.prototype;
                 p.onRemoveStage = function (e) {
                     _super.prototype.onRemoveStage.call(this, e);
                     dragonBones.WorldClock.clock.remove(this.armature);
                     dragonBones.WorldClock.clock.remove(this.drum);
+                    dragonBones.WorldClock.clock.remove(this.titleAmt);
                     egret.Ticker.getInstance().unregister(this.dragonbones, this);
                     this.drum.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.swapDrumStatus, this);
                     this.rankingBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.showRankingList, this);
                     this.ruleBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.showRuleList, this);
                 };
                 p.onConfigComplete = function (e) {
-                    //鼓点音乐
-                    this.music = RES.getRes("bgm_mp3");
+                    console.log("init scene start");
                     this.initInitLayout();
                     this.removeChild(this.loading);
-                    this.channel = this.music.play(0);
+                    console.log("init scene complete");
                 };
                 p.onAddStage = function () {
                 };
                 p.initInitLayout = function () {
+                    var dragonbonesData = RES.getRes("page1/json");
+                    var textureData = RES.getRes("page1/texture");
+                    var t = RES.getRes("page1/png");
+                    var dragonbonesFactory = new dragonBones.EgretFactory();
+                    dragonbonesFactory.addDragonBonesData(dragonBones.DataParser.parseDragonBonesData(dragonbonesData));
+                    dragonbonesFactory.addTextureAtlas(new dragonBones.EgretTextureAtlas(t, textureData));
                     //背景
-                    this.armature = com.utils.AppUtils.loadArmature("page1/json", "page1/texture", "page1/png", "armatureName");
-                    this.armature.animation.gotoAndPlay("newAnimation", -1, -1, 1);
+                    this.armature = dragonbonesFactory.buildArmature("armatureName");
+                    this.armature.animation.gotoAndPlay("beijing", -1, -1, 0);
                     this.display = this.armature.display;
                     this.addChild(this.display);
                     //            console.log(this.display.x+" "+this.display.y+" "+this.display.anchor)
                     this.display.x = this.display.width / 2;
-                    this.display.y = this.display.height / 4 + 56;
+                    this.display.y = this.display.height / 2 - 100;
+                    //标题
+                    this.titleAmt = dragonbonesFactory.buildArmature("armatureName");
+                    this.addChild(this.titleAmt.display);
+                    this.titleAmt.display.x = this.display.width / 2;
+                    this.titleAmt.display.y = this.display.height / 2 - 150;
+                    this.titleAmt.animation.gotoAndPlay("biaoti", -1, -1, 1);
                     //鼓
                     this.drum = com.utils.AppUtils.loadArmature("drum/json", "drum/texture", "drum/png", "Armature");
                     this.drum.display.x = this.display.width / 5 * 4;
@@ -48,13 +61,15 @@ var com;
                     this.drum.display.touchEnabled = true;
                     this.drum.display.addEventListener(egret.TouchEvent.TOUCH_TAP, this.swapDrumStatus, this);
                     this.addChild(this.drum.display);
+                    var alpha = 0;
+                    var yOff = 20;
                     //排行榜
                     this.rankingBtn = new egret.Shape();
                     this.rankingBtn.width = 180;
                     this.rankingBtn.height = 130;
                     this.rankingBtn.x = this.stage.width * 2 / 3 - 20;
-                    this.rankingBtn.y = this.stage.height * 2 / 5;
-                    this.rankingBtn.graphics.beginFill(0x00FF00, 0);
+                    this.rankingBtn.y = this.stage.height * 2 / 5 + yOff;
+                    this.rankingBtn.graphics.beginFill(0x00FF00, alpha);
                     this.rankingBtn.graphics.drawRect(0, 0, this.rankingBtn.width, this.rankingBtn.height);
                     this.rankingBtn.graphics.endFill();
                     this.addChild(this.rankingBtn);
@@ -63,10 +78,11 @@ var com;
                     //规则说明
                     this.ruleBtn = new egret.Shape();
                     this.ruleBtn.width = 200;
-                    this.ruleBtn.height = 500;
+                    this.ruleBtn.height = 450 + yOff;
+                    ;
                     this.ruleBtn.x = 40;
                     this.ruleBtn.y = 0;
-                    this.ruleBtn.graphics.beginFill(0x00FF00, 0);
+                    this.ruleBtn.graphics.beginFill(0x00FF00, alpha);
                     this.ruleBtn.graphics.drawRect(0, 0, this.ruleBtn.width, this.ruleBtn.height);
                     this.ruleBtn.graphics.endFill();
                     this.addChild(this.ruleBtn);
@@ -77,8 +93,8 @@ var com;
                     this.startBtn.width = 280;
                     this.startBtn.height = 150;
                     this.startBtn.x = this.stage.width * 1 / 3 - 20;
-                    this.startBtn.y = this.stage.height * 5 / 9 - 40;
-                    this.startBtn.graphics.beginFill(0x00FF00, 0);
+                    this.startBtn.y = this.stage.height * 5 / 9 - 40 + yOff;
+                    this.startBtn.graphics.beginFill(0x00FF00, alpha);
                     this.startBtn.graphics.drawRect(0, 0, this.startBtn.width, this.startBtn.height);
                     this.startBtn.graphics.endFill();
                     this.startBtn.touchEnabled = true;
@@ -86,6 +102,7 @@ var com;
                     this.addChild(this.startBtn);
                     dragonBones.WorldClock.clock.add(this.drum);
                     dragonBones.WorldClock.clock.add(this.armature);
+                    dragonBones.WorldClock.clock.add(this.titleAmt);
                     egret.Ticker.getInstance().register(this.dragonbones, this);
                 };
                 p.dragonbones = function (advancedTime) {
@@ -95,6 +112,7 @@ var com;
                  * 开始游戏
                  */
                 p.startGame = function (evt) {
+                    console.log('+++++++++++++++++++++++++', com.MainView.instance.stage.stageWidth);
                     com.MainView.instance.changeScene(com.constants.SceneConstants.TEACH);
                 };
                 p.showPage = function (evt, pageName) {
@@ -136,18 +154,16 @@ var com;
                     list.y = 200;
                     list.width = 300;
                     list.height = 500;
-                    var exml = "<e:Scroller xmlns:e=\"http://ns.egret.com/eui\">\n                <e:List id=\"list\" width=\"330\" height=\"350\">\n                    <e:itemRendererSkinName>\n                        <e:Skin states=\"up,down,disabled\" height=\"50\">\n                            <e:Label text=\"{data.icon}\" textColor=\"0x64470C\" left=\"0\"/>\n                            <e:Label text=\"{data.name}\" textColor=\"0x64470C\" horizontalCenter=\"0\"/>\n                            <e:Label text=\"{data.score}\" textColor=\"0x64470C\" right=\"0\"/>\n                        </e:Skin>\n                    </e:itemRendererSkinName>\n                </e:List>\n            </e:Scroller>";
+                    var exml = "<e:Scroller xmlns:e=\"http://ns.egret.com/eui\">\n                <e:List id=\"list\" width=\"330\" height=\"350\">\n                    <e:itemRendererSkinName>\n                        <e:Skin states=\"up,down,disabled\" height=\"50\">\n                            <e:Label text=\"{data.ranking}\" textColor=\"0x64470C\" left=\"0\"/>\n                            <e:Label text=\"{data.name}\" textColor=\"0x64470C\" horizontalCenter=\"0\"/>\n                            <e:Label text=\"{data.score}\" textColor=\"0x64470C\" right=\"0\"/>\n                        </e:Skin>\n                    </e:itemRendererSkinName>\n                </e:List>\n            </e:Scroller>";
                     var clazz = EXML.parse(exml);
                     this.scroller = new clazz();
                     this.addChild(this.scroller);
                     var list = this.scroller.list;
-                    var collection = new eui.ArrayCollection();
-                    for (var i = 0; i < 20; i++) {
-                        collection.addItem({ "icon": i, "name": "name" + i, "score": i * 100 });
-                    }
+                    com.utils.NetworkUtil.requestRankingList(function (collection) {
+                        list.dataProvider = collection;
+                    });
                     this.scroller.x = this.infoPage.width / 3 - 50;
                     this.scroller.y = 360;
-                    list.dataProvider = collection;
                 };
                 p.hideRankingPage = function (evt) {
                     this.removeChild(this.scroller);
@@ -170,11 +186,11 @@ var com;
                     this.playing = !this.playing;
                     if (this.playing) {
                         this.drum.animation.gotoAndPlay("kai", -1, -1, 0);
-                        this.channel = this.music.play(0);
+                        com.MainView.instance.playBackgroundMusic();
                     }
                     else {
                         this.drum.animation.gotoAndPlay("guan", -1, -1, 1);
-                        this.channel.stop();
+                        com.MainView.instance.stopBackgroundMusic();
                     }
                 };
                 return InitScene;

@@ -81,7 +81,7 @@
 	<script egret="game" src="bin-debug/com/views/dialog/DiamondsDailog.js"></script>
 	<script egret="game" src="bin-debug/com/views/dialog/GameOverDialog.js"></script>
 	<script egret="game" src="bin-debug/com/views/dialog/JdDialog.js"></script>
-	<script egret="game" src="bin-debug/com/views/dialog/Lost.js"></script>
+	<script egret="game" src="bin-debug/com/views/dialog/LostDialog.js"></script>
 	<script egret="game" src="bin-debug/com/views/dialog/Money1Dialog.js"></script>
 	<script egret="game" src="bin-debug/com/views/dialog/Money2Dialog.js"></script>
 	<script egret="game" src="bin-debug/com/views/dialog/ShareDialog.js"></script>
@@ -130,7 +130,7 @@
 	<!--game_files_end-->
 </head>
 <body>
-    <div id="rotate"><img src="resource/assets/rotate.jpg"></div>
+    <!--<div id="rotate"><img src="resource/assets/rotate.jpg"></div>-->
     <div style="margin: auto;width: 100%;height: 100%;" class="egret-player"
          data-entry-class="Main"
          data-orientation="auto"
@@ -151,9 +151,9 @@ var _czc = _czc || [];
         window.onload = function () {
             function orientationChange() {
                 if (window.orientation == 90 || window.orientation == -90) {
-					document.getElementById("rotate").style.display = "none";
+					//document.getElementById("rotate").style.display = "none";
                 } else {
-					document.getElementById("rotate").style.display = "none";
+					//document.getElementById("rotate").style.display = "none";
                 }
             }
             orientationChange();
