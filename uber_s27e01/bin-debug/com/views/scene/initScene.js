@@ -9,13 +9,17 @@ var com;
                 function InitScene() {
                     _super.call(this);
                     this.playing = true;
-                    this.loading = new com.views.ui.loading.LoaderLoading("resource/resource.json?v=0", "gameScene", this.onConfigComplete.bind(this));
-                    this.addChild(this.loading);
-                    com.utils.NetworkUtil.requestUser();
+                    this.inited = false;
+                    if (!this.inited) {
+                        this.loading = new com.views.ui.loading.LoaderLoading("resource/resource.json?v=0", "gameScene", this.onConfigComplete.bind(this));
+                        if (!this.inited)
+                            this.addChild(this.loading);
+                    }
                 }
                 var d = __define,c=InitScene,p=c.prototype;
                 p.onRemoveStage = function (e) {
                     _super.prototype.onRemoveStage.call(this, e);
+                    console.log("销毁初始化页面");
                     dragonBones.WorldClock.clock.remove(this.armature);
                     dragonBones.WorldClock.clock.remove(this.drum);
                     dragonBones.WorldClock.clock.remove(this.titleAmt);
@@ -23,16 +27,19 @@ var com;
                     this.drum.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.swapDrumStatus, this);
                     this.rankingBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.showRankingList, this);
                     this.ruleBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.showRuleList, this);
+                    this.removeChildren();
                 };
                 p.onConfigComplete = function (e) {
-                    console.log("init scene start");
+                    console.log("init scene start", this.loading);
+                    if (this.contains(this.loading))
+                        this.removeChild(this.loading);
                     this.initInitLayout();
-                    this.removeChild(this.loading);
                     console.log("init scene complete");
                 };
                 p.onAddStage = function () {
                 };
                 p.initInitLayout = function () {
+                    this.inited = true;
                     var dragonbonesData = RES.getRes("page1/json");
                     var textureData = RES.getRes("page1/texture");
                     var t = RES.getRes("page1/png");
@@ -174,9 +181,12 @@ var com;
                     this.rankingBtn.touchEnabled = true;
                     this.startBtn.touchEnabled = true;
                     this.drum.display.touchEnabled = true;
-                    this.removeChild(this.infoPage);
-                    this.removeChild(this.close1Btn);
-                    this.removeChild(this.close2Btn);
+                    if (this.scroller != null && this.contains(this.infoPage))
+                        this.removeChild(this.infoPage);
+                    if (this.scroller != null && this.contains(this.close1Btn))
+                        this.removeChild(this.close1Btn);
+                    if (this.scroller != null && this.contains(this.close2Btn))
+                        this.removeChild(this.close2Btn);
                     if (this.scroller != null && this.contains(this.scroller))
                         this.removeChild(this.scroller);
                     this.close1Btn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.hidePage, this);

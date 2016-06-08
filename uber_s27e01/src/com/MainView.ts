@@ -21,6 +21,8 @@ module com {
         changeScene(index: number) {
             if (this.scene != null)
                 this.removeChild(this.scene);
+            if(this.contains(this.loading))
+                this.removeChild(this.loading);
             switch (index) {
                 case com.constants.SceneConstants.INIT://初始场景
                     this.scene = <com.views.ui.BasicView>(new com.views.scene.InitScene());

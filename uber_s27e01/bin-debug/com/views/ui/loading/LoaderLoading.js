@@ -38,6 +38,7 @@ var com;
                         //            this.m = new egret.Rectangle(0,0,30,30);
                         this.m = new egret.Rectangle(0, 0, this.loading.width, this.loading.height);
                         this.loading.mask = this.m;
+                        console.log("添加加载页");
                         this.addChild(this.loaded);
                         this.addChild(this.loading);
                         this.dataJSON = dataJSON;
@@ -83,6 +84,7 @@ var com;
                         //            this.mc = null;
                         this.txt = null;
                         this.func = null;
+                        console.log('销毁加载页');
                     };
                     p.onConfigComplete = function (e) {
                         com.controller.EventManager.instance.removeEventListener(this, com.model.localData.event.LoaderEvent.CONFIG_COMPLETE);

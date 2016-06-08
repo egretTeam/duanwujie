@@ -37,9 +37,9 @@ module com.utils {
 //                    NetworkUtil.getJSSDK();
                 }
             },function(event:egret.Event){
-                var res = JSON.parse(event.currentTarget.response);
+//                var res = JSON.parse(event.currentTarget.response);
                 console.log("error: ");
-                console.log(res);
+                console.log(event.currentTarget.response);
             });
             request.send();
         }
@@ -105,9 +105,9 @@ module com.utils {
                 }
                 returnRankingList(collection);
             },function(event:egret.Event) {
-                var res = JSON.parse(event.currentTarget.response);
+//                var res = JSON.parse(event.currentTarget.response);
                 console.log("请求排名失败: ");
-                console.log(res);
+                console.log(event.currentTarget.response);
                 });
             request.send();
         }
@@ -127,9 +127,9 @@ module com.utils {
                 console.log(res);
                 returnRanking(res);
             },function(event:egret.Event){
-                var res = JSON.parse(event.currentTarget.response);
+//                var res = JSON.parse(event.currentTarget.response);
                 console.log("提交分数失败: ");
-                console.log(res);
+                console.log(event.currentTarget.response);
             });
 //            var data = new FormData();
 //            data.append( "score",score );
@@ -154,9 +154,9 @@ module com.utils {
                 result(res);
                 
             },function(event:egret.Event) {
-                var res = JSON.parse(event.currentTarget.response);
+//                var res = JSON.parse(event.currentTarget.response);
                 console.log("获取抽奖结果失败: ");
-                console.log(res);
+                console.log(event.currentTarget.response);
                 });
             request.send();
         }
@@ -172,16 +172,11 @@ module com.utils {
                     callback(res.msg);
 
             },function(event:egret.Event) {
-                var res = JSON.parse(event.currentTarget.response);
+//                var res = JSON.parse(event.currentTarget.response);
                 console.log("领取话费和流量失败: " );
-                console.log(res);
+                console.log(event.currentTarget.response);
                 });
             
-
-//            var data = new FormData();
-//            data.append("prizeLevel",score);
-//            data.append("phone",pn);
-//            data.append("fromWechat",true);
             request.send("prizeLevel=" + score + "&phone=" + pn + "&fromWechat=" + true);
         }
         
@@ -196,16 +191,10 @@ module com.utils {
                 if(!res.sucess)
                     callback(res.msg);
             },function(event: egret.Event) {
-                var res = JSON.parse(event.currentTarget.response);
                 console.log("领取钻石会员失败: ");
-                console.log(res);
+                console.log(event.currentTarget.response);
                 });
 
-//            var data = new FormData();
-//            data.append("code",code);
-//            data.append("phone",pn);
-//            data.append("fromWechat",true);
-//            request.send(data);
                 
             request.send("code="+code+"&phone="+pn+"&fromWechat="+true);
         }
@@ -221,16 +210,10 @@ module com.utils {
                 if(!res.sucess)
                     callback(res.msg);
             },function(event: egret.Event) {
-                var res = JSON.parse(event.currentTarget.response);
                 console.log("发送钻石会员验证码失败: ");
-                console.log(res);
+                console.log(event.currentTarget.response);
                 });
 
-//            var data = new FormData()
-//            data.append("phone",pn);
-//            data.append("fromWechat",true);
-//            request.send(data);
-                
             request.send("phone=" + pn + "&fromWechat="+true);
         }
         
@@ -244,16 +227,10 @@ module com.utils {
                 console.log(res);
                 callback(res);
             },function(event: egret.Event) {
-                var res = JSON.parse(event.currentTarget.response);
                 console.log("发送音乐盒验证码失败: ");
-                console.log(res);
+                console.log(event.currentTarget.response);
                 });
 
-//            var data = new FormData();
-//            data.append("phone",pn);
-//            data.append("fromWechat",true);
-//            request.send(data);
-            
 
             var data = new FormData();
             request.send("phone="+pn+"&fromWechat="+true);
@@ -270,13 +247,10 @@ module com.utils {
                 console.log(res);
                 callback(res);
             },function(event: egret.Event) {
-                var res = JSON.parse(event.currentTarget.response);
                 console.log("查询是否彩铃用户失败: ");
-                console.log(res);
+                console.log(event.currentTarget.response);
                 });
 
-//            var data = new FormData();
-//            data.append("phone",pn);
             request.send("phone="+pn);
         }
         
@@ -290,9 +264,8 @@ module com.utils {
                 console.log(res);
                 callback(res);
             },function(event: egret.Event) {
-                var res = JSON.parse(event.currentTarget.response);
                 console.log("开通彩铃失败: ");
-                console.log(res);
+                console.log(event.currentTarget.response);
                 });
 
             request.send("phone="+pn+"&fromWechat="+true+"&code="+code);
@@ -309,17 +282,10 @@ module com.utils {
                 console.log(res);
                 callback(res);
             },function(event: egret.Event) {
-                var res = JSON.parse(event.currentTarget.response);
                 console.log("领取彩铃失败: ");
-                console.log(res);
+                console.log(event.currentTarget.response);
                 });
 
-//            var data = new FormData();
-//            data.append("phone",pn);
-//            data.append("fromWechat",true);
-//            data.append("crbtId",crbtId);
-//            request.send(data);
-            
             request.send("phone="+pn+"&fromWechat="+true+"&crbtId="+crbtId);
         }
         
@@ -333,9 +299,8 @@ module com.utils {
                 console.log(res);
                 callback(res.data);
             },function(event: egret.Event) {
-                var res = JSON.parse(event.currentTarget.response);
                 console.log("查询音乐盒失败: ");
-                console.log(res);
+                console.log(event.currentTarget.response);
                 });
             request.send("fromWechat="+true);
         }

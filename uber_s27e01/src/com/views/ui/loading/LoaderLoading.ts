@@ -1,6 +1,5 @@
 module com.views.ui.loading {
     export class LoaderLoading extends BasicView {
-        static loaded:Boolean=false;
         txt: egret.TextField;//文本
 //        mc: egret.MovieClip;//MovieClip
         dataJSON: string = "";//配置文件
@@ -40,6 +39,7 @@ module com.views.ui.loading {
             this.m =new egret.Rectangle(0,0,this.loading.width,this.loading.height);
             this.loading.mask=this.m;
 
+            console.log("添加加载页")
             this.addChild(this.loaded);
             this.addChild(this.loading);
             
@@ -93,6 +93,7 @@ module com.views.ui.loading {
 //            this.mc = null;
             this.txt = null;
             this.func = null;
+            console.log('销毁加载页')
         }
 
         private onConfigComplete(e: com.model.localData.event.Event): void {//配置加载成功
@@ -104,7 +105,6 @@ module com.views.ui.loading {
         private onComplete(e: com.model.localData.event.Event): void {//资源加载成功
             com.controller.EventManager.instance.removeEventListener(this, com.model.localData.event.LoaderEvent.COMPLETE);
             com.controller.EventManager.instance.removeEventListener(this, com.model.localData.event.LoaderEvent.PROGRESS);
-            LoaderLoading. loaded=true;
             if(this.func!=null)
                 this.func(e);
         }

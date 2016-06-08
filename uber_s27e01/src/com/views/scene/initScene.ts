@@ -14,18 +14,21 @@ module com.views.scene {
         private ruleBtn: egret.Shape;
         private scroller;
         private titleAmt:dragonBones.Armature;
+        private inited:Boolean=false;
 
         constructor() {
             super();
-            if(!com.views.ui.loading.LoaderLoading.loaded){
+            if(!this.inited) {
                 this.loading = new com.views.ui.loading.LoaderLoading("resource/resource.json?v=0","gameScene",this.onConfigComplete.bind(this));
-                this.addChild(this.loading);
+                if(!this.inited)
+                    this.addChild(this.loading);
+//                    this.removeChild(this.loading);
             }
-            com.utils.NetworkUtil.requestUser();
         }
 
         protected onRemoveStage(e: egret.Event) {//移除
             super.onRemoveStage(e);
+            console.log("销毁初始化页面");
             dragonBones.WorldClock.clock.remove(this.armature);
             dragonBones.WorldClock.clock.remove(this.drum);
             dragonBones.WorldClock.clock.remove(this.titleAmt);
@@ -33,15 +36,14 @@ module com.views.scene {
             this.drum.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.swapDrumStatus,this);
             this.rankingBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.showRankingList,this);
             this.ruleBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.showRuleList,this);
-            
+            this.removeChildren();
             
         }
         onConfigComplete(e: com.model.localData.event.LoaderEvent) {//配置加载完成
-            console.log("init scene start");
-            
-            this.initInitLayout();
+            console.log("init scene start",this.loading);
             if(this.contains(this.loading))
                 this.removeChild(this.loading);
+            this.initInitLayout();
             
             
             console.log("init scene complete");
@@ -50,6 +52,7 @@ module com.views.scene {
         protected onAddStage():void{
         }
         private initInitLayout(): void {
+            this.inited = true;
             var dragonbonesData = RES.getRes("page1/json");
             var textureData = RES.getRes("page1/texture");
             var t = RES.getRes("page1/png");

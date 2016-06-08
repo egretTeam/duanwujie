@@ -16,6 +16,8 @@ var com;
         p.changeScene = function (index) {
             if (this.scene != null)
                 this.removeChild(this.scene);
+            if (this.contains(this.loading))
+                this.removeChild(this.loading);
             switch (index) {
                 case com.constants.SceneConstants.INIT:
                     this.scene = (new com.views.scene.InitScene());

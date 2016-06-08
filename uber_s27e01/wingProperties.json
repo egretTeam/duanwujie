@@ -255,6 +255,11 @@
 					"isFolder":false,
 					"key":"share_icon_jpg",
 					"name":"share_icon_jpg"
+				},
+				{
+					"isFolder":false,
+					"key":"againgame",
+					"name":"againgame"
 				}
 			]
 		}
