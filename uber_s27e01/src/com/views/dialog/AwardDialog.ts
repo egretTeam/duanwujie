@@ -77,7 +77,10 @@ module com.views.dialog {
                 if(AwardDialog.balance>0){
                     AwardDialog.balance = res.lotteryNum;
                     MainView.instance.changeScene(com.constants.SceneConstants.LUCK);
-                    com.views.scene.luckScene.getInstance().goToPage(parseInt(res.record.score),res.record);
+                    if(res.record == null || res.success == false)
+                        com.views.scene.luckScene.getInstance().goToPage(-1,null);
+                    else
+                        com.views.scene.luckScene.getInstance().goToPage(parseInt(res.record.score),res.record);
                     ra.removeEventListener(dragonBones.AnimationEvent.COMPLETE,page.goToNextPage,page);
                 }else{
                     com.utils.AppUtils.alert(page.stage,res.msg);
