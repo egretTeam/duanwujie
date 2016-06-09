@@ -75,18 +75,23 @@ module com {
         }
         music:egret.Sound;
         channel:egret.SoundChannel
-
+        playing:Boolean=false;
+        
         public playBackgroundMusic(): void {
+            if(this.playing)
+                return;
             //鼓点音乐
             if(this.music ==null)
                 this.music = RES.getRes("bgm_mp3");
             this.channel = this.music.play(0);
+            this.playing=true;
         } 
         
         public stopBackgroundMusic(): void {
             if(this.channel!=null){
                 this.channel.stop();
             }
+            this.playing = false;
         }
         
         private getJSSDK() {
@@ -100,6 +105,7 @@ module com {
                     jssdk = data.jssdk,
                     domain = document.domain;
                 document.addEventListener("WeixinJSBridgeReady",function() {
+                    com.utils.AppUtils.alert(null,"测试播放1");
                     MainView.instance.playBackgroundMusic();
                 },false);
                 window['wx'].config({
@@ -118,7 +124,8 @@ module com {
 
                 window['wx'].ready(function() {
                     //com.views.scene.InitScene.playBackgroundMusic();
-//                    MainView.instance.playBackgroundMusic();
+                    com.utils.AppUtils.alert(null,"测试播放2");
+                    MainView.instance.playBackgroundMusic();
                     //分享给朋友
                     window['wx'].onMenuShareAppMessage({
                         title:'史上最难龙舟，我排名前100，你敢挑战我吗？',
