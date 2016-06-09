@@ -9,8 +9,6 @@ module com {
         constructor() {
             super();
 
-            if(this.music == null)
-                this.music = RES.getRes("bgm_mp3");
             MainView.instance = this;
             this.init();
 
@@ -75,23 +73,18 @@ module com {
         }
         music:egret.Sound;
         channel:egret.SoundChannel
-        playing:Boolean=false;
-        
+
         public playBackgroundMusic(): void {
-            if(this.playing)
-                return;
             //鼓点音乐
             if(this.music ==null)
                 this.music = RES.getRes("bgm_mp3");
             this.channel = this.music.play(0);
-            this.playing=true;
         } 
         
         public stopBackgroundMusic(): void {
             if(this.channel!=null){
                 this.channel.stop();
             }
-            this.playing = false;
         }
         
         private getJSSDK() {
@@ -104,10 +97,7 @@ module com {
                     data: any = JSON.parse(request.response),
                     jssdk = data.jssdk,
                     domain = document.domain;
-                document.addEventListener("WeixinJSBridgeReady",function() {
-                    com.utils.AppUtils.alert(null,"测试播放1");
-                    MainView.instance.playBackgroundMusic();
-                },false);
+
                 window['wx'].config({
                     debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                     appId: jssdk.appId, // 必填，公众号的唯一标识
@@ -124,8 +114,6 @@ module com {
 
                 window['wx'].ready(function() {
                     //com.views.scene.InitScene.playBackgroundMusic();
-                    com.utils.AppUtils.alert(null,"测试播放2");
-                    MainView.instance.playBackgroundMusic();
                     //分享给朋友
                     window['wx'].onMenuShareAppMessage({
                         title:'史上最难龙舟，我排名前100，你敢挑战我吗？',
@@ -194,7 +182,7 @@ module com {
             this.shareLoader.responseType = egret.HttpResponseType.TEXT;
             this.shareLoader.open('/auth/wechat/jssdk?t='+new Date().getTime()+'&originalUrl='+encodeURIComponent(location.href.split('#')[0]),egret.HttpMethod.GET);
             this.shareLoader.send();
-//            this.shareLoader.addEventListener(egret.Event.COMPLETE,this.onGetShareComplete,this);
+            this.shareLoader.addEventListener(egret.Event.COMPLETE,this.onGetShareComplete,this);
             console.log(this.shareLoader);
 
         }
@@ -301,6 +289,8 @@ module com {
                                 _czc && _czc.push(["_trackEvent", "分享到微博失败", "share", "分享", 1]);
                             }
                             wx.onMenuShareWeibo(bodyMenuShareWeibo);
+                            //自动播放
+                            MainView.instance.playBackgroundMusic();
                         });
                     }
                 } else {

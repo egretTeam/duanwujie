@@ -1,7 +1,7 @@
 {
 	"groups":[
 		{
-			"keys":"loading,loaded",
+			"keys":"loading,loaded,bgm_mp3",
 			"name":"preload"
 		},
 		{
