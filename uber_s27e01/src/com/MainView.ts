@@ -111,10 +111,11 @@ module com {
                         'onMenuShareWeibo'
                     ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                 });
-
-                window['wx'].ready(function() {
+                document.addEventListener("WeixinJSBridgeReady",function() {
                     //自动播放
                     MainView.instance.playBackgroundMusic();
+                },false);
+                window['wx'].ready(function() {
                     //com.views.scene.InitScene.playBackgroundMusic();
                     //分享给朋友
                     window['wx'].onMenuShareAppMessage({
