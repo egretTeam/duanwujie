@@ -113,6 +113,8 @@ module com {
                 });
 
                 window['wx'].ready(function() {
+                    //自动播放
+                    MainView.instance.playBackgroundMusic();
                     //com.views.scene.InitScene.playBackgroundMusic();
                     //分享给朋友
                     window['wx'].onMenuShareAppMessage({
@@ -182,8 +184,8 @@ module com {
             this.shareLoader.responseType = egret.HttpResponseType.TEXT;
             this.shareLoader.open('/auth/wechat/jssdk?t='+new Date().getTime()+'&originalUrl='+encodeURIComponent(location.href.split('#')[0]),egret.HttpMethod.GET);
             this.shareLoader.send();
-            this.shareLoader.addEventListener(egret.Event.COMPLETE,this.onGetShareComplete,this);
-            console.log(this.shareLoader);
+//            this.shareLoader.addEventListener(egret.Event.COMPLETE,this.onGetShareComplete,this);
+//            console.log(this.shareLoader);
 
         }
 
@@ -290,7 +292,7 @@ module com {
                             }
                             wx.onMenuShareWeibo(bodyMenuShareWeibo);
                             //自动播放
-                            MainView.instance.playBackgroundMusic();
+//                            MainView.instance.playBackgroundMusic();
                         });
                     }
                 } else {
