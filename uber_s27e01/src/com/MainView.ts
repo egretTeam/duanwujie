@@ -9,6 +9,8 @@ module com {
         constructor() {
             super();
 
+            if(this.music == null)
+                this.music = RES.getRes("bgm_mp3");
             MainView.instance = this;
             this.init();
 
@@ -114,6 +116,7 @@ module com {
 
                 window['wx'].ready(function() {
                     //com.views.scene.InitScene.playBackgroundMusic();
+                    MainView.instance.playBackgroundMusic();
                     //分享给朋友
                     window['wx'].onMenuShareAppMessage({
                         title:'史上最难龙舟，我排名前100，你敢挑战我吗？',
@@ -182,7 +185,7 @@ module com {
             this.shareLoader.responseType = egret.HttpResponseType.TEXT;
             this.shareLoader.open('/auth/wechat/jssdk?t='+new Date().getTime()+'&originalUrl='+encodeURIComponent(location.href.split('#')[0]),egret.HttpMethod.GET);
             this.shareLoader.send();
-            this.shareLoader.addEventListener(egret.Event.COMPLETE,this.onGetShareComplete,this);
+//            this.shareLoader.addEventListener(egret.Event.COMPLETE,this.onGetShareComplete,this);
             console.log(this.shareLoader);
 
         }
@@ -289,8 +292,6 @@ module com {
                                 _czc && _czc.push(["_trackEvent", "分享到微博失败", "share", "分享", 1]);
                             }
                             wx.onMenuShareWeibo(bodyMenuShareWeibo);
-                            //自动播放
-                            MainView.instance.playBackgroundMusic();
                         });
                     }
                 } else {
